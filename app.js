@@ -4,6 +4,8 @@ var express = require('express');
 var app = express();
 var routes = require('./routes');
 var path = require('path');
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 var jsonParser = require('body-parser');
 var logger = require('morgan');
@@ -56,8 +58,15 @@ app.use(function(err, req, res, next) {
 	});
 });
 
+io.on('connection', function(socket) {
+	console.log('A user connected');
+	socket.on('disconnect', function() {
+		console.log('A user disconnected');
+	});
+});
+
 var port = process.env.PORT || 8080;
 
-app.listen(port, function() {
+server.listen(port, function() {
 	console.log('Express server listening on port', port);
 });
