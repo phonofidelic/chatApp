@@ -59,10 +59,15 @@ app.use(function(err, req, res, next) {
 });
 
 io.on('connection', function(socket) {
-	console.log('A user connected');
+	console.log('* A user connected');
 	socket.on('disconnect', function() {
-		console.log('A user disconnected');
+		console.log('* A user disconnected');
 	});
+
+	socket.on('chat message', function(msg) {
+		console.log('* message sent:', msg);
+		io.emit('chat message', msg);
+	})
 });
 
 var port = process.env.PORT || 8080;
