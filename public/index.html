@@ -23,15 +23,21 @@
 		</form>
 	</div>
  -->
-
+	<header>
+		<h1>phono_chat</h1>
+	</header>
  	<div id="app">
- 	{{message}}
  		<ul id="messages">
- 			<!-- <li></li>	 -->
+ 			<message v-for="message in messages" 
+ 					 :text="message.text" 
+ 					 :_id="message._id" 
+ 					 :created-at="message.createdAt"
+ 					 :click="message.openReply">{{message.text}}
+ 			</message>	
  		</ul>
  		<form>
 	 		<input type="text" id="m" autocomplete="off" v-model="currentMessage">
-	 		<button v-on:click.prevent="postMessage">Post</button>
+	 		<button v-on:click.prevent="postMessage(currentRoute)">Post</button>
 	 	</form>
  	</div>
 
