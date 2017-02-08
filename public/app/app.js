@@ -26,37 +26,32 @@ $(document).ready(
 	}
 );
 
-Vue.component('message', {
+var Message = Vue.component('message', {
 	data: function() {
 		return {
-			replies: [],
 			currentReply: '',
 			isActive: false
 		}
 	},
-	props: ['text', '_id', 'created-at'],
-	template: '<li v-on:click="this.openReply" class="message" :class="{ active: isActive }">{{text}}</li>',
+	props: ['text', '_id', 'created-at', 'replies'],
+	template: '<li v-on:click="this.openReply" class="message" :class="{ active: isActive }"><div>{{text}}<span class="has-reply" v-show="replies.lentgth > 0">*</span></div><div class="replies" v-show="isActive" v-for="reply in replies">{{reply.text}}</div></li>',
 	methods: {
 		openReply: function() {
 			console.log('openReply', this);
 			var self = this;
 			// set currentRoute to selected message
-			app.currentRoute = '/messages/'+this.id+'/replies';
+			app.currentRoute = '/messages/'+this._id+'/replies';
 			app.currentRouteId = this.id;
 			console.log('currentRoute:', app.currentRoute);
 			// app.messages.forEach(function(message) {
 			// 	message.isActive = true;
 			// });
 			this.isActive = !this.isActive;
-
-
-			// var ev = new Event('select');
-
 		},
 		getReplies: function() {
 			// var self = this;
 			this.$http.get('/messages/'+this.id+'/replies').then(function(response) {
-				console.log('response:', response);
+				console.log('replies:', response);
 				// response.data.replies.forEach(function(reply) {
 				// 	this.replies.push(reply);
 				// });
@@ -70,6 +65,9 @@ Vue.component('message', {
 
 var app = new Vue({
 	el: '#app',
+	components: {
+		'message': Message
+	},
 	data: {
 		messages: [],
 		currentMessage: '',
@@ -82,10 +80,10 @@ var app = new Vue({
 				console.log('Initial messages:', response.data);
 				response.data.forEach(function(message) {
 					self.messages.push(message);
-					// $('#messages').append('<li><message>{{this.message}}');
-					// var message = new Message(message.text);
-					// $('#messages').append(message.html);
 				});
+				return response.data;
+			}).then(function(messages) {
+
 			})
 		},
 		postMessage: function(route) {

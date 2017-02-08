@@ -51,3 +51,11 @@ form button {
 .active {
 	background: #ff4d62;
 }
+
+.replies {
+	padding-left: 20px;
+}
+
+.has-reply {
+	color: #ff4d62;
+}

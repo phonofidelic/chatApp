@@ -16,9 +16,9 @@ app.use(jsonParser.json());
 var mongoose = require('mongoose');
 
 // local
-// mongoose.connect('mongodb://localhost:27017/chatApp');
+mongoose.connect('mongodb://localhost:27017/chatApp');
 //heroku
-mongoose.connect('mongodb://heroku_djrv4shx:3q2trf5i3gbddvd8dtgpa0u2ca@ds139959.mlab.com:39959/heroku_djrv4shx');
+// mongoose.connect('mongodb://heroku_djrv4shx:3q2trf5i3gbddvd8dtgpa0u2ca@ds139959.mlab.com:39959/heroku_djrv4shx');
 
 var db = mongoose.connection;
 
@@ -40,7 +40,7 @@ app.use(function(req, res, next){
 	next();
 });
 
-app.use('/', express.static(path.join(__dirname, 'public')));
+// app.use('/', express.static(path.join(__dirname, 'public_react')));
 
 app.use('/messages', routes);
 
@@ -73,7 +73,7 @@ io.on('connection', function(socket) {
 	})
 });
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8081;
 
 server.listen(port, function() {
 	console.log('Express server listening on port', port);

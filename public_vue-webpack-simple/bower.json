@@ -1,0 +1,21 @@
+{
+  "name": "phono-chat",
+  "description": "A Vue.js project",
+  "main": "",
+  "authors": [
+    "phonofidelic <chris_clemons85@hotmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/phonofidelic/chatApp",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue-resource": "^1.2.0"
+  }
+}

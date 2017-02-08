@@ -11,8 +11,12 @@
 	<script src="https://unpkg.com/vue/dist/vue.js"></script>
 	<script type="text/javascript" src="lib/vue-resource/dist/vue-resource.min.js"></script>
 	<!-- <script type="text/javascript" src="/lib/angular-socket-io/socket.js"></script> -->
+	<script type="x-template" id="message-template" src="app/message.html"></script>
 </head>
 <body>
+	<header>
+		<h1>phono_chat</h1>
+	</header>
 	<!-- Angular version -->
 	<!-- <div id="main" ng-controller="ChatController as vm">
 		<ul ng-init="vm.getMessages()">
@@ -24,23 +28,26 @@
 		</form>
 	</div>
  -->
-	<header>
-		<h1>phono_chat</h1>
-	</header>
- 	<div id="app">
+
+	<!-- Vue version -->
+ 	<!-- <div id="app">
  		<ul id="messages">
  			<message v-for="message in messages" 
  					 :text="message.text" 
  					 :_id="message._id" 
  					 :created-at="message.createdAt"
- 					 :click="message.openReply">{{message.text}}
+ 					 :replies="message.replies"
+ 					 >{{message.text}}
  			</message>	
  		</ul>
  		<form>
 	 		<input type="text" id="m" autocomplete="off" v-model="currentMessage">
 	 		<button v-on:click.prevent="postMessage(currentRoute)">Post</button>
 	 	</form>
- 	</div>
+ 	</div> -->
+
+ 	<!-- React version -->
+ 	<div id="root"></div>
 
 	<script type="text/javascript">
 		// var socket = io();
