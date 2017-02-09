@@ -5,7 +5,7 @@ var app = express();
 var routes = require('./routes');
 var path = require('path');
 var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var io = require('socket.io').listen(server);
 
 var jsonParser = require('body-parser');
 var logger = require('morgan');
@@ -73,7 +73,7 @@ io.on('connection', function(socket) {
 	})
 });
 
-var port = process.env.PORT || 8081;
+var port = process.env.PORT || 8080;
 
 server.listen(port, function() {
 	console.log('Express server listening on port', port);
