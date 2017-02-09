@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
+import Client from './Client';
 import axios from 'axios';
 
-const MESSAGES = 'http://localhost:8081/messages';
+const socket = Client.io();
+
+const MESSAGES = 'http://localhost:8080/messages';
 
 function Message(props) {
   return <li>{props.text}</li>;
@@ -25,6 +28,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.getMessages();
+  }
+
+  getMessages() {
     axios.get(MESSAGES).then(res => {           
       console.log('Initial messages:', res)
 
@@ -45,7 +52,8 @@ class App extends Component {
       this.state.messages.push(res.data);
       // var newMsg = res.data;
       this.setState({});
-    })
+    });
+    socket.emit('chat message', msg)
   }
   render() {
     return (
