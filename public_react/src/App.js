@@ -25,10 +25,13 @@ class App extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+
+    this.onRecieveMsg = this.onRecieveMsg.bind(this)
   }
 
   componentDidMount() {
     this.getMessages();
+    socket.on('new message', this.onRecieveMsg);
   }
 
   getMessages() {
@@ -49,12 +52,23 @@ class App extends Component {
     console.log('Post message:', msg)
     axios.post(MESSAGES, {text: msg}).then(res => {
       console.log('onPostMsg response:', res);
-      this.state.messages.push(res.data);
-      // var newMsg = res.data;
-      this.setState({});
+      // this.state.messages.push(res.data);
+      // this.setState({});
+      socket.emit('chat message', res.data);
     });
-    socket.emit('chat message', msg)
   }
+
+  onRecieveMsg(msg) {
+    var {messages} = this.state;
+    messages.push(msg);
+    this.setState({messages});
+    console.log('# socket test', msg)
+
+    // this.setState({msg});
+    // messages.push(msg)
+    // this.setState({messages});
+  }
+
   render() {
     return (
       <div>

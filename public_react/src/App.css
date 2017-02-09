@@ -10,6 +10,12 @@ body {
   font: 13px Helvetica, Arial;
 }
 
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;  
+}
+
 form {
   background: #555; 
   padding: 3px;
