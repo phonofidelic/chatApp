@@ -40,7 +40,7 @@ app.use(function(req, res, next){
 	next();
 });
 
-// app.use('/', express.static(path.join(__dirname, 'public_react')));
+app.use('/', express.static(path.join(__dirname, 'public_react/build')));
 
 app.use('/messages', routes);
 
@@ -70,7 +70,12 @@ io.on('connection', function(socket) {
 	socket.on('chat message', function(msg) {
 		console.log('* message sent:', msg);
 		io.emit('new message', msg);
-	})
+	});
+
+	socket.on('chat response', function(msg) {
+		console.log('*response to '+msg._id+':', msg.text);
+		io.emit('new response', msg);
+	});
 });
 
 var port = process.env.PORT || 8080;

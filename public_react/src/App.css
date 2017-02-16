@@ -1,13 +1,21 @@
+/*@import url('https://fonts.googleapis.com/css?family=Roboto:100');*/
+@fontface {
+  font-family: 'Roboto', sans-serif;
+  src: url('https://fonts.googleapis.com/css?family=Roboto:100');
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #ccc;
+  background: #f6f6f6;
   color: #555;
 }
 
 body {
-  font: 13px Helvetica, Arial;
+  /*font: 13px 'Roboto', Helvetica, Arial;*/
+  font-family: 'Roboto', sans-serif;
+  font: 13px, Helvetica, Arial;
 }
 
 header {
@@ -22,32 +30,38 @@ form {
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 50px;
 }
 
 form input {
   border: 0;
   padding: 10px;
   widows: 90%;
-  margin-right: .5%;
+  /*margin-right: .5%;*/
   background: #fff;
+  height: 100%;
+  width: 75%;
 }
 
 form button {
   /*width: 9%;*/
-  background: rgb(130, 224, 255);
+  background: #f6f6f6;
   border: none;
   padding: 10px;
+  height: 100%;
+  width: 25%;
 }
 
-#message {
+#messages {
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: 50px 0 50px 0;
 }
 
 #messages li {
   padding: 5px 10px;
-  border-bottom: 2px dotted #fff;
+  border-bottom: 2px dotted #ced0d0;
+  min-height: 50px;
 }
 
 /*#messages li:nth-child(odd) {
