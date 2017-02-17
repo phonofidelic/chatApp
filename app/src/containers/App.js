@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Client from './Client';
-import Message from './Message';
+import Client from '../Client';
+import Message from '../components/Message';
 import axios from 'axios';
 
 const socket = Client.io();
@@ -59,6 +59,7 @@ class App extends Component {
       console.log('onPostMsg response:', res);
       socket.emit('chat message', res.data);
     });
+    this.setState({currentMessage: ''});
   };
 
   onRecieveMsg(msg) {
@@ -77,7 +78,11 @@ class App extends Component {
     console.log('msg id:', id);
     this.setState({currentRoute: MESSAGES_ROUTE+'/'+id+'/replies'})
     this.state.activeIndex === index ? 
-      this.setState({activeIndex: null}) : this.setState({activeIndex: index});
+      this.setState({
+        activeIndex: null, 
+        currentRoute: MESSAGES_ROUTE
+      }) : 
+      this.setState({activeIndex: index});
     // this.setState({activeIndex: index})
   };
 

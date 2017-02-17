@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import './Message.css';
-import Client from './Client';
+import Client from '../Client';
 import axios from 'axios';
 
 const socket = Client.io();
@@ -26,18 +25,18 @@ class Message extends Component {
   };
 
   componentDidMount() {
-    if (this.state.replies.length) {
-      axios.get('http://localhost:8080/messages/'+this.props.id+'/replies').then(res => {
-        const replies = res.data;
-        this.setState({replies});
-      }).catch(err => {
-        console.error('error:', err)
-      });
-    } else {
-      console.log('no replies for message', this.props.id);
-    }
+    // if (this.state.replies.length) {
+    //   axios.get('http://localhost:8080/messages/'+this.props.id+'/replies').then(res => {
+    //     const replies = res.data;
+    //     this.setState({replies});
+    //   }).catch(err => {
+    //     console.error('error:', err)
+    //   });
+    // } else {
+    //   console.log('no replies for message', this.props.id);
+    // }
 
-    socket.on('new response', this.handleNewReply);
+    // socket.on('new response', this.handleNewReply);
   };
 
   handleChange(e) {
