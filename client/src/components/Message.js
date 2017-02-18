@@ -67,7 +67,7 @@ class Message extends Component {
       </li>
     )    
   };
-}
+};
 
 export default Message;
 

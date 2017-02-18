@@ -19,41 +19,31 @@ class App extends Component {
     this.state = {
       messages: [],
       currentMessage: '',
-      currentRoute: MESSAGES_ROUTE
+      currentRoute: MESSAGES_ROUTE,
+      inputError: null
     };
 
     this.handleChange = this.handleChange.bind(this);
-
     this.onRecieveMsg = this.onRecieveMsg.bind(this);
-
     this.onRecieveResponse = this.onRecieveResponse.bind(this);
-
     this.handleSelect = this.handleSelect.bind(this);
-
-    // this.onPostMsg = this.onPostMsg.bind(this);
   };
 
   componentDidMount() {
-    // this.getMessages();
-    axios.get(MESSAGES_ROUTE).then(res => {           
-      console.log('Initial messages:', res)
-
-      const messages = res.data.sort(this.sortMessages);
-      this.setState({messages})
-    });
+    this.getMessages();
     socket.on('new message', this.onRecieveMsg);
     socket.on('new response', this.onRecieveResponse);
   };
 
   sortMessages(a, b) {
     return a.createdAt - b.createdAt;
-  }
+  };
 
   getMessages() {
     axios.get(MESSAGES_ROUTE).then(res => {           
       console.log('Initial messages:', res)
 
-      const messages = res.data;
+      const messages = res.data.sort(this.sortMessages);;
       this.setState({messages})
     });
   };
@@ -62,32 +52,42 @@ class App extends Component {
     this.setState({currentMessage: e.target.value});
   };
 
-  // TODO: add validation
   onPostMsg(e, msg) {
     e.preventDefault();
-    console.log('Post message:', msg);
-    axios.post(this.state.currentRoute, {text: msg}).then(res => {
-      console.log('onPostMsg response:', res);
-      socket.emit('chat message', res.data);
-    });
-    this.setState({currentMessage: ''});
+
+    if (this.state.currentMessage != '') {
+      console.log('Post message:', msg);
+      axios.post(this.state.currentRoute, {text: msg}).then(res => {
+        console.log('onPostMsg response:', res);
+        socket.emit('chat message', res.data);
+      });
+      this.setState({currentMessage: ''});
+    } else {
+      console.error('empty message');
+      window.alert('empty message');
+    }
   };
 
   onPostReply(e, msg) {
     e.preventDefault();
-    console.log('Post message:', msg);
-    axios.post(this.state.currentRoute, {text: msg}).then(res => {
-      console.log('onPostMsg response:', res);
-      socket.emit('chat response', res.data);
-    });
-    this.setState({currentMessage: ''});
+    
+    if (this.state.currentMessage != '') {
+      console.log('Post message:', msg);
+      axios.post(this.state.currentRoute, {text: msg}).then(res => {
+        console.log('onPostMsg response:', res);
+        socket.emit('chat response', res.data);
+      });
+      this.setState({currentMessage: ''});
+    } else {
+      console.error('empty message');
+      window.alert('empty message');      
+    }
   };
 
   onRecieveMsg(msg) {
     var {messages} = this.state;
     messages.unshift(msg);
     this.setState({messages});
-    console.log('# socket test', msg)
   };
 
   onRecieveResponse(msg) {
@@ -98,8 +98,6 @@ class App extends Component {
   };
 
   handleSelect(index, id) {
-    // console.log('msg id:', this.state.messages[index].id)
-    console.log('msg id:', id);
     this.setState({currentRoute: MESSAGES_ROUTE+'/'+id+'/replies'})
     this.state.activeIndex === index ? 
       this.setState({
@@ -107,16 +105,7 @@ class App extends Component {
         currentRoute: MESSAGES_ROUTE
       }) : 
       this.setState({activeIndex: index});
-    // this.setState({activeIndex: index})
   };
-
-  handleDeSelect() {
-    this.setState({activeIndex: null})
-  }
-
-  // move reply logic here.
-  // if activeIndex -> set the post route to append indexed messges id+'/replies'
-  // and change form ui to indicate that the user is replying to a selected message
 
   render() {
     var active = this.state.activeIndex;
@@ -156,6 +145,6 @@ class App extends Component {
       </div>
     );
   };
-}
+};
 
 export default App;
