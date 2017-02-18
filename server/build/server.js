@@ -1,3 +1,4 @@
+'use strict';
 'use-strict';
 
 var express = require('express');
@@ -13,46 +14,49 @@ var logger = require('morgan');
 app.use(logger('dev'));
 app.use(jsonParser.json());
 
+var staticFiles = express.static(path.join(__dirname, '../../client/build'));
+
 var mongoose = require('mongoose');
 
 // local
-// mongoose.connect('mongodb://localhost:27017/chatApp');
+mongoose.connect('mongodb://localhost:27017/chatApp');
 //heroku
-mongoose.connect('mongodb://heroku_djrv4shx:3q2trf5i3gbddvd8dtgpa0u2ca@ds139959.mlab.com:39959/heroku_djrv4shx');
+// mongoose.connect('mongodb://heroku_djrv4shx:3q2trf5i3gbddvd8dtgpa0u2ca@ds139959.mlab.com:39959/heroku_djrv4shx');
 
 var db = mongoose.connection;
 
-db.on('error', function(err) {
+db.on('error', function (err) {
 	console.log('connection error:', err);
 });
 
-db.once('open', function() {
+db.once('open', function () {
 	console.log('db connection succesfull!');
 });
 
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	if(req.method === "OPTIONS") {
+	if (req.method === "OPTIONS") {
 		res.header("Access-Control-Allow-Methods", "PUT,POST,DELETE");
 		return res.status(200).json({});
 	}
 	next();
 });
 
-app.use('/', express.static(path.join(__dirname, 'app/build')));
+// app.use('/', express.static(path.join(__dirname, 'app/build')));
+app.use(staticFiles);
 
 app.use('/messages', routes);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	var err = new Error('Not Found');
 	err.status = 404;
 	next(err);
 });
 
 // Error Handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
 	res.status(err.status || 500);
 	res.json({
 		error: {
@@ -61,25 +65,25 @@ app.use(function(err, req, res, next) {
 	});
 });
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
 	console.log('* A user connected');
-	socket.on('disconnect', function() {
+	socket.on('disconnect', function () {
 		console.log('* A user disconnected');
 	});
 
-	socket.on('chat message', function(msg) {
+	socket.on('chat message', function (msg) {
 		console.log('* message sent:', msg);
 		io.emit('new message', msg);
 	});
 
-	socket.on('chat response', function(msg) {
-		console.log('*response to '+msg._id+':', msg.text);
+	socket.on('chat response', function (msg) {
+		console.log('*response to ' + msg._id + ':', msg.text);
 		io.emit('new response', msg);
 	});
 });
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3001;
 
-server.listen(port, function() {
+server.listen(port, function () {
 	console.log('Express server listening on port', port);
 });

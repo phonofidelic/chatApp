@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const socket = Client.io();
 
-const MESSAGES_ROUTE = 'http://localhost:8080/messages';
+const MESSAGES_ROUTE = 'http://localhost:3001/messages';
 
 class App extends Component {
   constructor(props) {
