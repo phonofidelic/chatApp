@@ -6,7 +6,6 @@ import axios from 'axios';
 
 const socket = Client.io();
 
-
 // TODO: bind MESSAGES_ROUTE conditionaly to correct env var
 // Productoin api base url
 // const MESSAGES_ROUTE = 'https://phono-chat.herokuapp.com/messages';

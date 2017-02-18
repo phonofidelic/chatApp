@@ -20,25 +20,7 @@ class Message extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-
-    // this.onSelectMsg = this.onSelectMsg.bind(this);
-
     this.handleNewReply = this.handleNewReply.bind(this);
-  };
-
-  componentDidMount() {
-    // if (this.state.replies.length) {
-    //   axios.get('http://localhost:8080/messages/'+this.props.id+'/replies').then(res => {
-    //     const replies = res.data;
-    //     this.setState({replies});
-    //   }).catch(err => {
-    //     console.error('error:', err)
-    //   });
-    // } else {
-    //   console.log('no replies for message', this.props.id);
-    // }
-
-    // socket.on('new response', this.handleNewReply);
   };
 
   handleChange(e) {
