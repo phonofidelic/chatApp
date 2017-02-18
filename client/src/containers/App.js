@@ -6,10 +6,12 @@ import axios from 'axios';
 
 const socket = Client.io();
 
+
+// TODO: bind MESSAGES_ROUTE conditionaly to correct env var
 // Productoin api base url
-const MESSAGES_ROUTE = 'https://phono-chat.herokuapp.com/messages';
+// const MESSAGES_ROUTE = 'https://phono-chat.herokuapp.com/messages';
 // Development api base url
-// const MESSAGES_ROUTE = 'http://localhost:3001/messages';
+const MESSAGES_ROUTE = 'http://localhost:3001/messages';
 
 class App extends Component {
   constructor(props) {
@@ -25,6 +27,8 @@ class App extends Component {
 
     this.onRecieveMsg = this.onRecieveMsg.bind(this);
 
+    this.onRecieveResponse = this.onRecieveResponse.bind(this);
+
     this.handleSelect = this.handleSelect.bind(this);
 
     // this.onPostMsg = this.onPostMsg.bind(this);
@@ -35,11 +39,16 @@ class App extends Component {
     axios.get(MESSAGES_ROUTE).then(res => {           
       console.log('Initial messages:', res)
 
-      const messages = res.data;
+      const messages = res.data.sort(this.sortMessages);
       this.setState({messages})
     });
     socket.on('new message', this.onRecieveMsg);
+    socket.on('new response', this.onRecieveResponse);
   };
+
+  sortMessages(a, b) {
+    return a.createdAt - b.createdAt;
+  }
 
   getMessages() {
     axios.get(MESSAGES_ROUTE).then(res => {           
@@ -65,15 +74,28 @@ class App extends Component {
     this.setState({currentMessage: ''});
   };
 
+  onPostReply(e, msg) {
+    e.preventDefault();
+    console.log('Post message:', msg);
+    axios.post(this.state.currentRoute, {text: msg}).then(res => {
+      console.log('onPostMsg response:', res);
+      socket.emit('chat response', res.data);
+    });
+    this.setState({currentMessage: ''});
+  };
+
   onRecieveMsg(msg) {
     var {messages} = this.state;
-    messages.push(msg);
+    messages.unshift(msg);
     this.setState({messages});
     console.log('# socket test', msg)
+  };
 
-    // this.setState({msg});
-    // messages.push(msg)
-    // this.setState({messages});
+  onRecieveResponse(msg) {
+    this.getMessages();
+    var {messages} = this.state;
+    messages = messages.sort(this.sortMessages);
+    this.setState({messages});
   };
 
   handleSelect(index, id) {
@@ -107,7 +129,7 @@ class App extends Component {
 
     let replyForm = <form>
                         <input type="text" value={this.state.currentMessage} onChange={this.handleChange}/>
-                        <button onClick={(e) => this.onPostMsg(e, this.state.currentMessage)}>reply</button>
+                        <button onClick={(e) => this.onPostReply(e, this.state.currentMessage)}>reply</button>
                       </form>;
 
     return (
@@ -119,14 +141,15 @@ class App extends Component {
         
           {this.state.messages.map((msg, index) => {
             return (
-              <Message 
+              <Message                 
                 text={msg.text}
                 replies={msg.replies}
                 key={msg._id} 
                 id={msg._id}
+                createdAt={msg.createdAt}
                 active={index === active}
                 onSelect={this.handleSelect.bind(null, index, msg._id)}
-                isActive={false} />
+                />
             );
           })}
         </ul>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Client from '../Client';
 import axios from 'axios';
+import Style from './Message.styles.js';
 
 const socket = Client.io();
 
@@ -13,7 +14,8 @@ class Message extends Component {
       id: props.id,
       replies: props.replies,
       currentReply: '',
-      isActive: false,
+      createdAt: props.createdAt,
+      active: props.active,
       classes: ['message']
     };
 
@@ -64,59 +66,24 @@ class Message extends Component {
   };
 
   render() {
-    const 
-    selected = {
-            background: '#ff4d62',
-            color: '#fff'
-          },
-          notSelected = {
-            background: '#f6f6f6',
-            color: '#555'
-          },
-          replies = {
-            left: '0',
-            possition: 'fixed'
-          },
-          debug = {
-            textAlign: 'right',
-            width: '100%',
-            color: '#ced0d0',
-            fontSize: '10px'
-          },
-          form = {
-            zIndex: '1000',
-            width: '100%',
-            left: '0'
-          }
-    let isActive = this.state.isActive;
-
-    let message = null;
-
-    if (this.state.isActive) {
-      message = <li onClick={this.props.onSelect} style={this.props.active ? selected : ''}>
-                  <div  style={selected}>{this.state.text}
-                    <ul style={selected}>replies:
-                      {this.props.replies.map(reply => {
-                        return(<li style={selected} key={reply._id}>{reply.text}</li>)
-                      })}
-                    </ul>
-                  </div>
-                 
-                    <form style={form}>
-                      <input type="text" value={this.state.currentReply} onChange={this.handleChange} />
-                      <button onClick={e => this.onPostReply(e, this.state.currentReply)} style={selected}>reply</button>
-                    </form>
-                  
-                </li>
-    } else {
-        message = <li onClick={this.props.onSelect} style={this.props.active ? selected : notSelected}>
-          <div style={debug}>{this.state.id}</div>
+    return (
+      <li onClick={this.props.onSelect} 
+          className="message"
+          style={this.props.active ? Style.selected : Style.notSelected}>
+        <div style={Style.debug}>{this.state.createdAt}</div>
           {this.state.text}
-          <span>{this.props.replies.length ? '*' : ''}</span>
-        </li>
-    }
-
-    return (message);
+        <span>{this.props.replies.length ? '*' : ''}</span>
+        <ul>
+          {this.props.active ? (
+            this.props.replies.map(reply => {
+              return(<li key={reply._id} className="reply">{reply.text}</li>)
+            })
+          ) : (
+            null
+          )}
+        </ul>
+      </li>
+    )    
   };
 }
 
