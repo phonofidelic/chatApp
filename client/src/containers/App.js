@@ -6,7 +6,10 @@ import axios from 'axios';
 
 const socket = Client.io();
 
-const MESSAGES_ROUTE = process.env.REACT_APP_PROD_API_URI || 'http://localhost:3001/messages';
+// Productoin api base url
+const MESSAGES_ROUTE = process.env.REACT_APP_PROD_API_URI;
+// Development api base url
+// const MESSAGES_ROUTE = 'http://localhost:3001/messages';
 
 class App extends Component {
   constructor(props) {
