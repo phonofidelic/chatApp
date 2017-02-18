@@ -7,7 +7,7 @@ import axios from 'axios';
 const socket = Client.io();
 
 // Productoin api base url
-const MESSAGES_ROUTE = process.env.REACT_APP_PROD_API_URI;
+const MESSAGES_ROUTE = 'https://phono-chat.herokuapp.com/messages';
 // Development api base url
 // const MESSAGES_ROUTE = 'http://localhost:3001/messages';
 
