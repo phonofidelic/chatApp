@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Client from '../Client';
+import Client from '../../Client';
 import axios from 'axios';
 import Style from './Message.styles.js';
 

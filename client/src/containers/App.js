@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Client from '../Client';
-import Message from '../components/Message';
+import Message from '../components/Message/Message';
 import axios from 'axios';
 
 const socket = Client.io();
@@ -55,7 +55,7 @@ class App extends Component {
   onPostMsg(e, msg) {
     e.preventDefault();
 
-    if (this.state.currentMessage != '') {
+    if (this.state.currentMessage !== '') {
       console.log('Post message:', msg);
       axios.post(this.state.currentRoute, {text: msg}).then(res => {
         console.log('onPostMsg response:', res);
@@ -71,7 +71,7 @@ class App extends Component {
   onPostReply(e, msg) {
     e.preventDefault();
     
-    if (this.state.currentMessage != '') {
+    if (this.state.currentMessage !== '') {
       console.log('Post message:', msg);
       axios.post(this.state.currentRoute, {text: msg}).then(res => {
         console.log('onPostMsg response:', res);
