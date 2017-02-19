@@ -6,7 +6,7 @@ import './index.css';
 
 const config = {
 	google: {
-		families: ['Slabo 27px', 'Roboto']
+		families: ['Slabo 27px', 'Roboto:100,300,400']
 	}
 }
 
