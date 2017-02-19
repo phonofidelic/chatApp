@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@dr-kobros/react-webfont-loader@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@dr-kobros/react-webfont-loader/-/react-webfont-loader-2.0.0.tgz#e3d46e78a2f01977e633474463a4c6582c410890"
+  dependencies:
+    react "^15"
+    webfontloader "^1.6.27"
+
 abab@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.3.tgz#b81de5f7274ec4e756d797cd834f303642724e5d"
@@ -4340,7 +4347,7 @@ react-scripts@0.9.0:
   optionalDependencies:
     fsevents "1.0.17"
 
-react@^15.4.2:
+react@^15, react@^15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"
   dependencies:
@@ -5249,6 +5256,10 @@ watchpack@^0.2.1:
     async "^0.9.0"
     chokidar "^1.0.0"
     graceful-fs "^4.1.2"
+
+webfontloader@^1.6.27:
+  version "1.6.27"
+  resolved "https://registry.yarnpkg.com/webfontloader/-/webfontloader-1.6.27.tgz#c3899649b0653aa57d0a23388f82409e0df224ba"
 
 webidl-conversions@^3.0.0:
   version "3.0.1"

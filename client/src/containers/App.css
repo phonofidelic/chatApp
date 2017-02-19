@@ -1,6 +1,10 @@
-/*@import url('https://fonts.googleapis.com/css?family=Roboto:100');*/
-@fontface {
-  font-family: 'Roboto', sans-serif;
+/*@font-face {
+  font-family: 'Slabo 27px', serif;
+  src: url('https://fonts.googleapis.com/css?family=Slabo+27px');
+}*/
+
+@font-face {
+  font-family: 'Roboto', serif;
   src: url('https://fonts.googleapis.com/css?family=Roboto:100');
 }
 
@@ -8,15 +12,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #f6f6f6;
-  color: #555;
+  /*background: #f6f6f6;*/
+  /*color: #555;*/
   /*border: solid red 1px;*/
 }
 
 body {
-  /*font: 13px 'Roboto', Helvetica, Arial;*/
+  background: #f6f6f6;
+  color: #555;
   font-family: 'Roboto', sans-serif;
-  font: 13px, Helvetica, Arial;
+  /*font-family: 'Slabo 27px', serif;*/
 }
 
 header {
@@ -42,6 +47,7 @@ form input {
   background: #fff;
   height: 100%;
   width: 75%;
+  border-radius: 0px;
 }
 
 form button {
@@ -51,6 +57,11 @@ form button {
   padding: 10px;
   height: 100%;
   width: 25%;
+}
+
+.logo {
+  /*font-family: 'Slabo 27px', serif;*/
+  /*color: #fff;*/
 }
 
 #messages {
@@ -72,6 +83,7 @@ form button {
 .reply {
   list-style: none;
   margin: 5px 10px;
+  color: #555;
 }
 
 .active {

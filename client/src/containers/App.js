@@ -123,7 +123,7 @@ class App extends Component {
     return (
       <div>
       <header>
-        <h1>phono_chat</h1>
+        <h1 className="logo">phono_chat</h1>
       </header>
         <ul id="messages">
         
