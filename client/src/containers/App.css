@@ -1,13 +1,3 @@
-/*@font-face {
-  font-family: 'Slabo 27px', serif;
-  src: url('https://fonts.googleapis.com/css?family=Slabo+27px');
-}*/
-
-@font-face {
-  font-family: 'Roboto', serif;
-  src: url('https://fonts.googleapis.com/css?family=Roboto:100');
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -57,11 +47,6 @@ form button {
   padding: 10px;
   height: 100%;
   width: 25%;
-}
-
-.logo {
-  /*font-family: 'Slabo 27px', serif;*/
-  /*color: #fff;*/
 }
 
 #messages {
