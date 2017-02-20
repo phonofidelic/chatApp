@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Client from '../Client';
+import Header from '../components/Header/Header';
 import Message from '../components/Message/Message';
 import axios from 'axios';
 
@@ -8,9 +9,9 @@ const socket = Client.io();
 
 // TODO: bind MESSAGES_ROUTE conditionaly to correct env var
 // Productoin api base url
-const MESSAGES_ROUTE = 'https://phono-chat.herokuapp.com/messages';
+// const MESSAGES_ROUTE = 'https://phono-chat.herokuapp.com/messages';
 // Development api base url
-// const MESSAGES_ROUTE = 'http://localhost:3001/messages';
+const MESSAGES_ROUTE = 'http://localhost:3001/messages';
 
 class App extends Component {
   constructor(props) {
@@ -122,9 +123,10 @@ class App extends Component {
 
     return (
       <div>
-      <header>
-        <h1 className="logo">phono_chat</h1>
-      </header>
+      <Header />
+      <div className="container">
+        {this.props.children}
+      </div>
         <ul id="messages">
         
           {this.state.messages.map((msg, index) => {
