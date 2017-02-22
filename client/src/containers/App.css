@@ -22,7 +22,7 @@ body {
   color: #fff;
 }
 
-form {
+.messageForm {
   background: #555; 
   padding: 3px;
   position: fixed;
@@ -31,7 +31,7 @@ form {
   height: 50px;
 }
 
-form input {
+.messageForm input {
   border: 0;
   padding: 10px;
   widows: 90%;
@@ -42,7 +42,7 @@ form input {
   border-radius: 0px;
 }
 
-form button {
+.messageForm button {
   /*width: 9%;*/
   background: #f6f6f6;
   border: none;

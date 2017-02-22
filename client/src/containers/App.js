@@ -111,19 +111,19 @@ class App extends Component {
   render() {
     var active = this.state.activeIndex;
 
-    let messageForm = <form>
+    let messageForm = <form className="messageForm">
                         <input type="text" value={this.state.currentMessage} onChange={this.handleChange}/>
                         <button onClick={(e) => this.onPostMsg(e, this.state.currentMessage)}>post</button>
                       </form>;
 
-    let replyForm = <form>
+    let replyForm = <form className="messageForm">
                         <input type="text" value={this.state.currentMessage} onChange={this.handleChange}/>
                         <button onClick={(e) => this.onPostReply(e, this.state.currentMessage)}>reply</button>
                       </form>;
 
     return (
       <div>
-      <Header />
+        <Header />
       <div className="container">
         {this.props.children}
       </div>

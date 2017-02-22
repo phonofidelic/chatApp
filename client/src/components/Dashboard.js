@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/auth.js'
+import { protectedTest } from '../actions/auth.js'
 
 class Dashboard extends Component {
 

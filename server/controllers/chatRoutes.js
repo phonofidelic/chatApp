@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-var Message = require('./models').Message;
+var Message = require('../models/message').Message;
 
 router.param('mID', function(req, res, next, id) {
 	Message.findById(id, function(err, doc) {
