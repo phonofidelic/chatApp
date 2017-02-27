@@ -3,46 +3,49 @@
 
 var express = require('express');
 var app = express();
-var routes = require('./routes');
+var routes = require('./controllers/chatRoutes'); //TODO: move all related logic to router.js and import and implement router.js here
+var router = require('./router');
 var path = require('path');
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
-
 var jsonParser = require('body-parser');
 var logger = require('morgan');
-
-app.use(logger('dev'));
-app.use(jsonParser.json());
+var config = require('./config/main');
 
 var staticFiles = express.static(path.join(__dirname, '../../client/build'));
 
 var mongoose = require('mongoose');
 
+// Connect to mongodb server with mongoose
 // TODO: bind to correct env var
 // local
-// mongoose.connect('mongodb://localhost:27017/chatApp');
+mongoose.connect(config.database);
 //heroku
-mongoose.connect('mongodb://heroku_djrv4shx:3q2trf5i3gbddvd8dtgpa0u2ca@ds139959.mlab.com:39959/heroku_djrv4shx');
+// mongoose.connect('mongodb://heroku_djrv4shx:3q2trf5i3gbddvd8dtgpa0u2ca@ds139959.mlab.com:39959/heroku_djrv4shx');
 
+// Log connection status
 var db = mongoose.connection;
-
 db.on('error', function (err) {
 	console.log('connection error:', err);
 });
-
 db.once('open', function () {
 	console.log('db connection succesfull!');
 });
 
+// Enable COORS for client
 app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.header('Access-Control-Allow-Credentials', 'true');
 	if (req.method === "OPTIONS") {
 		res.header("Access-Control-Allow-Methods", "PUT,POST,DELETE");
 		return res.status(200).json({});
 	}
 	next();
 });
+
+app.use(logger('dev'));
+app.use(jsonParser.json());
 
 // app.use('/', express.static(path.join(__dirname, 'app/build')));
 app.use(staticFiles);
@@ -83,8 +86,11 @@ io.on('connection', function (socket) {
 	});
 });
 
-var port = process.env.PORT || 3001;
+router(app);
+// app.use(router);
 
-server.listen(port, function () {
-	console.log('Express server listening on port', port);
+server.listen(config.port, function () {
+	console.log('Express server listening on port', config.port);
 });
+
+module.exports = server;

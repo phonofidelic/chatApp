@@ -33,6 +33,7 @@ exports.login = function(req, res, next) {
 
 // Registration route
 exports.register = function(req, res, next) {
+	console.log('@registration route');
 	// Check for registration errors
 	const email = req.body.email,
 		  username = req.body.username,
