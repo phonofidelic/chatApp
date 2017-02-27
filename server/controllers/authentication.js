@@ -36,8 +36,8 @@ exports.register = function(req, res, next) {
 	console.log('@registration route');
 	// Check for registration errors
 	const email = req.body.email,
-		  username = req.body.username,
-		  password = req.body.password;
+			  username = req.body.username,
+			  password = req.body.password;
 
 	if (!email) {
 		return res.status(422).send({ error: 'Please enter an email address.'});

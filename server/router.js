@@ -1,4 +1,5 @@
 const AuthenticationController = require('./controllers/authentication'),
+			UserController = require('./controllers/user'),
 			ChatController = require('./controllers/chat'),
 			express = require('express'),
 			passportService = require('./config/passport'),
@@ -27,18 +28,24 @@ module.exports = function(app) {
 
 	authRoutes.post('/login', requireLogin, AuthenticationController.login);
 
-	authRoutes.get('/test', function(req, res, next) {
-		res.status(200).json({message: 'it works'});
-		return next();
-	});
-
 	// Chat routes
 	apiRoutes.use('/chat', chatRoutes);
 
-	// BUG: ChatController."methodname" is undefined
-	chatRoutes.get('/messages', ChatController.getMessages);
-	chatRoutes.post('/messages', ChatController.postMessage);
+	//// oldsetup
+	// chatRoutes.get('/messages', ChatController.getMessages);
+	// chatRoutes.post('/messages', ChatController.postMessage);
 
+	// get conversations to and from logged in user
+	chatRoutes.get('/', requireAuth, ChatController.getConversations);
+
+	// get specific conversation
+	chatRoutes.get('/:conversationId', requireAuth, ChatController.getConversation);
+
+	// reply in conversation
+	chatRoutes.post('/:conversationId', requireAuth, ChatController.sendReply);
+
+	// start new conversation
+	chatRoutes.post('/new/:recipient', requireAuth, ChatController.newConversation);
 
 	app.use('/api', apiRoutes);
 };
