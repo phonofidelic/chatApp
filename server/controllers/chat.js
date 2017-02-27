@@ -1,5 +1,5 @@
 'use-strict';
-const Message = require('../models/message').Message;
+const Message = require('../models/message');
 
 exports.getMessages = function(req, res, next) {
 	Message.find({})
@@ -11,7 +11,7 @@ exports.getMessages = function(req, res, next) {
 };
 
 exports.postMessage = function(req, res, next) {
-	let mesasge = new Message(req.body);
+	let message = new Message(req.body);
 	message.save(function(err, message) {
 		if (err) return next(err);
 		res.status(201);

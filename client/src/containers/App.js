@@ -11,7 +11,7 @@ const socket = Client.io();
 // Productoin api base url
 // const MESSAGES_ROUTE = 'https://phono-chat.herokuapp.com/messages';
 // Development api base url
-const MESSAGES_ROUTE = 'http://localhost:3001/messages';
+const MESSAGES_ROUTE = 'http://localhost:3001/api/chat/messages';
 
 class App extends Component {
   constructor(props) {
