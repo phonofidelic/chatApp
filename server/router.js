@@ -18,9 +18,10 @@ const REQUIRE_ADMIN = "Admin",
 module.exports = function(app) {
 	const apiRoutes = express.Router(),
 				authRoutes = express.Router(),
-				chatRoutes = express.Router();
+				chatRoutes = express.Router(),
+				userRoutes = express.Router();
 
-	// Auth routes
+	// Auth routes ***************************************************
 
 	apiRoutes.use('/auth', authRoutes);
 
@@ -28,15 +29,17 @@ module.exports = function(app) {
 
 	authRoutes.post('/login', requireLogin, AuthenticationController.login);
 
-	// Chat routes
+	// Chat routes ***************************************************
+
 	apiRoutes.use('/chat', chatRoutes);
 
-	//// oldsetup
-	// chatRoutes.get('/messages', ChatController.getMessages);
-	// chatRoutes.post('/messages', ChatController.postMessage);
+	// // old setup/open chat
+	chatRoutes.get('/', ChatController.getMessages);
+
+	chatRoutes.post('/', ChatController.postMessage);
 
 	// get conversations to and from logged in user
-	chatRoutes.get('/', requireAuth, ChatController.getConversations);
+	// chatRoutes.get('/', requireAuth, ChatController.getConversations);
 
 	// get specific conversation
 	chatRoutes.get('/:conversationId', requireAuth, ChatController.getConversation);
@@ -47,5 +50,16 @@ module.exports = function(app) {
 	// start new conversation
 	chatRoutes.post('/new/:recipient', requireAuth, ChatController.newConversation);
 
+	// User routes ***************************************************
+
+	apiRoutes.use('/user', userRoutes);
+
+	userRoutes.get('/protected', requireAuth, (req, res, next) => {
+		res.send({ content: 'Protected test route functioning!' });
+	});
+
+	userRoutes.get('/list', UserController.getUserList);
+
+	app.use(passport.initialize());
 	app.use('/api', apiRoutes);
 };

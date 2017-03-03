@@ -4,7 +4,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import NotFound from './components/pages/NotFound';
 import HomePage from './components/pages/HomePage';
-import Register from './components/pages/Register';
+import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/Dashboard';
 import RequireAuth from './components/auth/RequireAuth';

@@ -35,7 +35,7 @@ function validate(formProps) {
 
 class Register extends Component {
 	handleFormSubmit(formProps) {
-		this.porps.registerUser(formProps);
+		this.props.registerUser(formProps);
 	};
 
 	renderAlert() {
@@ -53,6 +53,7 @@ class Register extends Component {
 
 		return (
 			<div>
+			<h1>Register</h1>
 				<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 				{this.renderAlert()}
 					<div className="input-username">
@@ -74,7 +75,7 @@ class Register extends Component {
 	};
 };
 
-function mapStatesToProps(state) {
+function mapStateToProps(state) {
 	return {
 		errorMessage: state.auth.error,
 		message: state.auth.message

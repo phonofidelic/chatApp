@@ -3,6 +3,7 @@ const mongoose = require('mongoose'),
 	  Schema = mongoose.Schema;
 
 // adapted from Treehouse tutorial
+
 // var sortReplies = function(a, b) {
 // 	return a.createdAt - b.createdAt; 
 // }

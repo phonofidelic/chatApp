@@ -36,7 +36,8 @@ export function errorHandler(dispatch, error, type) {
 
 export function loginUser({ email, password }) {
 	return function(dispatch) {
-		axios.post(`${API_URL}/auth/login`).then(response => {
+		axios.post(`${API_URL}/auth/login`, { email, password })
+		.then(response => {
 			cookie.save('token', response.data.token, { path: '/' });
 			dispatch({ type: AUTH_USER });
 			window.location.href = CLIENT_ROOT_URL + '/dashboard';
@@ -68,15 +69,17 @@ export function logoutUser() {
 
 export function protectedTest() {
 	return function(dispatch) {
-		axios.get(`${API_URL}/protected`, {
-			headers: { 'Authorization': cookie.load('token')}
+		axios.get(`${API_URL}/user/protected`, {	// BUG: returning unauthorized
+			headers: { Authorization: cookie.load('token') }
 		}).then(response => {
+			console.log('@protectedTest:', response.data.content)
 			dispatch({
 				type: PROTECTED_TEST,
 				payload: response.data.content
 			});
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
+			// TODO: redirect to login?
 		});
 	}
 }

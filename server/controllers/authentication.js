@@ -26,9 +26,10 @@ exports.login = function(req, res, next) {
 	let userInfo = setUserInfo(req.user);
 
 	res.status(200).json({
-		token: 'JWT' +generateToken(userInfo),
+		token: 'JWT ' + generateToken(userInfo),	// remove 'JWT'?	
 		user: userInfo
 	});
+	console.log('@controllers/authentication.js login:', userInfo);
 };
 
 // Registration route
@@ -78,7 +79,7 @@ exports.register = function(req, res, next) {
 			let userInfo = setUserInfo(user);
 
 			res.status(201).json({
-				token: 'JWT' + generateToken(userInfo),
+				token: 'JWT ' + generateToken(userInfo),
 				user: userInfo
 			});
 		});

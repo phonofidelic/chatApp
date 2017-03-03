@@ -11,7 +11,7 @@ const socket = Client.io();
 // Productoin api base url
 // const MESSAGES_ROUTE = 'https://phono-chat.herokuapp.com/messages';
 // Development api base url
-const MESSAGES_ROUTE = 'http://localhost:3001/api/chat/messages';
+const MESSAGES_ROUTE = 'http://localhost:3001/api/chat';
 
 class App extends Component {
   constructor(props) {
@@ -121,12 +121,13 @@ class App extends Component {
                         <button onClick={(e) => this.onPostReply(e, this.state.currentMessage)}>reply</button>
                       </form>;
 
+    // TODO: move chat to seperate component
     return (
       <div>
         <Header />
-      <div className="container">
-        {this.props.children}
-      </div>
+	      <div className="nav-container">
+	        {this.props.children}
+	      </div>
         <ul id="messages">
         
           {this.state.messages.map((msg, index) => {

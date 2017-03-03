@@ -1,7 +1,7 @@
 'use-strict';
 const User = require('../models/user');
 
-const setUserInfo = function setUserInfo(request) {
+const setUserInfo = function(request) {
   const getUserInfo = {
     _id: request._id,
     username: request.profile.username,
@@ -28,4 +28,12 @@ exports.viewProfile = function(req, res, next) {
 
 		return res.status(200).json({ user: userToReturn });
 	});
+};
+
+exports.getUserList = function(req, res, next) {
+	User.find({})
+	.exec((err, users) => {
+		if (err) return next(err);
+		res.status(201).json(users)
+	})
 }

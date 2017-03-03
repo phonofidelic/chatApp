@@ -6,17 +6,21 @@ var routes = require('./controllers/chatRoutes'); //TODO: move all related logic
 var router = require('./router');
 var path = require('path');
 // var server = require('http').Server(app);
-
+var socketEvents = require('./socketEvents');
 var jsonParser = require('body-parser');
 var logger = require('morgan');
 var config = require('./config/main');
+var mongoose = require('mongoose');
+var passport = require('passport');
+
+// app.use(passport.initialize());
 
 app.use(logger('dev'));
 app.use(jsonParser.json());
 
 const staticFiles = express.static(path.join(__dirname, '../../client/build'));
 
-var mongoose = require('mongoose');
+
 
 
 
@@ -45,10 +49,10 @@ server = app.listen(config.port, function() {
 
 var io = require('socket.io').listen(server);
 
+socketEvents(io);
+
 // app.use('/', express.static(path.join(__dirname, 'app/build')));
 // app.use(staticFiles);
-
-// app.use('/messages', routes);
 
 // Setting up basic middleware for all Express requests
 app.use(jsonParser.urlencoded({ extended: false })); // Parses urlencoded bodies
@@ -57,37 +61,24 @@ app.use(logger('dev')); // Log requests to API using morgan
 
 
 
-
-
-// TODO: move to ./socketEvents.js
-io.on('connection', function(socket) {
-	console.log('* A user connected');
-	socket.on('disconnect', function() {
-		console.log('* A user disconnected');
-	});
-
-	socket.on('chat message', function(msg) {
-		console.log('* message sent:', msg);
-		io.emit('new message', msg);
-	});
-
-	socket.on('chat response', function(msg) {
-		console.log('*response to '+msg._id+':', msg.text);
-		io.emit('new response', msg);
-	});
-});
-
-
 // Enable COORS for client
-app.use(function(req, res, next){
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	res.header('Access-Control-Allow-Credentials', 'true');
-	if(req.method === "OPTIONS") {
-		res.header("Access-Control-Allow-Methods", "PUT,POST,DELETE");
-		return res.status(200).json({});
-	}
-	next();
+// app.use(function(req, res, next){
+// 	res.header("Access-Control-Allow-Origin", "*");
+// 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials");
+// 	res.header('Access-Control-Allow-Credentials', 'true');
+// 	if(req.method === "OPTIONS") {
+// 		res.header("Access-Control-Allow-Methods", "PUT,POST,DELETE");
+// 		return res.status(200).json({});
+// 	}
+// 	next();
+// });
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
 });
 
 

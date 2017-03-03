@@ -7,23 +7,25 @@ const Conversation = require('../models/conversation'),
 
 
 // old setup
-// exports.getMessages = function(req, res, next) {
-// 	Message.find({})
-// 		   .sort({createdAt: -1})
-// 		   .exec(function(err, messages) {
-// 				if (err) return next(err);
-// 				res.json(messages);
-// 			});
-// };
+exports.getMessages = function(req, res, next) {
+	Message.find({})
+		   .sort({createdAt: -1})
+		   .exec(function(err, messages) {
+				if (err) return next(err);
+				res.json(messages);
+			});
+};
 
-// exports.postMessage = function(req, res, next) {
-// 	let message = new Message(req.body);
-// 	message.save(function(err, message) {
-// 		if (err) return next(err);
-// 		res.status(201);
-// 		res.json(message);
-// 	});
-// };
+exports.postMessage = function(req, res, next) {
+	let message = new Message(req.body);
+	message.save(function(err, message) {
+		if (err) return next(err);
+		res.status(201);
+		res.json(message);
+	});
+};
+
+// ##########################################################
 
 exports.getConversations = function(req, res, next) {
 	// Return one message from conversation to display as snippet
