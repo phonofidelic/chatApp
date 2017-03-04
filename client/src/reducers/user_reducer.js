@@ -9,14 +9,7 @@ export default function(state = INITIAL_STATE, action) {
 				...state,
 				userInfo: action.payload
 			};
-
-			// return {
-			// 	id: action.payload._id,
-			// 	username: action.payload.username,
-			// 	email: action.payload.email,
-			// 	role: action.payload.role
-			// }
-
+			
 			default:
 				return state;
 	}

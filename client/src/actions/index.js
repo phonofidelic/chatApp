@@ -102,3 +102,16 @@ export function viewProfile() {
 	}
 }
 
+
+export function getConversations() {
+	const user = cookie.load('user');
+	return (dispatch) => {
+		axios.get(`${API_URL}/chat/conversations`, {
+			headers: { Authorization: cookie.load('token') }
+		}).then(response => {
+			console.log('@getConversations:', response);
+		}).catch(err => {
+			errorHandler(dispatch, err.response, AUTH_ERROR);
+		});
+	}
+}

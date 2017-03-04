@@ -39,13 +39,13 @@ module.exports = function(app) {
 	chatRoutes.post('/', ChatController.postMessage);
 
 	// get conversations to and from logged in user
-	// chatRoutes.get('/', requireAuth, ChatController.getConversations);
+	chatRoutes.get('/conversations', requireAuth, ChatController.getConversations);
 
 	// get specific conversation
 	chatRoutes.get('/:conversationId', requireAuth, ChatController.getConversation);
 
 	// reply in conversation
-	chatRoutes.post('/:conversationId', requireAuth, ChatController.sendReply);
+	// chatRoutes.post('/:conversationId', requireAuth, ChatController.sendReply);
 
 	// start new conversation
 	chatRoutes.post('/new/:recipient', requireAuth, ChatController.newConversation);

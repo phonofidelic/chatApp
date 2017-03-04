@@ -7,6 +7,7 @@ import HomePage from './components/pages/HomePage';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/Dashboard';
+import Conversations from './components/Conversations';
 import RequireAuth from './components/auth/RequireAuth';
 
 export default (
@@ -15,6 +16,7 @@ export default (
 		<Route path="dashboard" component={RequireAuth(Dashboard)} />
 		<Route path="register" component={Register} />
 		<Route path="login" component={Login} />
+		<Route path="conversations" component={RequireAuth(Conversations)} />
 		
 
 		<Route path="*" component={NotFound} />

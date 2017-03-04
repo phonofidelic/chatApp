@@ -1,0 +1,1 @@
+export const GET_CONVERSATION_LIST = 'chat/GET_CONVERSATION_LIST';

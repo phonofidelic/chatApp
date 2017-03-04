@@ -52,7 +52,7 @@ exports.getConversations = function(req, res, next) {
 						res.send({ error: err });
 						return next(err);
 					}
-					fullConversation.push(message);
+					fullConversations.push(message);
 					if (fullConversations.length === conversations.length) {
 						return res.status(200).json({ conversations: fullConversations });
 					}
@@ -80,12 +80,13 @@ exports.getConversation = function (req, res, next) {
 };
 
 exports.newConversation = function(req, res, next) {
+	console.log('@newConversation:', req.body)
 	if (!req.params.recipient) {
 		res.status(422).send({ error: 'Please select a recipient for your message.' });
 		return next();
 	}
 
-	if (!req.body.compossedMessage) {
+	if (!req.body.composedMessage) {
 		res.status(422).send({ error: 'Please enter a message.' });
 		return next();
 	}
@@ -94,7 +95,9 @@ exports.newConversation = function(req, res, next) {
 		participants: [req.user._id, req.params.recipient]
 	});
 
-	converstion.save(function(err, newConversation) {
+	conversation.save(function(err, newConversation) {
+		console.log('@conversation.save:', newConversation)
+		console.log('@newConversation:', req.body.composedMessage)
 		if (err) {
 			res.send({ error: err });
 			return next(err);
@@ -127,7 +130,7 @@ exports.sendReply = function(req, res, next) {
 
 	reply.save(function(err, sentReply) {
 		if (err) {
-			req.send({ error: err} );
+			res.send({ error: err });
 			return next(err);
 		}
 

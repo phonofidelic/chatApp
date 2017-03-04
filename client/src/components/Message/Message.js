@@ -55,7 +55,7 @@ class Message extends Component {
           style={this.props.active ? Style.selected : Style.notSelected}>
         <div style={Style.debug}>{this.state.createdAt}</div>
           {this.state.text}
-        <span>{this.props.replies.length ? '*' : ''}</span>
+        {this.props.replies ? <span>{this.props.replies.length ? '*' : ''}</span>: ''}
         <ul>
           {this.props.active ? (
             this.props.replies.map(reply => {
