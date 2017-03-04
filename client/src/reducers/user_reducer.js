@@ -1,4 +1,5 @@
-import { VIEW_PROFILE } from '../actiontypes/user';
+import { VIEW_PROFILE, 
+				 GET_CONVERSATION_LIST } from '../actiontypes/user';
 
 const INITIAL_STATE = {};
 
@@ -9,8 +10,14 @@ export default function(state = INITIAL_STATE, action) {
 				...state,
 				userInfo: action.payload
 			};
+
+		case GET_CONVERSATION_LIST:
+			return {
+				...state,
+				conversations: action.payload
+			};
 			
-			default:
-				return state;
+		default:
+			return state;
 	}
 }

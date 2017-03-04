@@ -5,7 +5,8 @@ import { AUTH_USER,
 				 AUTH_ERROR,
 				 UNAUTH_USER,
 				 PROTECTED_TEST } from '../actiontypes/auth';
-import {VIEW_PROFILE } from '../actiontypes/user';			
+import { VIEW_PROFILE,
+				 GET_CONVERSATION_LIST } from '../actiontypes/user';			
 
 const API_URL = 'http://localhost:3001/api';
 const CLIENT_ROOT_URL = 'http://localhost:3000';
@@ -110,6 +111,10 @@ export function getConversations() {
 			headers: { Authorization: cookie.load('token') }
 		}).then(response => {
 			console.log('@getConversations:', response);
+			dispatch({
+				type: GET_CONVERSATION_LIST,
+				payload: response.data.conversations
+			});
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
