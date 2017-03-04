@@ -16,7 +16,7 @@ class Conversations extends Component {
 			return (
 				<div>
 					<h3>Conversations:</h3>
-					<ul>
+					<ul className="conversation-list">
 						{this.props.conversations.map((conversation) => {
 							return (
 								<li className="conversation" key={conversation[0].conversationId}>
