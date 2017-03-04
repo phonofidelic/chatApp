@@ -53,6 +53,7 @@ exports.getConversations = function(req, res, next) {
 						return next(err);
 					}
 					fullConversations.push(message);
+					fullConversations.sort({updatedAt: -1});
 					if (fullConversations.length === conversations.length) {
 						return res.status(200).json({ conversations: fullConversations });
 					}

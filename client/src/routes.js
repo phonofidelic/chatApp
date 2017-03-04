@@ -6,8 +6,8 @@ import NotFound from './components/pages/NotFound';
 import HomePage from './components/pages/HomePage';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-import Dashboard from './components/Dashboard';
-import Conversations from './components/Conversations';
+import Dashboard from './components/Dashboard/Dashboard';
+import Conversations from './components/Dashboard/Conversations';
 import RequireAuth from './components/auth/RequireAuth';
 
 export default (

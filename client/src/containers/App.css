@@ -85,3 +85,10 @@ body {
 .has-reply {
   color: #ff4d62;
 }
+
+/*.timestamp {
+    text-align: right;
+    width: 100%;
+    color: #ced0d0;
+    font-size: 10px;
+}*/
