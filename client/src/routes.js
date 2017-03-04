@@ -11,10 +11,11 @@ import RequireAuth from './components/auth/RequireAuth';
 
 export default (
 	<Route path="/" component={App}>
-		<IndexRoute component={HomePage} />
+		<IndexRoute component={RequireAuth(Dashboard)} />
+		<Route path="dashboard" component={RequireAuth(Dashboard)} />
 		<Route path="register" component={Register} />
 		<Route path="login" component={Login} />
-		<Route path="dashboard" component={RequireAuth(Dashboard)} />
+		
 
 		<Route path="*" component={NotFound} />
 	</Route>

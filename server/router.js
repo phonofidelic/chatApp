@@ -60,6 +60,8 @@ module.exports = function(app) {
 
 	userRoutes.get('/list', UserController.getUserList);
 
+	userRoutes.get('/:userId', requireAuth, UserController.viewProfile);
+
 	app.use(passport.initialize());
 	app.use('/api', apiRoutes);
 };

@@ -17,6 +17,7 @@ exports.viewProfile = function(req, res, next) {
 
 	if (req.user._id.toString() !== userId) {
 		res.status(401).json({ error: 'You are not authorized to view this profile.' });
+		return next();
 	}
 	User.findById(userId, (err, user) => {
 		if (err) {
@@ -36,4 +37,9 @@ exports.getUserList = function(req, res, next) {
 		if (err) return next(err);
 		res.status(201).json(users)
 	})
+};
+
+exports.test = function(req, res, next) {
+	// res.status(200).json(req.user.id_toString());
+	console.log('test', req.params)
 }

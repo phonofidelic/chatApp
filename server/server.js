@@ -93,14 +93,14 @@ app.use(function(req, res, next) {
 });
 
 // Error Handler
-app.use(function(err, req, res, next) {
-	res.status(err.status || 500);
-	res.json({
-		error: {
-			message: err.message
-		}
-	});
-});
+// app.use(function(err, req, res, next) {
+// 	res.status(err.status || 500);
+// 	res.json({
+// 		error: {
+// 			message: err.message
+// 		}
+// 	});
+// });
 
 module.exports = server;
 

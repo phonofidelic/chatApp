@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { protectedTest } from '../actions';
 import * as actions from '../actions';
 
 class Dashboard extends Component {
@@ -9,12 +8,14 @@ class Dashboard extends Component {
 		super(props);
 
 		this.props.protectedTest();
+
+		this.props.viewProfile();
 	}
 
 	renderContent() {
-		if (this.props.content) {
+		if (this.props.user) {
 			return (
-				<p>{this.props.content}</p>
+				<p>hello, {this.props.user.username}</p>
 			);
 		}
 	}
@@ -30,7 +31,11 @@ class Dashboard extends Component {
 };
 
 function mapStateToProps(state) {
-	return { content: state.auth.content };
+	console.log('@mapStateToProps:', state)
+	return { 
+		content: state.auth.content,
+		user: state.user.userInfo
+	};
 }
 
 export default connect(mapStateToProps, actions)(Dashboard);

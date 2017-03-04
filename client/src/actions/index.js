@@ -5,6 +5,7 @@ import { AUTH_USER,
 				 AUTH_ERROR,
 				 UNAUTH_USER,
 				 PROTECTED_TEST } from '../actiontypes/auth';
+import {VIEW_PROFILE } from '../actiontypes/user';			
 
 const API_URL = 'http://localhost:3001/api';
 const CLIENT_ROOT_URL = 'http://localhost:3000';
@@ -39,6 +40,7 @@ export function loginUser({ email, password }) {
 		axios.post(`${API_URL}/auth/login`, { email, password })
 		.then(response => {
 			cookie.save('token', response.data.token, { path: '/' });
+			cookie.save('user', response.data.user, { path: '/' });
 			dispatch({ type: AUTH_USER });
 			window.location.href = CLIENT_ROOT_URL + '/dashboard';
 		}).catch(err => {
@@ -69,7 +71,7 @@ export function logoutUser() {
 
 export function protectedTest() {
 	return function(dispatch) {
-		axios.get(`${API_URL}/user/protected`, {	// BUG: returning unauthorized
+		axios.get(`${API_URL}/user/protected`, {
 			headers: { Authorization: cookie.load('token') }
 		}).then(response => {
 			console.log('@protectedTest:', response.data.content)
@@ -79,9 +81,24 @@ export function protectedTest() {
 			});
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
-			// TODO: redirect to login?
 		});
 	}
 }
 
+export function viewProfile() {
+	const user = cookie.load('user');
+	return (dispatch) => {
+		axios.get(`${API_URL}/user/${user._id}`, {
+			headers: { Authorization: cookie.load('token') }
+		}).then(response => {
+			console.log('@viewProfile:', response);
+			dispatch({
+				type: VIEW_PROFILE,
+				payload: response.data.user
+			});
+		}).catch(err => {
+			errorHandler(dispatch, err.response, AUTH_ERROR);
+		});
+	}
+}
 
