@@ -63,7 +63,8 @@ exports.getConversations = function(req, res, next) {
 };
 
 exports.getConversation = function (req, res, next) {
-	Message.find({ 'conversationId': conversation._id })
+	console.log('@getConversation:', req.params)
+	Message.find({ conversationId: req.params.conversationId })
 		.select('createdAt body author')
 		.sort('-createdAt')
 		.populate({

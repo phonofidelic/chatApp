@@ -45,7 +45,7 @@ module.exports = function(app) {
 	chatRoutes.get('/:conversationId', requireAuth, ChatController.getConversation);
 
 	// reply in conversation
-	// chatRoutes.post('/:conversationId', requireAuth, ChatController.sendReply);
+	chatRoutes.post('/:conversationId', requireAuth, ChatController.sendReply);
 
 	// start new conversation
 	chatRoutes.post('/new/:recipient', requireAuth, ChatController.newConversation);

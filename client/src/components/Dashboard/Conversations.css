@@ -1,9 +1,15 @@
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
 .conversation-list {
 
 }
 
 .conversation {
 	height: 50px;
+
 }
 .conversation:hover {
 	background: #ff4d62;

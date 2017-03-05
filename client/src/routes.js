@@ -8,12 +8,18 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/Dashboard/Dashboard';
 import Conversations from './components/Dashboard/Conversations';
+import Conversation from './components/Dashboard/Conversation';
 import RequireAuth from './components/auth/RequireAuth';
 
 export default (
 	<Route path="/" component={App}>
 		<IndexRoute component={RequireAuth(Dashboard)} />
-		<Route path="dashboard" component={RequireAuth(Dashboard)} />
+
+		<Route path="dashboard">
+			<IndexRoute component={RequireAuth(Dashboard)} />
+			<Route path="conversation/view/:conversationId" component={RequireAuth(Conversation)} />
+		</Route>
+
 		<Route path="register" component={Register} />
 		<Route path="login" component={Login} />
 		<Route path="conversations" component={RequireAuth(Conversations)} />

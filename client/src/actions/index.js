@@ -83,8 +83,8 @@ export function protectedTest() {
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
-	}
-}
+	};
+};
 
 export function viewProfile() {
 	const user = cookie.load('user');
@@ -100,8 +100,8 @@ export function viewProfile() {
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
-	}
-}
+	};
+};
 
 
 export function getConversations() {
@@ -118,5 +118,20 @@ export function getConversations() {
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
-	}
-}
+	};
+};
+
+export function getConversation(conversationId) {
+	const user = cookie.load('user');
+	return (dispatch) => {
+		axios.get(`${API_URL}/chat/${conversationId}`, {
+			headers: { Authorization: cookie.load('token') }
+		}).then(response => {
+			console.log('@getConversation:', response);
+		}).catch(err => {
+			errorHandler(dispatch, err.response, AUTH_ERROR);
+		});
+	};
+};
+
+

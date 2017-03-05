@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import ConversationItem from './ConversationItem';
 import './Conversations.css';
 
 class Conversations extends Component {
@@ -11,20 +12,23 @@ class Conversations extends Component {
 		this.props.getConversations();		
 	}
 
+	handleSelectConversation(conversationId) {
+		this.props.getConversation(conversationId);
+	}
+
 	renderConversationList() {
 		if (this.props.conversations) {
 			return (
 				<div>
 					<h3>Conversations:</h3>
 					<ul className="conversation-list">
-						{this.props.conversations.map((conversation) => {
-							return (
-								<li className="conversation" key={conversation[0].conversationId}>
-									<div className="timestamp">{conversation[0].updatedAt}</div>
-									<div>{conversation[0].body}</div>
-								</li>
-							)
-						})}
+						{this.props.conversations.map(data => data.map(message => (
+							<ConversationItem className="conversation"
+																key={message._id}
+																updatedAt={message.updatedAt}
+																body={message.body}
+																conversationId={message.conversationId} />
+						)))}
 					</ul>
 				</div>
 			);
