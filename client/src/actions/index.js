@@ -6,7 +6,8 @@ import { AUTH_USER,
 				 UNAUTH_USER,
 				 PROTECTED_TEST } from '../actiontypes/auth';
 import { VIEW_PROFILE,
-				 GET_CONVERSATION_LIST } from '../actiontypes/user';			
+				 GET_CONVERSATION_LIST,
+				 GET_CONVERSATION } from '../actiontypes/user';			
 
 const API_URL = 'http://localhost:3001/api';
 const CLIENT_ROOT_URL = 'http://localhost:3000';
@@ -128,6 +129,10 @@ export function getConversation(conversationId) {
 			headers: { Authorization: cookie.load('token') }
 		}).then(response => {
 			console.log('@getConversation:', response);
+			dispatch({
+				type: GET_CONVERSATION,
+				payload: response.data.conversation
+			})
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});

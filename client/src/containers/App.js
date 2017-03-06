@@ -15,7 +15,7 @@ class App extends Component {
 	      <div className="nav-container">
 	        {this.props.children}
 	      </div>
-        <Chat />
+        
       </div>
     );
   };
