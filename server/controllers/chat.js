@@ -124,6 +124,7 @@ exports.newConversation = function(req, res, next) {
 };
 
 exports.sendReply = function(req, res, next) {
+	console.log('@sendReply:', req.params)
 	const reply = new Message({
 		conversationId: req.params.conversationId,
 		body: req.body.composedMessage,

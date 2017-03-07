@@ -1,16 +1,20 @@
 import axios from 'axios';
-import { browserHistory } from 'react-router';
 import cookie from 'react-cookie';
+import io from 'socket.io-client';
 import { AUTH_USER,
 				 AUTH_ERROR,
 				 UNAUTH_USER,
 				 PROTECTED_TEST } from '../actiontypes/auth';
 import { VIEW_PROFILE,
 				 GET_CONVERSATION_LIST,
-				 GET_CONVERSATION } from '../actiontypes/user';			
+				 GET_CONVERSATION,
+				 POST_MESSAGE } from '../actiontypes/user';			
 
 const API_URL = 'http://localhost:3001/api';
 const CLIENT_ROOT_URL = 'http://localhost:3000';
+
+// Connect to socket.io server
+export const socket = io.connect(CLIENT_ROOT_URL);	
 
 export function errorHandler(dispatch, error, type) {
 	let errorMessage = '';
@@ -106,7 +110,6 @@ export function viewProfile() {
 
 
 export function getConversations() {
-	const user = cookie.load('user');
 	return (dispatch) => {
 		axios.get(`${API_URL}/chat/conversations`, {
 			headers: { Authorization: cookie.load('token') }
@@ -123,7 +126,6 @@ export function getConversations() {
 };
 
 export function getConversation(conversationId) {
-	const user = cookie.load('user');
 	return (dispatch) => {
 		axios.get(`${API_URL}/chat/${conversationId}`, {
 			headers: { Authorization: cookie.load('token') }
@@ -135,6 +137,26 @@ export function getConversation(conversationId) {
 			})
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
+		});
+	};
+};
+
+export function postReply(conversationId, dataToSend) {
+	console.log('@postReply composedMessage:', dataToSend.composedMessage)
+	return (dispatch) => {
+		axios.post(`${API_URL}/chat/${conversationId}`, dataToSend, { 
+				headers:{ Authorization: cookie.load('token') }
+		}).then(response => {
+			console.log('@sendReply:', response);
+			// TODO: emit socket event for new message
+			socket.emit('new message', conversationId);
+			
+			dispatch({
+				type: POST_MESSAGE,
+				payload: response.data
+			});
+
+			
 		});
 	};
 };

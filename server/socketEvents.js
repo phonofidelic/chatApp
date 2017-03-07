@@ -13,6 +13,7 @@ exports = module.exports = function(io) {
 		});
 
 		socket.on('new message', (conversation) => {
+			console.log('new message:', conversation)
 			io.sockets.in(conversation).emit('refresh messages', conversation);
 		});
 

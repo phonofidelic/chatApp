@@ -1,6 +1,7 @@
 import { VIEW_PROFILE, 
 				 GET_CONVERSATION_LIST,
-				 GET_CONVERSATION } from '../actiontypes/user';
+				 GET_CONVERSATION,
+				 POST_MESSAGE } from '../actiontypes/user';
 
 const INITIAL_STATE = {};
 
@@ -22,6 +23,12 @@ export default function(state = INITIAL_STATE, action) {
 			return {
 				...state,
 				conversation: action.payload
+			};
+
+		case POST_MESSAGE:
+			return {
+				...state,
+				message: action.payload
 			};
 			
 		default:

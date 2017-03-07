@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 import MessageList from './MessageList';
-import Message from './Message';
+import MessagingForm from './MessagingForm';
+
+const socket = actions.socket;
 
 class Conversation extends Component {
 
@@ -13,9 +15,17 @@ class Conversation extends Component {
 		const { params, getConversation } = this.props;
 	  getConversation(params.conversationId);
 
-	  // TODO: add socket handler for refreshing new messages
+	  socket.emit('enter conversation', params.conversationId);
 
-		console.log('# props:', this.props)
+	  // TODO: add socket handler for refreshing new messages
+	  socket.on('refresh messages', (data) => {
+	  	console.log('socket event:', data)
+	  	getConversation(params.conversationId);
+	  });
+	};
+
+	componenetWillUnmount() {
+		socket.emit('leave conversation', this.props.params.conversationId);
 	};
 
 	renderConversation() {
@@ -41,13 +51,13 @@ class Conversation extends Component {
 			<div>
 				<a href={'/dashboard'}><button>back</button></a>
 				<div>{this.renderConversation()}</div>
+				<div><MessagingForm replyTo={this.props.params.conversationId}/></div>
 			</div>
 		);
 	}
 }
 
 function mapStateToProps(state) {
-	console.log('# satate:', state)
 	return {
 		messages: state.user.conversation
 	};

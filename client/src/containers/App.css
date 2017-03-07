@@ -22,7 +22,7 @@ body {
   color: #fff;
 }
 
-.messageForm {
+/*.messageForm {
   background: #555; 
   padding: 3px;
   position: fixed;
@@ -35,7 +35,6 @@ body {
   border: 0;
   padding: 10px;
   widows: 90%;
-  /*margin-right: .5%;*/
   background: #fff;
   height: 100%;
   width: 75%;
@@ -43,14 +42,13 @@ body {
 }
 
 .messageForm button {
-  /*width: 9%;*/
   background: #f6f6f6;
   border: none;
   padding: 10px;
   height: 100%;
   width: 25%;
 }
-
+*/
 #messages {
   list-style-type: none;
   margin: 0;
