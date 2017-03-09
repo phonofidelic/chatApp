@@ -1,0 +1,13 @@
+input {
+	margin: 10px auto;
+	height: 30px;
+	width: 100%;
+	max-width: 300px;
+	display: block;
+}
+
+button {
+	margin: 0 auto;
+	max-width: 300px;
+	display: block;
+}

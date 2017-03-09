@@ -23,8 +23,8 @@ class Dashboard extends Component {
 	render() {
 		return (
 			<div className="dasboard-container">
-				<h1>Dashboard</h1>
 				<div className="greeting">{this.renderUserInfo()}</div>
+				<div>TODO: add "view/edit account info"</div>
 				<Conversations />
 				<button onClick={this.props.logoutUser.bind(this)}>Logout</button>
 			</div>

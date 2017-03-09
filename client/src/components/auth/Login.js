@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { loginUser, checkForExistingUser, registerUser } from '../../actions';
+import './Login.css';
 
 const form = reduxForm({
 	form: 'login'
@@ -28,23 +29,6 @@ class Login extends Component {
 		}
 	};
 
-	renderLogin() {
-		return (
-			<div>	
-				<button type="submit">Login</button>
-			</div>
-		);
-	};
-
-	renderRegister() {
-		return (
-			<div className="input-username">
-				<label>Username</label>
-				<Field name="username" component="input" type="text" />
-			</div>
-		);
-	};
-
 	render() {
 		const { handleSubmit } = this.props;
 
@@ -54,32 +38,40 @@ class Login extends Component {
 
 		return (
 			<div>
-				<div>{usernameAvailable ? <h3>Register</h3> : <h3>Login</h3>}</div>
+				<div className="greeting">{usernameAvailable ? <h3>Register</h3> : <h3>Login</h3>}</div>
 				
 				<form onSubmit={usernameAvailable ? handleSubmit(this.handleRegisterSubmit.bind(this)) : handleSubmit(this.handleLoginSubmit.bind(this))}>
 
 					<div className="input-email">			
-						<label>Email</label>
+						<label></label>
 						<Field name="email" 
 									 component="input" 
 									 type="text" 
+									 placeholder="Email"
 									 onChange={this.props.checkForExistingUser.bind(this)} />
 					</div>
 
 					<div className="input-password">
-						<label>Password</label>
-						<Field name="password" component="input" type="password" />
+						<label></label>
+						<Field name="password" 
+									 component="input" 
+									 type="password" 
+									 placeholder="Password" />
 					</div>
 
 					{
 						usernameAvailable ?
 						<div className="input-username">
-							<label>Username</label>
-							<Field name="username" component="input" type="text" />
+							<label></label>
+							<Field name="username" 
+										 component="input" 
+										 type="text" 
+										 placeholder="Username" />
 						</div>
 						: null
 					}
 
+					<div className="greeting">{this.renderAlert()}</div>
 					<div>	
 						{usernameAvailable ? <button type="submit">Register</button> : <button type="submit">Login</button>}
 					</div>
@@ -87,7 +79,6 @@ class Login extends Component {
 					
 
 				</form>
-				{this.renderAlert()}
 			</div>
 			
 		);
