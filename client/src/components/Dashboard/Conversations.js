@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+const moment = require('moment');
 import ConversationItem from './ConversationItem';
 import './Conversations.css';
 
@@ -25,9 +26,11 @@ class Conversations extends Component {
 						{this.props.conversations.map(data => data.map(message => (
 							<ConversationItem className="conversation"
 																key={message._id}
-																updatedAt={message.updatedAt}
+																timestamp={moment(message.updatedAt).from(moment)}
 																body={message.body}
-																conversationId={message.conversationId} />
+																conversationId={message.conversationId}
+																authorId={message.author._id}
+																author={message.author.profile.username} />
 						)))}
 					</ul>
 				</div>

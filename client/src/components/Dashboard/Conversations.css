@@ -3,21 +3,27 @@ a {
 	text-decoration: none;
 }
 
+li {
+	list-style: none;
+}
+
 .conversation-list {
 
 }
 
 .conversation {
 	height: 50px;
-
+	border: solid 1px #fff;
+	margin: 5px;
+	padding: 5px;
 }
 .conversation:hover {
 	background: #ff4d62;
 	color:#fff;
-	position: relative;
-	width: 100vw;
-	left: calc(-50vw + 50%);
-	padding: 0 10px;
+	/*position: relative;*/
+	/*width: 100vw;*/
+	/*left: calc(-50vw + 50%);*/
+	/*padding: 0 10px;*/
 
 }
 

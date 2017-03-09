@@ -54,6 +54,9 @@ module.exports = function(app) {
 
 	apiRoutes.use('/user', userRoutes);
 
+	// check username
+	userRoutes.get('/check/:email', UserController.checkForUser)
+
 	userRoutes.get('/protected', requireAuth, (req, res, next) => {
 		res.send({ content: 'Protected test route functioning!' });
 	});

@@ -17,8 +17,8 @@ class ConversationItem extends Component {
 			<a href={`dashboard/conversation/view/${this.props.conversationId}`}>
 				<li className="conversation" 
 						key={this.props._id}>
-					<div className="timestamp">{this.props.updatedAt}</div>
-					<div>{this.props.body}</div>
+					<div className="timestamp">{this.props.timestamp}</div>
+					<div>{this.props.author} said: {this.props.body}</div>
 				</li>
 			</a>
 		);

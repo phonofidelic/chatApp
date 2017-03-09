@@ -1,32 +1,27 @@
-.messageForm {
+.message-form {
   background: #555; 
   padding: 3px;
   position: fixed;
   bottom: 0;
   width: 100%;
   height: 50px;
-  /*margin-bottom: 50px;*/
 }
 
-.messageForm input {
+.message-form input {
   border: 0;
   padding: 10px;
-  widows: 90%;
-  margin-right: .5%;
   background: #fff;
   height: 100%;
   width: 100%;
   border-radius: 0px;
 }
 
-.messageForm button {
-  /*width: 9%;*/
+.message-form button {
   background: #f6f6f6;
   border: none;
   padding: 10px;
   height: 100%;
   width: 100%;
-  /*display: inline;*/
 }
 
 .message-field-container {

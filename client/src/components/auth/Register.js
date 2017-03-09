@@ -53,21 +53,16 @@ class Register extends Component {
 
 		return (
 			<div>
-			<h1>Register</h1>
-				<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-				{this.renderAlert()}
+				<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>				
 					<div className="input-username">
 						<label>Username</label>
 						<Field name="username" component={renderField} type="text" />
-					</div>
-					<div className="input-email">
-						<label>Email</label>
-						<Field name="email" component={renderField} type="email" />
 					</div>
 					<div className="input-password">
 						<label>Password</label>
 						<Field name="password" component={renderField} type="password" />
 					</div>
+					{this.renderAlert()}
 					<button type="submit">Register</button>
 				</form>
 			</div>

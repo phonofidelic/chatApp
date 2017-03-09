@@ -1,0 +1,13 @@
+.message {
+  padding: 5px 10px;
+  /*border-bottom: 2px dotted #ced0d0;*/
+  min-height: 50px;
+}
+
+.user-tag {
+	font-size: .85em;
+}
+
+.message-body {
+	margin-left: 5px;
+}

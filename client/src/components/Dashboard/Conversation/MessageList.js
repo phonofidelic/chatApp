@@ -10,7 +10,8 @@ class MessageList extends Component {
 						<Message key={message._id}
 										 createdAt={message.createdAt} 
 										 body={message.body}
-										 author={message.author._id}/>
+										 authorId={message.author._id}
+										 author={message.author.profile.username} />
 					))}
 			</ul>
 		);

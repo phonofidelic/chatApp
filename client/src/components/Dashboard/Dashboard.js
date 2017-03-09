@@ -26,6 +26,7 @@ class Dashboard extends Component {
 				<h1>Dashboard</h1>
 				<div className="greeting">{this.renderUserInfo()}</div>
 				<Conversations />
+				<button onClick={this.props.logoutUser.bind(this)}>Logout</button>
 			</div>
 		)
 	};

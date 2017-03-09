@@ -9,10 +9,11 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Conversations from './components/Dashboard/Conversations';
 import Conversation from './components/Dashboard/Conversation/Conversation';
 import RequireAuth from './components/auth/RequireAuth';
+import HomePage from './components/HomePage';
 
 export default (
 	<Route path="/" component={App}>
-		<IndexRoute component={RequireAuth(Dashboard)} />
+		<IndexRoute component={RequireAuth(HomePage)} />
 
 		<Route path="dashboard">
 			<IndexRoute component={RequireAuth(Dashboard)} />

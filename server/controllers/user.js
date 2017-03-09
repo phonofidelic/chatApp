@@ -39,6 +39,22 @@ exports.getUserList = function(req, res, next) {
 	})
 };
 
+exports.checkForUser = function(req, res, next) {
+	console.log('@checkForUser:', req.params.email)
+	User.findOne({'email': req.params.email})
+	.exec((err, user) => {
+		if (err) return next(err);
+
+		console.log('### user:', user)
+
+		if (user) {
+					return res.status(200).json({message: user.email});
+				} else {
+					return res.status(200).json({message: 'Username is available!'});
+				}
+	});
+};
+
 exports.test = function(req, res, next) {
 	// res.status(200).json(req.user.id_toString());
 	console.log('test', req.params)

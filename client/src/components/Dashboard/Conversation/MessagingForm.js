@@ -24,7 +24,7 @@ class MessagingForm extends Component {
 		const { handleSubmit } = this.props;
 
 		return (
-				<form className="messageForm" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+				<form className="message-form" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 					<div className="message-field-container">
 						<Field name="composedMessage" 
 									 component={ renderField } 

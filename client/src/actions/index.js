@@ -8,7 +8,8 @@ import { AUTH_USER,
 import { VIEW_PROFILE,
 				 GET_CONVERSATION_LIST,
 				 GET_CONVERSATION,
-				 POST_MESSAGE } from '../actiontypes/user';			
+				 POST_MESSAGE,
+				 CHECK_EMAIL } from '../actiontypes/user';			
 
 const API_URL = 'http://localhost:3001/api';
 const CLIENT_ROOT_URL = 'http://localhost:3000';
@@ -41,6 +42,23 @@ export function errorHandler(dispatch, error, type) {
 	}
 }
 
+export function checkForExistingUser(email) {
+	return function(dispatch) {
+		console.log('@checkForExistingUser email:', email.target.value);
+		axios.get(`${API_URL}/user/check/${email.target.value}`)
+		.then(response => {
+			console.log('@checkForExistingUser:', response);
+
+			dispatch({
+				type: CHECK_EMAIL,
+				payload: response.data.message
+			});
+		}).catch(err => {
+			errorHandler(dispatch, err.response, AUTH_ERROR);
+		});
+	};
+};
+
 export function loginUser({ email, password }) {
 	return function(dispatch) {
 		axios.post(`${API_URL}/auth/login`, { email, password })
@@ -59,6 +77,7 @@ export function registerUser({ email, username, password }) {
 	return function(dispatch) {
 		axios.post(`${API_URL}/auth/register`, { email, username, password }).then(response => {
 			cookie.save('token', response.data.token, { path: '/' });
+			cookie.save('user', response.data.user, { path: '/' });
 			dispatch({ type: AUTH_USER });
 			window.location.href = CLIENT_ROOT_URL + '/dashboard'; 
 		}).catch(err => {
@@ -71,6 +90,7 @@ export function logoutUser() {
 	return function(dispatch) {
 		dispatch({ type: UNAUTH_USER });
 		cookie.remove('token', { path: '/'});
+		cookie.remove('user', { path: '/'});
 		window.location.href = CLIENT_ROOT_URL + '/login';
 	}
 }
@@ -107,7 +127,6 @@ export function viewProfile() {
 		});
 	};
 };
-
 
 export function getConversations() {
 	return (dispatch) => {
