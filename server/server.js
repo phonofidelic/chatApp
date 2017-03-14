@@ -2,7 +2,6 @@
 
 var express = require('express');
 var app = express();
-var routes = require('./controllers/chatRoutes'); //TODO: move all related logic to router.js and import and implement router.js here
 var router = require('./router');
 var path = require('path');
 // var server = require('http').Server(app);

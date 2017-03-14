@@ -123,6 +123,10 @@ exports.newConversation = function(req, res, next) {
 	});
 };
 
+exports.removeUserFromConversation = function(req, res, next) {
+	// TODO: Remove user from conversation's participants
+};
+
 exports.sendReply = function(req, res, next) {
 	console.log('@sendReply:', req.params)
 	const reply = new Message({
