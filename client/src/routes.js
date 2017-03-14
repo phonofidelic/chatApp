@@ -6,7 +6,7 @@ import NotFound from './components/pages/NotFound';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/Dashboard/Dashboard';
-import Conversations from './components/Dashboard/Conversations';
+import ConversationList from './components/Dashboard/ConversationList';
 import Conversation from './components/Dashboard/Conversation/Conversation';
 import RequireAuth from './components/auth/RequireAuth';
 import HomePage from './components/HomePage';
@@ -22,7 +22,7 @@ export default (
 
 		<Route path="register" component={Register} />
 		<Route path="login" component={Login} />
-		<Route path="conversations" component={RequireAuth(Conversations)} />
+		<Route path="conversations" component={RequireAuth(ConversationList)} />
 		
 
 		<Route path="*" component={NotFound} />

@@ -33,3 +33,18 @@ li {
     color: #ced0d0;
     font-size: 10px;
 }
+
+.back-button-container {
+	background: #fff;
+	position: fixed;
+	width: 100%;
+	top: 38px;
+}
+
+.back-button-container button {
+	border: none;
+}
+
+.back-button-container button:hover {
+	color: #ff4d62;
+}

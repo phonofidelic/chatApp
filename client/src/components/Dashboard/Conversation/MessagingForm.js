@@ -9,8 +9,8 @@ const form = reduxForm({
 });
 
 const renderField = field => (
-	<div>
-		<input autoComplete="off" { ...field.input } />
+	<div className="message-field-container">
+		<input className="message-field" autoComplete="off" { ...field.input } />
 	</div>
 );
 
@@ -25,12 +25,10 @@ class MessagingForm extends Component {
 
 		return (
 				<form className="message-form" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-					<div className="message-field-container">
 						<Field name="composedMessage" 
 									 component={ renderField } 
 									 type="text" 
 									 placeholder="type your message..." />
-					</div>
 					<div className="message-button-container">
 						<button action="submit">Post</button>
 					</div>

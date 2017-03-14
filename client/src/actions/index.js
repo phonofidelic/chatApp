@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { reset } from 'redux-form';
 import cookie from 'react-cookie';
 import io from 'socket.io-client';
 import { AUTH_USER,
@@ -167,15 +168,13 @@ export function postReply(conversationId, dataToSend) {
 				headers:{ Authorization: cookie.load('token') }
 		}).then(response => {
 			console.log('@sendReply:', response);
-			// TODO: emit socket event for new message
 			socket.emit('new message', conversationId);
 			
 			dispatch({
 				type: POST_MESSAGE,
 				payload: response.data
 			});
-
-			
+			dispatch(reset('replyMessage'));	
 		});
 	};
 };

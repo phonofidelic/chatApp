@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
+import ReactDom from 'react-dom';
 import Message from './Message';
 
 class MessageList extends Component {
+
+	componentDidMount() {
+		this.scrollToBottom();
+	};
+
+		componentDidUpdate() {
+		this.scrollToBottom();
+	};
+
+	scrollToBottom() {
+		const node = ReactDom.findDOMNode(this.messagesEnd);
+		node.scrollIntoView({ behavior: "smooth" });
+	}
 
 	render() {
 		return (
@@ -13,6 +27,8 @@ class MessageList extends Component {
 										 authorId={message.author._id}
 										 author={message.author.profile.username} />
 					))}
+					<div style={ { float: "left", clear: "both", height: "50px" } }
+							 ref={ (el) => {this.messagesEnd = el; } }></div>
 			</ul>
 		);
 	}

@@ -37,8 +37,8 @@ class Login extends Component {
 		this.props.email === 'Username is available!' ? usernameAvailable = true : usernameAvailable = false;
 
 		return (
-			<div>
-				<div className="greeting">{usernameAvailable ? <h3>Register</h3> : <h3>Login</h3>}</div>
+			<div className="login-container">
+				<div className="greeting">{usernameAvailable ? <h3>Register</h3> : <h3>Hello</h3>}</div>
 				
 				<form onSubmit={usernameAvailable ? handleSubmit(this.handleRegisterSubmit.bind(this)) : handleSubmit(this.handleLoginSubmit.bind(this))}>
 
@@ -72,7 +72,7 @@ class Login extends Component {
 					}
 
 					<div className="greeting">{this.renderAlert()}</div>
-					<div>	
+					<div className="auth-button">	
 						{usernameAvailable ? <button type="submit">Register</button> : <button type="submit">Login</button>}
 					</div>
 

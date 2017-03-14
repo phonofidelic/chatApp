@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import MessageList from './MessageList';
@@ -28,15 +29,17 @@ class Conversation extends Component {
 		socket.emit('leave conversation', this.props.params.conversationId);
 	};
 
-	renderConversation() {
-		console.log('## this.props:', this.props)
+	// scrollToBottom() {
+	// 	const node = ReactDom.findDOMNode(this.messagesEnd);
+	// 	node.scrollIntoView({ behavior: "smooth" });
+	// }
 
-		// pass mnessages array to MessageList component
+	renderConversation() {
+		// pass messages array to MessageList component
 		if (this.props.messages) {
 			return (
 				<div>
-					<h3>Conversation</h3>
-					 <MessageList displayMessages={this.props.messages} />
+					 <MessageList displayMessages={this.props.messages.reverse()} />
 				</div>
 			);
 		} else {
@@ -49,7 +52,7 @@ class Conversation extends Component {
 	render() {
 		return (
 			<div>
-				<a href={'/dashboard'}><button>back</button></a>
+				<div className="back-button-container"><a href={'/dashboard'}><button>back</button></a></div>
 				<div>{this.renderConversation()}</div>
 				<div><MessagingForm replyTo={this.props.params.conversationId}/></div>
 			</div>

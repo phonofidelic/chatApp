@@ -1,5 +1,6 @@
-.dasboard-container {
-	margin: 0 10px;
+.dashboard-container {
+	margin: 10px;
+	padding-top: 20px;
 }
 
 .greeting {
@@ -7,12 +8,5 @@
 	margin: 20px;
 }
 
-button {
-  background: #ffb92d;
-  border: none;
-  padding: 10px;
-  height: 100%;
-  width: 100%;
-  cursor: pointer;
-}
+
 

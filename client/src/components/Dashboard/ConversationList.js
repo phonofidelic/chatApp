@@ -3,22 +3,23 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 const moment = require('moment');
 import ConversationItem from './ConversationItem';
-import './Conversations.css';
+import './ConversationList.css';
 
-class Conversations extends Component {
+class ConversationList extends Component {
 
 	constructor(props) {
 		super(props);
 
-		this.props.getConversations();		
+		this.props.getConversations();
 	}
 
 	handleSelectConversation(conversationId) {
 		this.props.getConversation(conversationId);
 	}
 
-	renderConversationList() {
+	render() {
 		if (this.props.conversations) {
+			this.props.conversations.reverse();
 			return (
 				<div>
 					<h3>Conversations:</h3>
@@ -41,12 +42,6 @@ class Conversations extends Component {
 			);
 		}
 	};
-
-	render() {
-		return (
-			<div>{this.renderConversationList()}</div>
-		);
-	};
 };
 
 function mapStateToProps(state) {
@@ -56,5 +51,5 @@ function mapStateToProps(state) {
 	};
 };
 
-export default connect(mapStateToProps, actions)(Conversations);
+export default connect(mapStateToProps, actions)(ConversationList);
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import Conversations from './Conversations';
+import ConversationList from './ConversationList';
 import './Dashboard.css';
 
 class Dashboard extends Component {
@@ -12,20 +12,14 @@ class Dashboard extends Component {
 		this.props.viewProfile();
 	};
 
-	renderUserInfo() {
-		if (this.props.user) {
-			return (
-				<p>hello, {this.props.user.username}</p>
-			);
-		}
-	};
-
 	render() {
 		return (
-			<div className="dasboard-container">
-				<div className="greeting">{this.renderUserInfo()}</div>
+			<div className="dashboard-container">
+				<div className="greeting">
+					<p>hello, {this.props.user ? this.props.user.username : ''}</p>
+				</div>
 				<div>TODO: add "view/edit account info"</div>
-				<Conversations />
+				<ConversationList />
 				<button onClick={this.props.logoutUser.bind(this)}>Logout</button>
 			</div>
 		)
