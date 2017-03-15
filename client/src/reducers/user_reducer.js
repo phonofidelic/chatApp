@@ -2,7 +2,8 @@ import { VIEW_PROFILE,
 				 GET_CONVERSATION_LIST,
 				 GET_CONVERSATION,
 				 POST_MESSAGE,
-				 CHECK_EMAIL } from '../actiontypes/user';
+				 CHECK_EMAIL,
+				 GET_CONTACTS } from '../actiontypes/user';
 
 const INITIAL_STATE = {};
 
@@ -32,11 +33,11 @@ export default function(state = INITIAL_STATE, action) {
 				message: action.payload
 			};
 
-		case CHECK_EMAIL:
+		case GET_CONTACTS:
 			return {
 				...state,
-				email: action.payload
-			}
+				contacts: action.payload
+			};
 			
 		default:
 			return state;

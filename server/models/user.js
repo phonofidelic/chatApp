@@ -14,8 +14,11 @@ const UserSchema = new Schema({
 		required: true
 	},
 	profile: {
-		username: { type: String}
+		username: { type: String }
 	},
+	contacts: [{ 
+		type: Schema.Types.ObjectId, ref: 'User' 
+	}],
 	role: {
 		type: String,
 		enum: ['Member', 'Client', 'Owner', 'Admin'],

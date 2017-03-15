@@ -5,5 +5,5 @@ export const POST_MESSAGE = 'user/POST_MESSAGE',
 					   VIEW_PROFILE = 'user/VIEW_PROFILE',
 					   GET_CONVERSATION_LIST = 'user/GET_CONVERSATION_LIST',
 					   GET_CONVERSATION = 'user/GET_CONVERSATION',
-					   CHECK_EMAIL = 'user/CHECK_EMAIL';
+					   GET_CONTACTS = 'user/GET_CONTACTS';
 

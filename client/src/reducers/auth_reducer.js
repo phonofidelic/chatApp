@@ -1,7 +1,8 @@
 import { AUTH_USER,
 				 UNAUTH_USER,
 				 AUTH_ERROR,
-				 PROTECTED_TEST } from '../actiontypes/auth';
+				 PROTECTED_TEST,
+				 CHECK_EMAIL } from '../actiontypes/auth';
 
 const INITIAL_STATE = { error: '', message: '', content: '', authenticated: false }
 
@@ -32,6 +33,12 @@ export default function(state = INITIAL_STATE, action) {
 				...state,
 				content: action.payload
 			};
+
+		case CHECK_EMAIL:
+			return {
+				...state,
+				email: action.payload
+			}
 
 		default:
 			return state;

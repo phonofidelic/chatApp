@@ -33,6 +33,9 @@ class ConversationList extends Component {
 																authorId={message.author._id}
 																author={message.author.profile.username} />
 						)))}
+						<a href="dashboard/conversation/new">
+							<div className="new-conversation">New conversation</div>
+						</a>
 					</ul>
 				</div>
 			);

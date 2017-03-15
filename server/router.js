@@ -54,17 +54,22 @@ module.exports = function(app) {
 
 	apiRoutes.use('/user', userRoutes);
 
-	// check username
+	// check username		TODO: move to auth routes
 	userRoutes.get('/check/:email', UserController.checkForUser)
 
 	userRoutes.get('/protected', requireAuth, (req, res, next) => {
 		res.send({ content: 'Protected test route functioning!' });
 	});
 
+	// get get user list 	TODO: move to admin role
 	userRoutes.get('/list', UserController.getUserList);
 
+	// view profile
 	userRoutes.get('/:userId', requireAuth, UserController.viewProfile);
 
-	app.use(passport.initialize());
+	// add new contact
+	userRoutes.post('/:userId/contacts/add/:contactUserId', requireAuth, UserController.addNewContact);
+
+	app.use(passport.initialize());	// <- sould remove?
 	app.use('/api', apiRoutes);
 };

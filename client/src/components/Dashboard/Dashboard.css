@@ -8,5 +8,13 @@
 	margin: 20px;
 }
 
-
+.new-conversation {
+	height: 50px;
+	border: solid 1px #555;
+	margin: 10px 2px;
+	background: #fff;
+	color: #555;
+	line-height: 50px;
+	text-align: center;	
+}
 

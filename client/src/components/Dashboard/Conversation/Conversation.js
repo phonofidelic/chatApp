@@ -29,11 +29,6 @@ class Conversation extends Component {
 		socket.emit('leave conversation', this.props.params.conversationId);
 	};
 
-	// scrollToBottom() {
-	// 	const node = ReactDom.findDOMNode(this.messagesEnd);
-	// 	node.scrollIntoView({ behavior: "smooth" });
-	// }
-
 	renderConversation() {
 		// pass messages array to MessageList component
 		if (this.props.messages) {

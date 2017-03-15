@@ -90,7 +90,7 @@ function mapStateToProps(state) {
 	return {
 		errorMessages: state.auth.error,
 		message: state.auth.error,
-		email: state.user.email
+		email: state.auth.email
 	}
 };
 

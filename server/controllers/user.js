@@ -6,6 +6,7 @@ const setUserInfo = function(request) {
     _id: request._id,
     username: request.profile.username,
     email: request.email,
+    contacts: request.contacts,
     role: request.role
   };
 
@@ -29,6 +30,34 @@ exports.viewProfile = function(req, res, next) {
 
 		return res.status(200).json({ user: userToReturn });
 	});
+};
+
+// exports.getContacts = function(req, res, next) {
+// 	const userId = req.params.userId;
+
+// 	if (req.user._id.toString() !== userId) {
+// 		res.status(401).json({ error: 'You are not authorized to view this profile.' });
+// 		return next();
+// 	}
+// };
+
+exports.addNewContact = function(req, res, next) {
+	const userId = req.params.userId;
+	const newContact = req.params.contactUserId;
+
+	User.findByIdAndUpdate(
+		userId,
+		{ $push: {'contacts': newContact} },
+		(err, savedContact) => {
+			if (err) {
+				res.send({ error: err });
+				return next(err);
+			}
+
+			res.status(200).json({ message: 'New contact added!', contactAdded: newContact });
+		}
+	);
+
 };
 
 exports.getUserList = function(req, res, next) {

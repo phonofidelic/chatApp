@@ -5,12 +5,13 @@ import io from 'socket.io-client';
 import { AUTH_USER,
 				 AUTH_ERROR,
 				 UNAUTH_USER,
-				 PROTECTED_TEST } from '../actiontypes/auth';
+				 PROTECTED_TEST,
+				 CHECK_EMAIL } from '../actiontypes/auth';
 import { VIEW_PROFILE,
 				 GET_CONVERSATION_LIST,
 				 GET_CONVERSATION,
-				 POST_MESSAGE,
-				 CHECK_EMAIL } from '../actiontypes/user';			
+				 GET_CONTACTS,
+				 POST_MESSAGE } from '../actiontypes/user';			
 
 const API_URL = 'http://localhost:3001/api';
 const CLIENT_ROOT_URL = 'http://localhost:3000';
@@ -42,6 +43,8 @@ export function errorHandler(dispatch, error, type) {
 		});
 	}
 }
+
+// ################## Auth #####################
 
 export function checkForExistingUser(email) {
 	return function(dispatch) {
@@ -112,6 +115,8 @@ export function protectedTest() {
 	};
 };
 
+// ################## User #####################
+
 export function viewProfile() {
 	const user = cookie.load('user');
 	return (dispatch) => {
@@ -128,6 +133,12 @@ export function viewProfile() {
 		});
 	};
 };
+
+export function getContacts() {
+
+};
+
+// ################## Chat #####################
 
 export function getConversations() {
 	return (dispatch) => {
