@@ -2,12 +2,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { Router, browserHistory} from 'react-router';	// --- Learn more!
-import reduxThunk from 'redux-thunk';	// ---------------- Learn more!
+import { Router, browserHistory} from 'react-router';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import reduxThunk from 'redux-thunk';
 import cookie from 'react-cookie';
-
 import WebfontLoader from '@dr-kobros/react-webfont-loader';
-import routes from './routes'; // TODO
+import routes from './routes';
 import reducers from './reducers/index';
 import { AUTH_USER } from './actiontypes/auth';
 import './index.css';
@@ -28,8 +28,10 @@ if (token) {
 
 render(
 	<Provider store={store}>
-		<WebfontLoader config={config}>	
-	  	<Router history={browserHistory} routes={routes} />
+		<WebfontLoader config={config}>
+			<MuiThemeProvider>
+	  		<Router history={browserHistory} routes={routes} />
+	  	</MuiThemeProvider>
 	  </WebfontLoader>
 	</Provider>,
   document.getElementById('root')

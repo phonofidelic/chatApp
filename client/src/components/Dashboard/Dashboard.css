@@ -8,7 +8,7 @@
 	margin: 20px;
 }
 
-.new-conversation {
+.new-conversation-button {
 	height: 50px;
 	border: solid 1px #555;
 	margin: 10px 2px;
@@ -18,3 +18,7 @@
 	text-align: center;	
 }
 
+.new-conversation-container {
+	max-width: 350px;
+	margin: 0 auto;
+}

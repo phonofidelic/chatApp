@@ -45,10 +45,10 @@ module.exports = function(app) {
 	chatRoutes.get('/:conversationId', requireAuth, ChatController.getConversation);
 
 	// reply in conversation
-	chatRoutes.post('/:conversationId', requireAuth, ChatController.sendReply);
+	chatRoutes.post('/reply/:conversationId', requireAuth, ChatController.sendReply);
 
 	// start new conversation
-	chatRoutes.post('/new/:recipient', requireAuth, ChatController.newConversation);
+	chatRoutes.post('/new', requireAuth, ChatController.newConversation);
 
 	// User routes ***************************************************
 
@@ -70,6 +70,13 @@ module.exports = function(app) {
 	// add new contact
 	userRoutes.post('/:userId/contacts/add/:contactUserId', requireAuth, UserController.addNewContact);
 
+	// get contacts
+	userRoutes.post('/:userId/contacts', requireAuth, UserController.getContacts);
+
 	app.use(passport.initialize());	// <- sould remove?
 	app.use('/api', apiRoutes);
 };
+
+
+
+

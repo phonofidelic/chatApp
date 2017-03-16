@@ -34,7 +34,7 @@ class ConversationList extends Component {
 																author={message.author.profile.username} />
 						)))}
 						<a href="dashboard/conversation/new">
-							<div className="new-conversation">New conversation</div>
+							<div className="new-conversation-button">New conversation</div>
 						</a>
 					</ul>
 				</div>

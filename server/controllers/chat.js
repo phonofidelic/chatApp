@@ -83,7 +83,7 @@ exports.getConversation = function (req, res, next) {
 
 exports.newConversation = function(req, res, next) {
 	console.log('@newConversation:', req.body)
-	if (!req.params.recipient) {
+	if (!req.body.recipients) {
 		res.status(422).send({ error: 'Please select a recipient for your message.' });
 		return next();
 	}
@@ -94,7 +94,7 @@ exports.newConversation = function(req, res, next) {
 	}
 
 	const conversation = new Conversation({
-		participants: [req.user._id, req.params.recipient]
+		participants: req.body.recipients
 	});
 
 	conversation.save(function(err, newConversation) {

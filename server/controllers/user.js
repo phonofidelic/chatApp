@@ -1,5 +1,6 @@
 'use-strict';
 const User = require('../models/user');
+const Promise = require('bluebird');
 
 const setUserInfo = function(request) {
   const getUserInfo = {
@@ -58,6 +59,28 @@ exports.addNewContact = function(req, res, next) {
 		}
 	);
 
+};
+
+exports.getContacts = function(req, res, next) {
+	const userId = req.params.userId;
+	const contacts = req.body.contacts;
+
+	let foundUsers = [];
+
+	contacts.forEach(contact => {
+		User.find({ '_id': contact })
+			.select('profile.username _id')
+			.exec((err, foundUser) => {
+				if (err) {
+					res.send({ error: err });
+					return next(err);
+				}
+				foundUsers.push(foundUser);
+				if (foundUsers.length === contacts.length) {
+					return res.status(200).json(foundUsers);
+				}
+		});
+	});
 };
 
 exports.getUserList = function(req, res, next) {

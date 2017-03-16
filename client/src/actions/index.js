@@ -134,8 +134,28 @@ export function viewProfile() {
 	};
 };
 
-export function getContacts() {
-
+export function getContacts(contacts) {
+	// users contact ids array as parameter, return username of each contact
+	const user = cookie.load('user');
+	return (dispatch) => {
+		console.log('@getContacts contacts:', contacts);
+		axios.post(`${API_URL}/user/${user._id}/contacts`, {"contacts": contacts}, {
+			headers: { Authorization: cookie.load('token') }
+		}).then(response => {
+			console.log('@getContacts:', response);
+			let contactsToReturn = []
+			response.data.forEach(contact => {
+				contactsToReturn.push(contact[0]);
+			});
+			console.log('@getContacts: contactsToReturn', contactsToReturn);
+			dispatch({
+				type: GET_CONTACTS,
+				payload: contactsToReturn
+			});
+		}).catch(err => {
+			errorHandler(dispatch, err.response, AUTH_ERROR);
+		});
+	}
 };
 
 // ################## Chat #####################
@@ -172,10 +192,31 @@ export function getConversation(conversationId) {
 	};
 };
 
+export function startNewConversation(recipients, message) {
+	console.log('@startNewConversation recipients:', recipients);
+	return (dispatch) => {
+		const user = cookie.load('user');
+		recipients.push(user._id);
+
+		let data = {
+			composedMessage: message,
+			recipients: recipients
+		}
+		console.log('@startNewConversation data:', data)
+
+		axios.post(`${API_URL}/chat/new`, data, {
+			headers: { Authorization: cookie.load('token') }
+		}).then(response => {
+			console.log('@startNewConversation response:', response);
+
+		})
+	}
+};
+
 export function postReply(conversationId, dataToSend) {
 	console.log('@postReply composedMessage:', dataToSend.composedMessage)
 	return (dispatch) => {
-		axios.post(`${API_URL}/chat/${conversationId}`, dataToSend, { 
+		axios.post(`${API_URL}/chat/reply/${conversationId}`, dataToSend, { 
 				headers:{ Authorization: cookie.load('token') }
 		}).then(response => {
 			console.log('@sendReply:', response);
