@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
-import registerUser from '../../actions';
+import { registerWithReference } from '../../actions';
 
 const form = reduxForm({
 	form: 'register',
@@ -37,7 +37,8 @@ function validate(formProps) {
 
 class Register extends Component {
 	handleFormSubmit(formProps) {
-		this.props.registerUser(formProps);
+		console.log('@handleFormSubmit:', this.props.params.inviteId, formProps);
+		this.props.registerWithReference(this.props.params.inviteId, formProps);
 	};
 
 	renderAlert() {
@@ -57,6 +58,11 @@ class Register extends Component {
 			<div>
 				<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>				
 					<div className="input-username">
+						<Field name="email" 
+									 component={renderField} 
+									 type="text"
+									 label="Email" />
+
 						<Field name="username" 
 									 component={renderField} 
 									 type="text"
@@ -83,6 +89,6 @@ function mapStateToProps(state) {
 	};
 };
 
-export default connect(mapStateToProps, { registerUser })(form(Register));
+export default connect(mapStateToProps, { registerWithReference })(form(Register));
 
 

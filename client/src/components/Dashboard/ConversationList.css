@@ -9,6 +9,7 @@ li {
 
 .conversation-list {
 	padding: 0px;
+	padding-bottom: 200px;
 }
 
 .conversation {
@@ -41,7 +42,8 @@ li {
 }
 
 .conversation-item-container {
-	/*padding-left: 10px;*/
+	max-width: 600px;
+	margin: 0 auto;
 }
 
 .timestamp {

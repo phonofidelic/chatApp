@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './containers/App';
 import NotFound from './components/pages/NotFound';
-import Register from './components/auth/Register';
+import RegisterWithReference from './components/auth/RegisterWithReference';
 import Login from './components/auth/Login';
 import Dashboard from './components/Dashboard/Dashboard';
 import ConversationList from './components/Dashboard/ConversationList';
@@ -22,7 +22,7 @@ export default (
 			<Route path="conversation/new" component={RequireAuth(NewConversation)} />
 		</Route>
 
-		<Route path="register" component={Register} />
+		<Route path="register/:inviteId" component={RegisterWithReference} />
 		<Route path="login" component={Login} />
 		<Route path="conversations" component={RequireAuth(ConversationList)} />
 		

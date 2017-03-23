@@ -29,4 +29,3 @@ class ConversationItem extends Component {
 export default ConversationItem;
 
 
-// <div>{this.props.author} said: {this.props.body.length > 20 ? this.props.body.slice(0, 20)+'...' : this.props.body}</div>

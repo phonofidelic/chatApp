@@ -25,7 +25,10 @@ module.exports = function(app) {
 
 	apiRoutes.use('/auth', authRoutes);
 
-	authRoutes.post('/register', AuthenticationController.register);
+	authRoutes.post('/register/', AuthenticationController.register);
+
+	// register with referrer
+	authRoutes.post('/register/:referrerId', AuthenticationController.registerWithReference);
 
 	authRoutes.post('/login', requireLogin, AuthenticationController.login);
 
@@ -72,6 +75,9 @@ module.exports = function(app) {
 
 	// get contacts
 	userRoutes.post('/:userId/contacts', requireAuth, UserController.getContacts);
+
+	// invite new contact
+	userRoutes.post('/:userId/invite', requireAuth, UserController.inviteNewContact);
 
 	app.use(passport.initialize());	// <- sould remove?
 	app.use('/api', apiRoutes);

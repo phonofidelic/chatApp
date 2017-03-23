@@ -11,7 +11,8 @@ import { VIEW_PROFILE,
 				 GET_CONVERSATION_LIST,
 				 GET_CONVERSATION,
 				 GET_CONTACTS,
-				 POST_MESSAGE } from '../actiontypes/user';			
+				 POST_MESSAGE,
+				 INVITE_NEW_CONTACT } from '../actiontypes/user';			
 
 const API_URL = 'http://localhost:3001/api';
 const CLIENT_ROOT_URL = 'http://localhost:3000';
@@ -90,6 +91,19 @@ export function registerUser({ email, username, password }) {
 	}
 }
 
+export function registerWithReference(inviteId, { email, username, password }) {
+	return function(dispatch) {
+		axios.post(`${API_URL}/auth/register/${inviteId}`, { email, username, password }).then(response => {
+			cookie.save('token', response.data.token, { path: '/' });
+			cookie.save('user', response.data.user, { path: '/' });
+			dispatch({ type: AUTH_USER });
+			window.location.href = CLIENT_ROOT_URL + '/dashboard';
+		}).catch(err => {
+			errorHandler(dispatch, err.response, AUTH_ERROR);
+		});
+	}
+}
+
 export function logoutUser() {
 	return function(dispatch) {
 		dispatch({ type: UNAUTH_USER });
@@ -157,6 +171,30 @@ export function getContacts(contacts) {
 		});
 	}
 };
+
+export function inviteNewContact({contactEmail}) {
+	const user = cookie.load('user');
+	const body = {
+		recipient: contactEmail,
+		username: user.username,
+		userEmail: user.email,
+		confirmationLink: `${CLIENT_ROOT_URL}/register/${user._id}`
+	};
+
+	return (dispatch) => {
+		axios.post(`${API_URL}/user/${user._id}/invite`, body, {
+			headers: { Authorization: cookie.load('token') }
+		}).then(response => {
+			console.log('@addNewContact:', response);
+			dispatch({
+				type: INVITE_NEW_CONTACT,
+				payload: response.data
+			});
+		}).catch(err => {
+			errorHandler(dispatch, err.response, AUTH_ERROR);
+		});
+	}
+}
 
 // ################## Chat #####################
 

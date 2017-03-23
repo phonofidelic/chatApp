@@ -10,12 +10,16 @@
 
 .new-conversation-button {
 	height: 50px;
-	border: solid 1px #555;
-	margin: 10px 2px;
+	max-width: 600px;
+	border-top: solid 1px #555;
+	/*border-bottom: solid 1px #555;*/
+	margin: 10px auto;
+	margin-top: 0px;
 	background: #fff;
 	color: #555;
 	line-height: 50px;
 	text-align: center;	
+	/*box-shadow: 0px -10px 10px 5px #fff;*/
 }
 
 .new-conversation-container {

@@ -3,7 +3,8 @@ import { VIEW_PROFILE,
 				 GET_CONVERSATION,
 				 POST_MESSAGE,
 				 CHECK_EMAIL,
-				 GET_CONTACTS } from '../actiontypes/user';
+				 GET_CONTACTS,
+				 INVITE_NEW_CONTACT } from '../actiontypes/user';
 
 const INITIAL_STATE = {};
 
@@ -38,6 +39,12 @@ export default function(state = INITIAL_STATE, action) {
 				...state,
 				contacts: action.payload
 			};
+
+		case INVITE_NEW_CONTACT:
+			return {
+				...state,
+				inviteStatus: action.payload
+			}
 			
 		default:
 			return state;

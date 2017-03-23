@@ -1,6 +1,7 @@
 'use-strict';
 const User = require('../models/user');
 const Promise = require('bluebird');
+const mailgun = require('../config/mailgun');
 
 const setUserInfo = function(request) {
   const getUserInfo = {
@@ -58,8 +59,19 @@ exports.addNewContact = function(req, res, next) {
 			res.status(200).json({ message: 'New contact added!', contactAdded: newContact });
 		}
 	);
-
 };
+
+exports.inviteNewContact = function(req, res, next) {
+	const recipient = req.body.recipient;
+	const message = {
+		html: `<html><body>${req.body.username} added you as a new contact! <br>Click the link to accept: <a href="${req.body.confirmationLink}">Create account</a></body></html>`,
+		subject: 'PhonoChat invite!'
+	};
+
+	// create reference to new user
+
+	mailgun.sendEmail(req.body.userEmail, recipient, message)
+}
 
 exports.getContacts = function(req, res, next) {
 	const userId = req.params.userId;

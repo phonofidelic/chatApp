@@ -86,6 +86,60 @@ exports.register = function(req, res, next) {
 	});
 };
 
+exports.registerWithReference = function(req, res, next) {
+	console.log('@registration route');
+	// Check for registration errors
+	const email = req.body.email,
+			  username = req.body.username,
+			  password = req.body.password;
+
+	if (!email) {
+		return res.status(422).send({ error: 'Please enter an email address.'});
+
+	}
+
+	if (!username) {
+		return res.status(422).send({ error: 'Please provide a username.'});
+		
+	}
+
+	if (!password) {
+		return res.status(422).send({ error: 'Please enter a password.'});
+		
+	}
+
+	User.findOne({ email: email}, function(err, existingUser) {
+		if (err) { return next(err); }
+
+		// Check for existing user
+		if (existingUser) {
+			return res.status(422).send({ error: 'Sorry, that email address is already in use.'});
+		}
+
+		let user = new User({
+			email: email,
+			password: password,
+			profile: { username: username },
+			contacts: [req.params.referrerId]
+		});
+
+		user.save(function(err, user) {
+			if (err) { return next(err); }
+
+			// TODO: insert optional email subscripton logic here
+
+			// Respond with JWT if user was created
+
+			let userInfo = setUserInfo(user);
+
+			res.status(201).json({
+				token: 'JWT ' + generateToken(userInfo),
+				user: userInfo
+			});
+		});
+	});
+}
+
 // Role authorization check
 exports.roleAuthorization = function(role) {
 	return function(req, res, next) {

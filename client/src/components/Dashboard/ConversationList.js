@@ -32,10 +32,7 @@ class ConversationList extends Component {
 																conversationId={message.conversationId}
 																authorId={message.author._id}
 																author={message.author.profile.username} />
-						)))}
-						<a href="dashboard/conversation/new">
-							<div className="new-conversation-button">New conversation</div>
-						</a>
+						)))}						
 					</ul>
 				</div>
 			);
@@ -48,7 +45,7 @@ class ConversationList extends Component {
 };
 
 function mapStateToProps(state) {
-	console.log('@mapStateToProps:', state)
+	// console.log('@mapStateToProps:', state)
 	return {
 		conversations: state.user.conversations
 	};
