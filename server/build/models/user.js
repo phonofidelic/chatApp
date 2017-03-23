@@ -18,6 +18,9 @@ var UserSchema = new Schema({
 	profile: {
 		username: { type: String }
 	},
+	contacts: [{
+		type: Schema.Types.ObjectId, ref: 'User'
+	}],
 	role: {
 		type: String,
 		enum: ['Member', 'Client', 'Owner', 'Admin'],
@@ -29,8 +32,25 @@ var UserSchema = new Schema({
 	timestamps: true
 });
 
+UserSchema.pre('save', function (next) {
+	var user = this,
+	    SALT_FACTOR = 5;
+
+	if (!user.isModified('password')) return next();
+
+	bcrypt.genSalt(SALT_FACTOR, function (err, salt) {
+		if (err) return next(err);
+
+		bcrypt.hash(user.password, salt, null, function (err, hash) {
+			if (err) return nesxt(err);
+			user.password = hash;
+			next();
+		});
+	});
+});
+
 // Compare user password for login
-UserSchema.methods.comparePassword = function (candidatePassword, cd) {
+UserSchema.methods.comparePassword = function (candidatePassword, cb) {
 	bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
 		if (err) {
 			return cb(err);

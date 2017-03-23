@@ -1,42 +1,57 @@
 'use strict';
 'use-strict';
 
-var _assign = require('babel-runtime/core-js/object/assign');
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
-var _assign2 = _interopRequireDefault(_assign);
+// adapted from Treehouse tutorial
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+// var sortReplies = function(a, b) {
+// 	return a.createdAt - b.createdAt; 
+// }
 
-var mongoose = require('mongoose');
+// var ReplySchema = new Schema({
+// 	text: String,
+// 	createdAt: { type: Date, default: Date.now() },
+// 	updatedAt: { type: Date, default: Date.now()}
+// });
 
-var Schema = mongoose.Schema;
+// ReplySchema.method('update', function(updates, callback) {
+// 	Object.assign(this, updates, { updatedAt: new Date.now() });
+// 	this.parent.save(callback);
+// });
 
-var sortReplies = function sortReplies(a, b) {
-	return a.createdAt - b.createdAt;
-};
+// var MessageSchema = new Schema({
+// 	text: String,
+// 	createdAt: { type: Date, default: Date.now() },
+// 	replies: [ReplySchema]
+// });
 
-var ReplySchema = new Schema({
-	text: String,
-	createdAt: { type: Date, default: Date.now() },
-	updatedAt: { type: Date, default: Date.now() }
-});
+// MessageSchema.pre('save', function(next) {
+// 	this.replies.sort(sortReplies);
+// 	next();
+// });
 
-ReplySchema.method('update', function (updates, callback) {
-	(0, _assign2.default)(this, updates, { updatedAt: new Date.now() });
-	this.parent.save(callback);
-});
+// module.exports = mongoose.model('Message', MessageSchema);
 
+//##################################################################
+
+// folowing slatespeak tutorial
 var MessageSchema = new Schema({
-	text: String,
-	createdAt: { type: Date, default: Date.now() },
-	replies: [ReplySchema]
+	conversationId: {
+		type: Schema.Types.ObjectId,
+		required: true
+	},
+	body: {
+		type: String,
+		required: true
+	},
+	author: {
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	}
+}, {
+	timestamps: true
 });
 
-MessageSchema.pre('save', function (next) {
-	this.replies.sort(sortReplies);
-	next();
-});
-
-var Message = mongoose.model('Messages', MessageSchema);
-
-module.exports.Message = Message;
+module.exports = mongoose.model('Message', MessageSchema);

@@ -3,18 +3,22 @@
 
 var express = require('express');
 var app = express();
-var routes = require('./controllers/chatRoutes'); //TODO: move all related logic to router.js and import and implement router.js here
 var router = require('./router');
 var path = require('path');
-var server = require('http').Server(app);
-var io = require('socket.io').listen(server);
+// var server = require('http').Server(app);
+var socketEvents = require('./socketEvents');
 var jsonParser = require('body-parser');
 var logger = require('morgan');
 var config = require('./config/main');
+var mongoose = require('mongoose');
+var passport = require('passport');
+
+// app.use(passport.initialize());
+
+app.use(logger('dev'));
+app.use(jsonParser.json());
 
 var staticFiles = express.static(path.join(__dirname, '../../client/build'));
-
-var mongoose = require('mongoose');
 
 // Connect to mongodb server with mongoose
 // TODO: bind to correct env var
@@ -32,25 +36,47 @@ db.once('open', function () {
 	console.log('db connection succesfull!');
 });
 
+var server = void 0;
+
+server = app.listen(config.port, function () {
+	console.log('Express server listening on port', config.port);
+});
+
+var io = require('socket.io').listen(server);
+
+socketEvents(io);
+
+// app.use('/', express.static(path.join(__dirname, 'app/build')));
+// app.use(staticFiles);
+
+// Setting up basic middleware for all Express requests
+app.use(jsonParser.urlencoded({ extended: false })); // Parses urlencoded bodies
+app.use(jsonParser.json()); // Send JSON responses
+app.use(logger('dev')); // Log requests to API using morgan
+
+
 // Enable COORS for client
+// app.use(function(req, res, next){
+// 	res.header("Access-Control-Allow-Origin", "*");
+// 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials");
+// 	res.header('Access-Control-Allow-Credentials', 'true');
+// 	if(req.method === "OPTIONS") {
+// 		res.header("Access-Control-Allow-Methods", "PUT,POST,DELETE");
+// 		return res.status(200).json({});
+// 	}
+// 	next();
+// });
+
 app.use(function (req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+	res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
 	res.header('Access-Control-Allow-Credentials', 'true');
-	if (req.method === "OPTIONS") {
-		res.header("Access-Control-Allow-Methods", "PUT,POST,DELETE");
-		return res.status(200).json({});
-	}
 	next();
 });
 
-app.use(logger('dev'));
-app.use(jsonParser.json());
-
-// app.use('/', express.static(path.join(__dirname, 'app/build')));
-app.use(staticFiles);
-
-app.use('/messages', routes);
+router(app);
+// app.use(router);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -60,37 +86,13 @@ app.use(function (req, res, next) {
 });
 
 // Error Handler
-app.use(function (err, req, res, next) {
-	res.status(err.status || 500);
-	res.json({
-		error: {
-			message: err.message
-		}
-	});
-});
-
-io.on('connection', function (socket) {
-	console.log('* A user connected');
-	socket.on('disconnect', function () {
-		console.log('* A user disconnected');
-	});
-
-	socket.on('chat message', function (msg) {
-		console.log('* message sent:', msg);
-		io.emit('new message', msg);
-	});
-
-	socket.on('chat response', function (msg) {
-		console.log('*response to ' + msg._id + ':', msg.text);
-		io.emit('new response', msg);
-	});
-});
-
-router(app);
-// app.use(router);
-
-server.listen(config.port, function () {
-	console.log('Express server listening on port', config.port);
-});
+// app.use(function(err, req, res, next) {
+// 	res.status(err.status || 500);
+// 	res.json({
+// 		error: {
+// 			message: err.message
+// 		}
+// 	});
+// });
 
 module.exports = server;

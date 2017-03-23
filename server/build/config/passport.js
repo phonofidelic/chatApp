@@ -40,7 +40,7 @@ var localLogin = new LocalStrategy(localOptions, function (email, password, done
 var jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
 	User.findById(payload._id, function (err, user) {
 		if (err) {
-			return done(err, fale);
+			return done(err, false);
 		}
 
 		if (user) {

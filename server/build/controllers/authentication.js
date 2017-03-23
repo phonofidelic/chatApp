@@ -8,7 +8,7 @@ var jwt = require('jsonwebtoken'),
 
 function generateToken(user) {
 	return jwt.sign(user, config.secret, {
-		expiresIn: 10080
+		expiresIn: 21600 // TODO: set time for production 
 	});
 };
 
@@ -27,13 +27,15 @@ exports.login = function (req, res, next) {
 	var userInfo = setUserInfo(req.user);
 
 	res.status(200).json({
-		token: 'JWT' + generateToken(userInfo),
+		token: 'JWT ' + generateToken(userInfo), // remove 'JWT'?	
 		user: userInfo
 	});
+	console.log('@controllers/authentication.js login:', userInfo);
 };
 
 // Registration route
 exports.register = function (req, res, next) {
+	console.log('@registration route');
 	// Check for registration errors
 	var email = req.body.email,
 	    username = req.body.username,
@@ -79,7 +81,62 @@ exports.register = function (req, res, next) {
 			var userInfo = setUserInfo(user);
 
 			res.status(201).json({
-				token: 'JWT' + generateToken(userInfo),
+				token: 'JWT ' + generateToken(userInfo),
+				user: userInfo
+			});
+		});
+	});
+};
+
+exports.registerWithReference = function (req, res, next) {
+	console.log('@registration route');
+	// Check for registration errors
+	var email = req.body.email,
+	    username = req.body.username,
+	    password = req.body.password;
+
+	if (!email) {
+		return res.status(422).send({ error: 'Please enter an email address.' });
+	}
+
+	if (!username) {
+		return res.status(422).send({ error: 'Please provide a username.' });
+	}
+
+	if (!password) {
+		return res.status(422).send({ error: 'Please enter a password.' });
+	}
+
+	User.findOne({ email: email }, function (err, existingUser) {
+		if (err) {
+			return next(err);
+		}
+
+		// Check for existing user
+		if (existingUser) {
+			return res.status(422).send({ error: 'Sorry, that email address is already in use.' });
+		}
+
+		var user = new User({
+			email: email,
+			password: password,
+			profile: { username: username },
+			contacts: [req.params.referrerId]
+		});
+
+		user.save(function (err, user) {
+			if (err) {
+				return next(err);
+			}
+
+			// TODO: insert optional email subscripton logic here
+
+			// Respond with JWT if user was created
+
+			var userInfo = setUserInfo(user);
+
+			res.status(201).json({
+				token: 'JWT ' + generateToken(userInfo),
 				user: userInfo
 			});
 		});
