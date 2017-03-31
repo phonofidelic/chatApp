@@ -75,6 +75,8 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(staticFiles);
+
 router(app);
 // app.use(router);
 
@@ -95,6 +97,5 @@ router(app);
 // 	});
 // });
 
-app.use(staticFiles);
 
 // module.exports = server;
