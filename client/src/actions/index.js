@@ -14,8 +14,13 @@ import { VIEW_PROFILE,
 				 POST_MESSAGE,
 				 INVITE_NEW_CONTACT } from '../actiontypes/user';			
 
-const API_URL = 'https://phono-chat.herokuapp.com/api' || 'http://localhost:3001/api';
-const CLIENT_ROOT_URL = 'https://phono-chat.herokuapp.com' || 'http://localhost:3000';
+// dev urls
+// const API_URL = 'http://localhost:3001/api';
+// const CLIENT_ROOT_URL = 'http://localhost:3000';
+
+// prod urls
+const API_URL = 'https://phono-chat.herokuapp.com/api';
+const CLIENT_ROOT_URL = 'https://phono-chat.herokuapp.com';
 
 // Connect to socket.io server
 export const socket = io.connect(CLIENT_ROOT_URL);	
