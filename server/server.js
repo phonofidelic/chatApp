@@ -59,19 +59,6 @@ app.use(jsonParser.json()); // Send JSON responses
 app.use(logger('dev')); // Log requests to API using morgan
 
 
-
-// Enable COORS for client
-// app.use(function(req, res, next){
-// 	res.header("Access-Control-Allow-Origin", "*");
-// 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials");
-// 	res.header('Access-Control-Allow-Credentials', 'true');
-// 	if(req.method === "OPTIONS") {
-// 		res.header("Access-Control-Allow-Methods", "PUT,POST,DELETE");
-// 		return res.status(200).json({});
-// 	}
-// 	next();
-// });
-
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
