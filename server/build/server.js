@@ -47,7 +47,7 @@ var io = require('socket.io').listen(server);
 socketEvents(io);
 
 // app.use('/', express.static(path.join(__dirname, 'app/build')));
-app.use(staticFiles);
+
 
 // Setting up basic middleware for all Express requests
 app.use(jsonParser.urlencoded({ extended: false })); // Parses urlencoded bodies
@@ -95,4 +95,6 @@ router(app);
 // 	});
 // });
 
-module.exports = server;
+app.use(staticFiles);
+
+// module.exports = server;
