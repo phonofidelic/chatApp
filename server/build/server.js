@@ -6,7 +6,7 @@ var app = express();
 var router = require('./router');
 var path = require('path');
 // var server = require('http').Server(app);
-var socketEvents = require('./socketEvents');
+
 var jsonParser = require('body-parser');
 var logger = require('morgan');
 var config = require('./config/main');
@@ -37,14 +37,17 @@ db.once('open', function () {
 });
 
 var server = void 0;
+// if (process.env.NODE_ENV != config.test_env) {
+// 	server = app.listen(config.port);
+// 	console.log('Express server listening on port', config.port);
+// } else {
+// 	server = app.listen(config.test_port);
+// 	console.log('Test server listening on port', config.test_port);
+// }
 
 server = app.listen(config.port, function () {
   console.log('Express server listening on port', config.port);
 });
-
-var io = require('socket.io').listen(server);
-
-socketEvents(io);
 
 // app.use('/', express.static(path.join(__dirname, 'app/build')));
 
@@ -75,10 +78,14 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(staticFiles);
+// app.use(staticFiles);
 
 router(app);
-// app.use(router);
+
+// app.get('*', (req, res) => {
+// 	res.send(path.join(__dirname, '../../client/build/index.html'));
+// });
+
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

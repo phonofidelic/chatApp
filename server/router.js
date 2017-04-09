@@ -2,6 +2,7 @@ const AuthenticationController = require('./controllers/authentication'),
 			UserController = require('./controllers/user'),
 			ChatController = require('./controllers/chat'),
 			express = require('express'),
+			path = require('path'),
 			passportService = require('./config/passport'),
 			passport = require('passport');
 
@@ -81,6 +82,8 @@ module.exports = function(app) {
 
 	app.use(passport.initialize());	// <- sould remove?
 	app.use('/api', apiRoutes);
+
+	// app.use(express.static(path.join(__dirname, '../../client/build')));
 };
 
 

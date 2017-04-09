@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon -r babel-register server.js",
     "build": "babel . --ignore node_modules,build --out-dir build",
-    "start:prod": "node build/server.js"
+    "start:prod": "concurrently \"node build/server.js\" \"node build/staticServer.js\""
   },
   "homepage": "https://phono-chat.herokuapp.com/",
   "dependencies": {

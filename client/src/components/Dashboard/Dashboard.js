@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import * as actions from '../../actions';
 import ConversationList from './ConversationList';
 import LogoutButton from '../auth/LogoutButton';
@@ -24,9 +25,9 @@ class Dashboard extends Component {
 				<ProfileManager />
 				<ConversationList />
 				<div className="stuck-bottom">
-					<a href="dashboard/conversation/new">
+					<Link onClick={this.forceUpdate} to="dashboard/conversation/new">
 						<div className="new-conversation-button">New conversation</div>
-					</a>
+					</Link>
 					<button onClick={this.props.logoutUser.bind(this)}>Logout</button>
 				</div>
 				
@@ -35,11 +36,14 @@ class Dashboard extends Component {
 	};
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
 	
 	return { 
 		user: state.user.userInfo
+		// id: ownProps.params.id,
+		// filter: ownProps.location.query.filter
 	};
 };
 
 export default connect(mapStateToProps, actions)(Dashboard);
+

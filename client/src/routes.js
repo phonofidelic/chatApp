@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
+// import { Route } from 'react-router-dom';
 
 import App from './containers/App';
 import NotFound from './components/pages/NotFound';
