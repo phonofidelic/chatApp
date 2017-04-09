@@ -14,7 +14,7 @@ app.get('*', function (req, res) {
 	res.sendFile(path.resolve(__dirname, '../../client/build/index.html'));
 });
 
-var server = app.listen(3000, function () {
+var server = app.listen(process.env.PORT || 3000, function () {
 	console.log('Static files served on port 3000');
 });
 
