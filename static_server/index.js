@@ -5,7 +5,7 @@ var app = express();
 var path = require('path');
 var socketEvents = require('./socketEvents');
 
-const staticFiles = express.static(path.join(__dirname, '../client/build'));
+var staticFiles = express.static(path.join(__dirname, '../client/build'));
 
 app.use(staticFiles);
 
@@ -13,11 +13,11 @@ app.get('*', (req, res) => {
 	res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
 })
 
-const server= app.listen(process.env.PORT || 8080, () => {
+var server= app.listen(process.env.PORT || 8080, function() {
 	console.log('Static files served on port 8080');
 });
 
 // set up socket.io
-const io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server);
 
 socketEvents(io);
