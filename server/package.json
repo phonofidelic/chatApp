@@ -8,7 +8,6 @@
     "build": "babel . --ignore node_modules,build --out-dir build",
     "start:prod": "concurrently \"node build/server.js\" \"node build/staticServer.js\""
   },
-  "homepage": "https://phono-chat.herokuapp.com/",
   "dependencies": {
     "babel-cli": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
