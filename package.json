@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "install": "(cd client && npm install) && (cd server && npm install)",
-    "start": "concurrently \"cd client && PORT=3000 yarn start\" \"cd server && PORT=3001 yarn start\"",
+    "install": "concurrently \"cd client && npm install\" \"cd server && npm install\" \"cd static_server && npm instal\"",
+    "start": "concurrently \"cd client && PORT=3000 yarn start\" \"cd server && PORT=3001 yarn start\" \"cd static_server && PORT=3002 npm run start\"",
     "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",
     "heroku-postbuild": "npm run build",
     "start:prod": "concurrently \"cd server && npm run start:prod\" \"cd static_server && npm run start\""
