@@ -23,7 +23,7 @@ const API_URL = 'https://phono-chat.herokuapp.com/api';
 const CLIENT_ROOT_URL = 'https://phono-chat.herokuapp.com';
 
 // Connect to socket.io server
-export const socket = io.connect('http://localhost:3002');	
+export const socket = io.connect(CLIENT_ROOT_URL);	
 
 export function errorHandler(dispatch, error, type) {
 	let errorMessage = '';
