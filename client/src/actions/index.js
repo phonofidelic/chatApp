@@ -15,11 +15,11 @@ import { VIEW_PROFILE,
 				 INVITE_NEW_CONTACT } from '../actiontypes/user';			
 
 // dev urls
-// const API_URL = 'http://localhost:3001/api';
+const API_URL = '/api';
 // const CLIENT_ROOT_URL = 'http://localhost:3000';
 
 // prod urls
-const API_URL = 'https://phono-chat.herokuapp.com/api';
+// const API_URL = 'https://phono-chat.herokuapp.com/api';
 const CLIENT_ROOT_URL = 'https://phono-chat.herokuapp.com';
 
 // Connect to socket.io server

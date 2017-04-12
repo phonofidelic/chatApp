@@ -5,10 +5,10 @@
   "license": "MIT",
   "scripts": {
     "install": "(cd client && npm install) && (cd server && npm install) && (cd static_server && npm install)",
-    "start": "concurrently \"cd client && PORT=3000 yarn start\" \"cd server && PORT=3001 yarn start\" \"cd static_server && PORT=3002 npm run start\"",
+    "start": "concurrently \"cd client && PORT=3000 yarn start\" \"cd server && PORT=3001 yarn start\"",
     "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",
     "heroku-postbuild": "npm run build",
-    "start:prod": "concurrently \"cd server && npm run start:prod\" \"cd static_server && npm run start\""
+    "start:prod": "cd server && npm run start:prod"
   },
   "dependencies": {
     "concurrently": "^3.3.0"
