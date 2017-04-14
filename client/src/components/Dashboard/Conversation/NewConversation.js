@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router';
 import * as actions from '../../../actions';
 import MessagingForm from './MessagingForm';
 import TextField from 'material-ui/TextField';
@@ -94,7 +95,7 @@ class NewConversation extends Component {
 		return (
 			<div>
 				<div className="back-button-container">
-					<a href={'/dashboard'}><button>back</button></a>
+					<Link to={'/dashboard'}><button>back</button></Link>
 				</div>
 				<div className="new-conversation-container">New conversation
 					<div>{this.renderPartisipantsList()}</div>

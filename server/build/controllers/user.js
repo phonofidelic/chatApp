@@ -100,7 +100,7 @@ exports.getUserList = function (req, res, next) {
 
 exports.checkForUser = function (req, res, next) {
 	console.log('@checkForUser:', req.params.email);
-	User.findOne({ 'email': req.params.email }).exec(function (err, user) {
+	User.findOne({ 'email': req.params.email.toLowerCase() }, 'email').exec(function (err, user) {
 		if (err) return next(err);
 
 		console.log('### user:', user);

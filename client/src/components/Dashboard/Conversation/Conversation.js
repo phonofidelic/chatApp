@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import MessageList from './MessageList';
@@ -47,7 +47,7 @@ class Conversation extends Component {
 	render() {
 		return (
 			<div>
-				<div className="back-button-container"><a href={'/dashboard'}><button>back</button></a></div>
+				<div className="back-button-container"><Link to={'/dashboard'}><button>back</button></Link></div>
 				<div>{this.renderConversation()}</div>
 				<div><MessagingForm replyTo={this.props.params.conversationId}/></div>
 			</div>

@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 
-import { Router, browserHistory} from 'react-router';
+import { Router, browserHistory, hashHistory} from 'react-router';
 // import { BrowserRouter as Router } from 'react-router-dom';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import routes from './routes';
@@ -43,7 +43,7 @@ if (token) {
 	store.dispatch({ type: AUTH_USER });
 }
 
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(hashHistory, store);
 
 render(
 	<Provider store={store}>

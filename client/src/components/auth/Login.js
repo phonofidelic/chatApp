@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import { loginUser, checkForExistingUser, registerUser } from '../../actions';
 import './Login.css';
@@ -11,11 +12,10 @@ const form = reduxForm({
 class Login extends Component {
 
 	handleLoginSubmit(formProps) {
-		this.props.loginUser(formProps);	
+		this.props.loginUser(formProps);
 	}
 
 	handleRegisterSubmit(formProps) {
-		console.log('@registerUser formProps:', formProps);
 		this.props.registerUser(formProps);
 	}
 

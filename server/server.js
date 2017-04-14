@@ -25,9 +25,10 @@ app.use(staticFiles);
 // }
 
 
+
 // mongoose.set('debug', true);
 // Connect to mongodb server with mongoose
-mongoose.connect(config.remoteDB);
+mongoose.connect(config.database);
 
 // Log db connection status
 var db = mongoose.connection;

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { reset } from 'redux-form';
+import { browserHistory } from 'react-router';
 import cookie from 'react-cookie';
 import io from 'socket.io-client';
 import { AUTH_USER,
@@ -20,10 +21,10 @@ const API_URL = '/api';
 
 // prod urls
 // const API_URL = 'https://phono-chat.herokuapp.com/api';
-const CLIENT_ROOT_URL = 'https://phono-chat.herokuapp.com';
+// const CLIENT_ROOT_URL = 'https://phono-chat.herokuapp.com';
 
 // Connect to socket.io server
-export const socket = io.connect(CLIENT_ROOT_URL);	
+export const socket = io.connect('/');	
 
 export function errorHandler(dispatch, error, type) {
 	let errorMessage = '';
@@ -76,7 +77,8 @@ export function loginUser({ email, password }) {
 			cookie.save('token', response.data.token, { path: '/' });
 			cookie.save('user', response.data.user, { path: '/' });
 			dispatch({ type: AUTH_USER });
-			window.location.href = CLIENT_ROOT_URL + '/dashboard';
+			// window.location.href = CLIENT_ROOT_URL + '/dashboard';
+			browserHistory.push('/dashboard');
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
@@ -89,7 +91,8 @@ export function registerUser({ email, username, password }) {
 			cookie.save('token', response.data.token, { path: '/' });
 			cookie.save('user', response.data.user, { path: '/' });
 			dispatch({ type: AUTH_USER });
-			window.location.href = CLIENT_ROOT_URL + '/dashboard'; 
+			// window.location.href = CLIENT_ROOT_URL + '/dashboard';
+			browserHistory.push('/dashboard');
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
@@ -102,7 +105,8 @@ export function registerWithReference(inviteId, { email, username, password }) {
 			cookie.save('token', response.data.token, { path: '/' });
 			cookie.save('user', response.data.user, { path: '/' });
 			dispatch({ type: AUTH_USER });
-			window.location.href = CLIENT_ROOT_URL + '/dashboard';
+			// window.location.href = CLIENT_ROOT_URL + '/dashboard';
+			browserHistory.push('/dashboard');
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
@@ -114,7 +118,8 @@ export function logoutUser() {
 		dispatch({ type: UNAUTH_USER });
 		cookie.remove('token', { path: '/'});
 		cookie.remove('user', { path: '/'});
-		window.location.href = CLIENT_ROOT_URL + '/login';
+		// window.location.href = CLIENT_ROOT_URL + '/login';
+		browserHistory.push('/login');
 	}
 }
 
@@ -183,7 +188,7 @@ export function inviteNewContact({contactEmail}) {
 		recipient: contactEmail,
 		username: user.username,
 		userEmail: user.email,
-		confirmationLink: `${CLIENT_ROOT_URL}/register/${user._id}`
+		confirmationLink: `https://phono-chat.herokuapp.com/register/${user._id}`
 	};
 
 	return (dispatch) => {

@@ -25,7 +25,7 @@ class Dashboard extends Component {
 				<ProfileManager />
 				<ConversationList />
 				<div className="stuck-bottom">
-					<Link onClick={this.forceUpdate} to="dashboard/conversation/new">
+					<Link to="dashboard/conversation/new">
 						<div className="new-conversation-button">New conversation</div>
 					</Link>
 					<button onClick={this.props.logoutUser.bind(this)}>Logout</button>
