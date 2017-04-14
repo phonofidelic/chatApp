@@ -42,17 +42,14 @@ exports.register = function(req, res, next) {
 
 	if (!email) {
 		return res.status(422).send({ error: 'Please enter an email address.'});
-
 	}
 
 	if (!username) {
 		return res.status(422).send({ error: 'Please provide a username.'});
-		
 	}
 
 	if (!password) {
-		return res.status(422).send({ error: 'Please enter a password.'});
-		
+		return res.status(422).send({ error: 'Please enter a password.'});	
 	}
 
 	User.findOne({ email: email}, function(err, existingUser) {

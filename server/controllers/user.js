@@ -104,8 +104,8 @@ exports.getUserList = function(req, res, next) {
 };
 
 exports.checkForUser = function(req, res, next) {
-	console.log('@checkForUser:', req.params.email)
-	User.findOne({'email': req.params.email})
+	console.log('@checkForUser:', req.params.email);
+	User.findOne({ 'email': req.params.email.toLowerCase() }, 'email')
 	.exec((err, user) => {
 		if (err) return next(err);
 
@@ -118,6 +118,7 @@ exports.checkForUser = function(req, res, next) {
 				}
 	});
 };
+
 
 exports.test = function(req, res, next) {
 	// res.status(200).json(req.user.id_toString());

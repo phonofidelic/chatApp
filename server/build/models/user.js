@@ -28,9 +28,7 @@ var UserSchema = new Schema({
 	},
 	resetPasswordToken: { type: String },
 	resetPasswordExpires: { type: Date }
-}, {
-	timestamps: true
-});
+}, { timestamps: true });
 
 UserSchema.pre('save', function (next) {
 	var user = this,
@@ -60,4 +58,4 @@ UserSchema.methods.comparePassword = function (candidatePassword, cb) {
 	});
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema, 'User');
