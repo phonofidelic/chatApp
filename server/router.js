@@ -22,6 +22,7 @@ module.exports = function(app) {
 				chatRoutes = express.Router(),
 				userRoutes = express.Router();
 
+
 	// Auth routes ***************************************************
 
 	apiRoutes.use('/auth', authRoutes);
@@ -79,6 +80,7 @@ module.exports = function(app) {
 
 	// invite new contact
 	userRoutes.post('/:userId/invite', requireAuth, UserController.inviteNewContact);
+
 
 	app.use(passport.initialize());	// <- sould remove?
 	app.use('/api', apiRoutes);

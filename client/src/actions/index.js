@@ -78,7 +78,7 @@ export function loginUser({ email, password }) {
 			cookie.save('user', response.data.user, { path: '/' });
 			dispatch({ type: AUTH_USER });
 			// window.location.href = CLIENT_ROOT_URL + '/dashboard';
-			browserHistory.push('/dashboard');
+			browserHistory.push('#/dashboard');
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
@@ -119,7 +119,7 @@ export function logoutUser() {
 		cookie.remove('token', { path: '/'});
 		cookie.remove('user', { path: '/'});
 		// window.location.href = CLIENT_ROOT_URL + '/login';
-		browserHistory.push('/login');
+		browserHistory.push('/');
 	}
 }
 
@@ -152,6 +152,22 @@ export function viewProfile() {
 				type: VIEW_PROFILE,
 				payload: response.data.user
 			});
+			return(response.data.user)
+		}).then((userInfo) => {
+			axios.post(`${API_URL}/user/${user._id}/contacts`, {"contacts": userInfo.contacts}, {
+				headers: { Authorization: cookie.load('token') }
+			}).then(response => {
+				console.log('@getContacts:', response);
+				let contactsToReturn = []
+				response.data.forEach(contact => {
+					contactsToReturn.push(contact[0]);
+				});
+				console.log('@getContacts: contactsToReturn', contactsToReturn);
+				dispatch({
+					type: GET_CONTACTS,
+					payload: contactsToReturn
+				});
+			})
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});

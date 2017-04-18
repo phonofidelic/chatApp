@@ -24,9 +24,7 @@ export default (
 		</Route>
 
 		<Route path="register/:inviteId" component={RegisterWithReference} />
-		<Route path="login" component={Login} />
-		<Route path="conversations" component={RequireAuth(ConversationList)} />
-		
+		<Route path="login" component={Login} />		
 
 		<Route path="*" component={NotFound} />
 	</Route>

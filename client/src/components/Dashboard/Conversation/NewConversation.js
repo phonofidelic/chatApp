@@ -35,14 +35,17 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
 		{...custom} />
 );
 
+
+
 class NewConversation extends Component {
 	constructor(props) {
 		super(props);
 
-		this.props.viewProfile();
+		this.props.viewProfile();	
 	}
 
 	renderSelectContactsField() {
+		console.log('## this.props.user:', this.props.user)
 		if (this.props.user) {
 			this.props.getContacts(this.props.user.contacts);
 			return(
@@ -51,7 +54,7 @@ class NewConversation extends Component {
 								 label="Add Participants"
 								 component={ renderSelectField }>
 					{this.props.contacts.map(contact => 
-						<MenuItem value={contact._id} primaryText={contact.profile.username} />
+						<MenuItem value={contact._id} primaryText={contact.profile.username} key={contact._id} />
 					)}
 				</Field>
 			);
