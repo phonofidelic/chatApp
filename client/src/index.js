@@ -3,9 +3,9 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 
-import { Router, browserHistory, hashHistory} from 'react-router';
+import { Router, browserHistory, hashHistory } from 'react-router';
 // import { BrowserRouter as Router } from 'react-router-dom';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { routerMiddleware, syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import routes from './routes';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -13,7 +13,7 @@ import reduxThunk from 'redux-thunk';
 import cookie from 'react-cookie';
 import WebfontLoader from '@dr-kobros/react-webfont-loader';
 
-import reducers from './reducers/index';
+import rootReducer from './reducers/index';
 import { reducer as formReducer } from 'redux-form';
 import authReducer from './reducers/auth_reducer';
 import userReducer from './reducers/user_reducer';
@@ -27,11 +27,13 @@ const config = {
 	}
 }
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const middleware = routerMiddleware(hashHistory);
+
+const createStoreWithMiddleware = applyMiddleware(reduxThunk, middleware)(createStore);
 const store = createStoreWithMiddleware(
 	combineReducers({ 
-		auth: authReducer, 
-		form: formReducer, 
+		auth: authReducer,
+		form: formReducer,
 		user: userReducer, 
 		routing: routerReducer 
 	}), window.window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -43,7 +45,7 @@ if (token) {
 	store.dispatch({ type: AUTH_USER });
 }
 
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(hashHistory, store);
 
 render(
 	<Provider store={store}>

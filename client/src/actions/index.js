@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { reset } from 'redux-form';
 import { browserHistory } from 'react-router';
-import { push } from 'react-router-redux'
+import { routerMiddleware, push } from 'react-router-redux'
 import cookie from 'react-cookie';
 import io from 'socket.io-client';
 import { AUTH_USER,
@@ -15,6 +16,7 @@ import { VIEW_PROFILE,
 				 GET_CONTACTS,
 				 POST_MESSAGE,
 				 INVITE_NEW_CONTACT } from '../actiontypes/user';			
+
 
 // dev urls
 const API_URL = '/api';
@@ -78,9 +80,9 @@ export function loginUser({ email, password }) {
 			cookie.save('token', response.data.token, { path: '/' });
 			cookie.save('user', response.data.user, { path: '/' });
 			dispatch({ type: AUTH_USER });
-			// window.location.href = CLIENT_ROOT_URL + '/dashboard';
+			window.location.href = '#/dashboard';
 			
-			browserHistory.push('dashboard');
+			// browserHistory.push('#/dashboard');
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
