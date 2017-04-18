@@ -47,7 +47,7 @@ class NewConversation extends Component {
 	renderSelectContactsField() {
 		console.log('## this.props.user:', this.props.user)
 		if (this.props.user) {
-			this.props.getContacts(this.props.user.contacts);
+			// this.props.getContacts(this.props.user.contacts);
 			return(
 				<Field name="participantsField"
 								 type="select"

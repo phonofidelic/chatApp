@@ -154,6 +154,7 @@ export function viewProfile() {
 			});
 			return(response.data.user)
 		}).then((userInfo) => {
+			// users contact ids array as parameter, return username of each contact
 			axios.post(`${API_URL}/user/${user._id}/contacts`, {"contacts": userInfo.contacts}, {
 				headers: { Authorization: cookie.load('token') }
 			}).then(response => {
@@ -172,30 +173,6 @@ export function viewProfile() {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
 	};
-};
-
-export function getContacts(contacts) {
-	// users contact ids array as parameter, return username of each contact
-	const user = cookie.load('user');
-	return (dispatch) => {
-		console.log('@getContacts contacts:', contacts);
-		axios.post(`${API_URL}/user/${user._id}/contacts`, {"contacts": contacts}, {
-			headers: { Authorization: cookie.load('token') }
-		}).then(response => {
-			console.log('@getContacts:', response);
-			let contactsToReturn = []
-			response.data.forEach(contact => {
-				contactsToReturn.push(contact[0]);
-			});
-			console.log('@getContacts: contactsToReturn', contactsToReturn);
-			dispatch({
-				type: GET_CONTACTS,
-				payload: contactsToReturn
-			});
-		}).catch(err => {
-			errorHandler(dispatch, err.response, AUTH_ERROR);
-		});
-	}
 };
 
 export function inviteNewContact({contactEmail}) {
