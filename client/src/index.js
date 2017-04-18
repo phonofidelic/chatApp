@@ -43,7 +43,7 @@ if (token) {
 	store.dispatch({ type: AUTH_USER });
 }
 
-const history = syncHistoryWithStore(hashHistory, store);
+const history = syncHistoryWithStore(browserHistory, store);
 
 render(
 	<Provider store={store}>

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { reset } from 'redux-form';
 import { browserHistory } from 'react-router';
+import { push } from 'react-router-redux'
 import cookie from 'react-cookie';
 import io from 'socket.io-client';
 import { AUTH_USER,
@@ -78,7 +79,8 @@ export function loginUser({ email, password }) {
 			cookie.save('user', response.data.user, { path: '/' });
 			dispatch({ type: AUTH_USER });
 			// window.location.href = CLIENT_ROOT_URL + '/dashboard';
-			browserHistory.push('#/dashboard');
+			
+			browserHistory.push('dashboard');
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
