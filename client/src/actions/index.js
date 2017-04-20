@@ -95,8 +95,8 @@ export function registerUser({ email, username, password }) {
 			cookie.save('token', response.data.token, { path: '/' });
 			cookie.save('user', response.data.user, { path: '/' });
 			dispatch({ type: AUTH_USER });
-			// window.location.href = CLIENT_ROOT_URL + '/dashboard';
-			browserHistory.push('/dashboard');
+			window.location.href = '#/dashboard';
+			// browserHistory.push('/dashboard');
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
@@ -109,8 +109,8 @@ export function registerWithReference(inviteId, { email, username, password }) {
 			cookie.save('token', response.data.token, { path: '/' });
 			cookie.save('user', response.data.user, { path: '/' });
 			dispatch({ type: AUTH_USER });
-			// window.location.href = CLIENT_ROOT_URL + '/dashboard';
-			browserHistory.push('/dashboard');
+			window.location.href = '#/dashboard';
+			// browserHistory.push('/dashboard');
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
