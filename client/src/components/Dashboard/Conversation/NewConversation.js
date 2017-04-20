@@ -46,7 +46,7 @@ class NewConversation extends Component {
 
 	renderSelectContactsField() {
 		console.log('## this.props.user:', this.props.user)
-		if (this.props.user) {
+		if (this.props.contacts) {
 			return(
 				<Field name="participantsField"
 								 type="select"
@@ -59,7 +59,7 @@ class NewConversation extends Component {
 			);
 		} else {
 			return(
-				<div>No userinfo found</div>
+				<div>No contacts found</div>
 			);
 		}
 	};

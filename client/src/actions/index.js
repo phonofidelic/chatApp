@@ -185,7 +185,7 @@ export function inviteNewContact({contactEmail}) {
 		recipient: contactEmail,
 		username: user.username,
 		userEmail: user.email,
-		confirmationLink: `https://phono-chat.herokuapp.com/register/${user._id}`
+		confirmationLink: `https://phono-chat.herokuapp.com/#/register/${user._id}`
 	};
 
 	return (dispatch) => {
