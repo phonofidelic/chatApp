@@ -7,7 +7,7 @@ const form = reduxForm({
 	form: 'inviteNewContact'
 });
 
-class ProfileManager extends Component {
+class AddNewContactForm extends Component {
 	// constructor(props) {
 	// 	super(props);
 	// }
@@ -36,7 +36,6 @@ class ProfileManager extends Component {
 	render() {
 		return (
 			<div>
-				[Profile Manager]
 				{this.renderInviteNewContact()}
 			</div>
 		);
@@ -49,6 +48,6 @@ function mapStateToProps(state) {
 	}
 };
 
-export default connect(mapStateToProps, { inviteNewContact })(form(ProfileManager));
+export default connect(mapStateToProps, { inviteNewContact })(form(AddNewContactForm));
 
 

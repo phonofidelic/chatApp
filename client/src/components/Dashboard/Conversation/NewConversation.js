@@ -8,6 +8,7 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import AddNewContactForm from '../AddNewContactForm';
 
 injectTapEventPlugin();
 
@@ -106,6 +107,7 @@ class NewConversation extends Component {
 					{ this.renderMessageField() }
 					<button action="submit">Post</button>
 					</form>
+					<AddNewContactForm />
 				</div>
 			</div>					
 		);

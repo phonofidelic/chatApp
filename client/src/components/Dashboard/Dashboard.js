@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import * as actions from '../../actions';
 import ConversationList from './ConversationList';
 import LogoutButton from '../auth/LogoutButton';
-import ProfileManager from './ProfileManager';
+import AddNewContactForm from './AddNewContactForm';
 import './Dashboard.css';
 
 class Dashboard extends Component {
@@ -22,7 +22,7 @@ class Dashboard extends Component {
 					<p>hello, {this.props.user ? this.props.user.username : ''}</p>
 				</div>
 				<div>TODO: add "view/edit account info"</div>
-				<ProfileManager />
+				<AddNewContactForm />
 				<ConversationList />
 				<div className="stuck-bottom">
 					<Link to={'dashboard/conversation/new'}>
