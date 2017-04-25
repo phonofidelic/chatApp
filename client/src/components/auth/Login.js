@@ -73,7 +73,7 @@ class Login extends Component {
 
 					<div className="greeting">{this.renderAlert()}</div>
 					<div className="auth-button">	
-						{usernameAvailable ? <button type="submit">Register</button> : <button type="submit">Login</button>}
+						{usernameAvailable ? <button className="secondary-button" type="submit">Register</button> : <button className="secondary-button" type="submit">Login</button>}
 					</div>
 
 					

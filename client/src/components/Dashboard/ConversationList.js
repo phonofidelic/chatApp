@@ -22,7 +22,7 @@ class ConversationList extends Component {
 			this.props.conversations.reverse();
 			return (
 				<div>
-					<h3>Conversations:</h3>
+					<div className="primary-button">Conversations</div>
 					<ul className="conversation-list">
 						{this.props.conversations.map(data => data.map(message => (
 							<ConversationItem className="conversation"

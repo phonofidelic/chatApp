@@ -75,7 +75,7 @@ class Register extends Component {
 									 label="Password" />
 					</div>
 					{this.renderAlert()}
-					<button type="submit">Register</button>
+					<button className="secondary-button" type="submit">Register</button>
 				</form>
 			</div>
 		);

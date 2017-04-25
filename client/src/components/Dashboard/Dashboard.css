@@ -8,9 +8,11 @@
 	margin: 20px;
 }
 
-.new-conversation-button {
+button.primary-button,
+.primary-button {
 	height: 50px;
 	max-width: 600px;
+	border: none;
 	border-top: solid 1px #555;
 	/*border-bottom: solid 1px #555;*/
 	margin: 10px auto;
@@ -19,10 +21,100 @@
 	color: #555;
 	line-height: 50px;
 	text-align: center;	
+	display: block;
+	width: 100%;
+	font-size: 1em;
+	cursor: pointer;
 	/*box-shadow: 0px -10px 10px 5px #fff;*/
 }
 
 .new-conversation-container {
 	max-width: 350px;
 	margin: 0 auto;
+}
+
+.profile-editor-container {
+	height: 400px;
+	/*display: block;*/
+	/*background: red;*/
+}
+
+/********* manage profile animations *********/
+.show-editor-appear {
+  opacity: 0.01;
+  height: 0px;
+}
+
+.show-editor-appear.show-editor-appear-active {
+  opacity: 1;
+  height: 400px;
+  transition-property: height opacity;
+  transition-duration: .5s;
+  transition-timing-function: ease;
+}
+
+.show-editor-enter {
+  opacity: 0.01;
+  height: 0px;
+}
+
+.show-editor-enter.show-editor-enter-active {
+  opacity: 1;
+  height: 400px;
+  transition-property: height opacity;
+  transition-duration: .5s;
+  transition-timing-function: ease;
+}
+
+.show-editor-leave {
+  opacity: 1;
+  height: 400px;
+}
+
+.show-editor-leave.show-editor-leave-active {
+  opacity: 0.01;
+  height: 0px;
+  transition-property: height opacity;
+  transition-duration: .5s;
+  transition-timing-function: ease;
+}
+
+/********* conversation list animations *********/
+.show-conversation-list-appear {
+  opacity: 0.01;
+  /*height: 0px;*/
+}
+
+.show-conversation-list-appear.show-conversation-list-appear-active {
+  opacity: 1;
+  /*height: 400px;*/
+  transition-property: opacity;
+  transition-duration: .5s;
+  transition-timing-function: ease;
+}
+
+.show-conversation-list-enter {
+  opacity: 0.01;
+  /*height: 0px;*/
+}
+
+.show-conversation-list-enter.show-conversation-list-enter-active {
+  opacity: 1;
+  /*height: 400px;*/
+  transition-property: opacity;
+  transition-duration: .5s;
+  transition-timing-function: ease;
+}
+
+.show-conversation-list-leave {
+  opacity: 1;
+  /*height: 400px;*/
+}
+
+.show-conversation-list-leave.show-conversation-list-leave-active {
+  opacity: 0.01;
+  /*height: 0px;*/
+  transition-property: opacity;
+  transition-duration: .5s;
+  transition-timing-function: ease;
 }

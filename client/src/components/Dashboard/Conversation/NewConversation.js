@@ -98,14 +98,16 @@ class NewConversation extends Component {
 		return (
 			<div>
 				<div className="back-button-container">
-					<Link to={'/dashboard'}><button>back</button></Link>
+					<Link to={'/dashboard'}>
+						<button className="secondary-button">back</button>
+					</Link>
 				</div>
 				<div className="new-conversation-container">New conversation
 					<div>{this.renderPartisipantsList()}</div>
 					<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 					{ this.renderSelectContactsField() }
 					{ this.renderMessageField() }
-					<button action="submit">Post</button>
+					<button className="secondary-button" action="submit">Post</button>
 					</form>
 					<AddNewContactForm />
 				</div>

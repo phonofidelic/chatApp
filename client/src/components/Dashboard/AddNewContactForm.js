@@ -27,7 +27,7 @@ class AddNewContactForm extends Component {
 								 component="input"
 								 type="text"
 								 placeholder="Email" />
-					<button type="submit">Send invite</button>
+					<button className="secondary-button" type="submit">Send invite</button>
 				</form>
 			</div>
 		);

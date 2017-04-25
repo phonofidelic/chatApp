@@ -5,6 +5,7 @@ import * as actions from '../../actions';
 import ConversationList from './ConversationList';
 import LogoutButton from '../auth/LogoutButton';
 import AddNewContactForm from './AddNewContactForm';
+import ProfileManagerContainer from './ProfileManagerContainer';
 import './Dashboard.css';
 
 class Dashboard extends Component {
@@ -21,14 +22,14 @@ class Dashboard extends Component {
 				<div className="greeting">
 					<p>hello, {this.props.user ? this.props.user.username : ''}</p>
 				</div>
-				<div>TODO: add "view/edit account info"</div>
-				<AddNewContactForm />
+				<ProfileManagerContainer />
 				<ConversationList />
 				<div className="stuck-bottom">
 					<Link to={'dashboard/conversation/new'}>
-						<div className="new-conversation-button">New conversation</div>
+						<div className="primary-button">New conversation</div>
 					</Link>
-					<button onClick={this.props.logoutUser.bind(this)}>Logout</button>
+					<button className="secondary-button"
+									onClick={this.props.logoutUser.bind(this)}>Logout</button>
 				</div>
 				
 			</div>
