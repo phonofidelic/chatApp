@@ -30,7 +30,7 @@ class MessagingForm extends Component {
 									 type="text" 
 									 placeholder="type your message..." />
 					<div className="message-button-container">
-						<button action="submit">Post</button>
+						<button className="post-button" action="submit">Post</button>
 					</div>
 				</form>
 		);

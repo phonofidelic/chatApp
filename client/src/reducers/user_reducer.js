@@ -4,9 +4,11 @@ import { VIEW_PROFILE,
 				 POST_MESSAGE,
 				 CHECK_EMAIL,
 				 GET_CONTACTS,
-				 INVITE_NEW_CONTACT } from '../actiontypes/user';
+				 INVITE_NEW_CONTACT,
+				 TOGGLE_PROFILE_EDITOR,
+				 TOGGLE_CONVERSATION_LIST } from '../actiontypes/user';
 
-const INITIAL_STATE = {};
+const INITIAL_STATE = { showProfileEditor: false, showConversationList: true };
 
 export default function(state = INITIAL_STATE, action) {
 	switch (action.type) {
@@ -44,6 +46,18 @@ export default function(state = INITIAL_STATE, action) {
 			return {
 				...state,
 				inviteStatus: action.payload
+			}
+
+		case TOGGLE_PROFILE_EDITOR:
+			return {
+				...state,
+				showProfileEditor: !state.showProfileEditor
+			}
+
+		case TOGGLE_CONVERSATION_LIST:
+			return {
+				...state,
+				showConversationList: !state.showConversationList
 			}
 			
 		default:

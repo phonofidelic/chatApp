@@ -47,7 +47,11 @@ class Conversation extends Component {
 	render() {
 		return (
 			<div>
-				<div className="back-button-container"><Link to={'/dashboard'}><button>back</button></Link></div>
+				<div className="back-button-container">
+					<Link to={'/dashboard'}>
+						<button className="secondary-button">back</button>
+					</Link>
+				</div>
 				<div>{this.renderConversation()}</div>
 				<div><MessagingForm replyTo={this.props.params.conversationId}/></div>
 			</div>

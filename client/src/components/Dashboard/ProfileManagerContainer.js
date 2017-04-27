@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ReactCssTransitionGroup from 'react-addons-css-transition-group';
+import * as actions from '../../actions';
 
 import ProfileManager from './ProfileManager';
 
@@ -8,14 +10,20 @@ class ProfileManagerContainer extends Component {
 	constructor(props) {
 		super(props);
 
+
 		this.state = {
 			showEditor: false
 		};
 	}
 
+	toggleProfileEditor() {
+		this.props.toggleProfileEditor();
+	};
+
 	render() {
+		
 		let editor;
-		this.state.showEditor ? 
+		this.props.showProfileEditor ? 
 			editor = <div className="profile-editor-container">
 									<ProfileManager />
 								</div> : 
@@ -24,7 +32,7 @@ class ProfileManagerContainer extends Component {
 		return(
 			<div>
 				<div className="primary-button" 
-								onClick={() => this.setState(() => this.state.showEditor ? {showEditor: false} : {showEditor: true})}>Manage Profile</div>
+								onClick={() => this.toggleProfileEditor()}>Manage Profile</div>
 			
 				<ReactCssTransitionGroup 
 					transitionName="show-editor"
@@ -40,4 +48,11 @@ class ProfileManagerContainer extends Component {
 	}
 }
 
-export default ProfileManagerContainer;
+function mapStateToProps(state) {
+	return {
+		showProfileEditor: state.user.showProfileEditor
+	};
+};
+
+export default connect(mapStateToProps, actions)(ProfileManagerContainer);
+

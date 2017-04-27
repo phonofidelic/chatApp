@@ -15,7 +15,9 @@ import { VIEW_PROFILE,
 				 GET_CONVERSATION,
 				 GET_CONTACTS,
 				 POST_MESSAGE,
-				 INVITE_NEW_CONTACT } from '../actiontypes/user';			
+				 INVITE_NEW_CONTACT,
+				 TOGGLE_PROFILE_EDITOR,
+				 TOGGLE_CONVERSATION_LIST } from '../actiontypes/user';			
 
 
 // dev urls
@@ -200,6 +202,22 @@ export function inviteNewContact({contactEmail}) {
 		}).catch(err => {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		});
+	}
+}
+
+export function toggleProfileEditor() {
+	return (dispatch) => {
+		dispatch({
+			type: TOGGLE_PROFILE_EDITOR
+		});	
+	}
+}
+
+export function toggleConversationList() {
+	return (dispatch) => {
+		dispatch({
+			type: TOGGLE_CONVERSATION_LIST
+		});	
 	}
 }
 

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 import ReactCssTransitionGroup from 'react-addons-css-transition-group';
 
 import ConversationList from './ConversationList';
@@ -9,22 +11,26 @@ class ConversationListContainer extends Component {
 		super(props);
 
 		this.state = {
-			showConversationList: true
+			showConversationList: false
 		};
+	}
+
+	toggleConversationList() {
+		this.props.toggleConversationList();
 	}
 
 	render() {
 		let conversationList;
-		this.state.showCionversationList ? 
+		this.props.showConversationList ? 
 			conversationList = <div className="conversation-list-container">
 														<ConversationList />
-													</div> :
+												 </div> :
 			conversationList = null;
 
 		return(
 			<div>
 				<div className="primary-button"
-						 onClick={() => this.setState(() => this.state.showConversationList ? {showConversationList: false} : {showConversationList: true})}>Conversations</div>
+						 onClick={() => this.toggleConversationList()}>Conversations</div>
 
 				<ReactCssTransitionGroup 
 					transitionName="show-conversation-list"
@@ -40,5 +46,11 @@ class ConversationListContainer extends Component {
 	}
 }
 
-export default ConversationListContainer;
+function mapStateToProps(state) {
+	return {
+		showConversationList: state.user.showConversationList
+	}
+}
+
+export default connect(mapStateToProps, actions)(ConversationListContainer);
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactCssTransitionGroup from 'react-addons-css-transition-group';
 import * as actions from '../../actions';
 const moment = require('moment');
 import ConversationItem from './ConversationItem';
@@ -18,11 +19,12 @@ class ConversationList extends Component {
 	}
 
 	render() {
+		let conversationList;
+
 		if (this.props.conversations) {
 			this.props.conversations.reverse();
 			return (
 				<div>
-					<div className="primary-button">Conversations</div>
 					<ul className="conversation-list">
 						{this.props.conversations.map(data => data.map(message => (
 							<ConversationItem className="conversation"
@@ -32,7 +34,7 @@ class ConversationList extends Component {
 																conversationId={message.conversationId}
 																authorId={message.author._id}
 																author={message.author.profile.username} />
-						)))}						
+						)))}
 					</ul>
 				</div>
 			);

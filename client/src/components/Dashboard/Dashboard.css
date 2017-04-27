@@ -5,7 +5,7 @@
 
 .greeting {
 	text-align: center;
-	margin: 20px;
+	margin-bottom: 80px;
 }
 
 button.primary-button,
@@ -26,6 +26,10 @@ button.primary-button,
 	font-size: 1em;
 	cursor: pointer;
 	/*box-shadow: 0px -10px 10px 5px #fff;*/
+}
+
+.last-primary-button {
+	margin-bottom: 50px;
 }
 
 .new-conversation-container {
@@ -82,39 +86,39 @@ button.primary-button,
 /********* conversation list animations *********/
 .show-conversation-list-appear {
   opacity: 0.01;
-  /*height: 0px;*/
+  height: 0px;
 }
 
 .show-conversation-list-appear.show-conversation-list-appear-active {
   opacity: 1;
-  /*height: 400px;*/
-  transition-property: opacity;
+  height: 400px;
+  transition-property: height opacity;
   transition-duration: .5s;
   transition-timing-function: ease;
 }
 
 .show-conversation-list-enter {
   opacity: 0.01;
-  /*height: 0px;*/
+  height: 0px;
 }
 
 .show-conversation-list-enter.show-conversation-list-enter-active {
   opacity: 1;
-  /*height: 400px;*/
-  transition-property: opacity;
+  height: 400px;
+  transition-property: height opacity;
   transition-duration: .5s;
   transition-timing-function: ease;
 }
 
 .show-conversation-list-leave {
   opacity: 1;
-  /*height: 400px;*/
+  height: 400px;
 }
 
 .show-conversation-list-leave.show-conversation-list-leave-active {
   opacity: 0.01;
-  /*height: 0px;*/
-  transition-property: opacity;
+  height: 0px;
+  transition-property: height opacity;
   transition-duration: .5s;
   transition-timing-function: ease;
 }

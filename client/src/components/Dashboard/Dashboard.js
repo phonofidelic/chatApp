@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import * as actions from '../../actions';
+import ConversationListContainer from './ConversationListContainer';
 import ConversationList from './ConversationList';
 import LogoutButton from '../auth/LogoutButton';
 import AddNewContactForm from './AddNewContactForm';
@@ -23,11 +24,12 @@ class Dashboard extends Component {
 					<p>hello, {this.props.user ? this.props.user.username : ''}</p>
 				</div>
 				<ProfileManagerContainer />
-				<ConversationList />
+				<ConversationListContainer />
+				<Link to={'dashboard/conversation/new'}>
+					<div className="primary-button last-primary-button">New conversation</div>
+				</Link>
 				<div className="stuck-bottom">
-					<Link to={'dashboard/conversation/new'}>
-						<div className="primary-button">New conversation</div>
-					</Link>
+
 					<button className="secondary-button"
 									onClick={this.props.logoutUser.bind(this)}>Logout</button>
 				</div>
