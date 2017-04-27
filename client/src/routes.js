@@ -20,7 +20,6 @@ export default (
 		<Route path="dashboard">
 			<IndexRoute component={RequireAuth(Dashboard)} />
 			<Route path="conversation/view/:conversationId" component={RequireAuth(Conversation)} />
-			<Route path="conversation/new" component={RequireAuth(NewConversation)} />
 		</Route>
 
 		<Route path="register/:inviteId" component={RegisterWithReference} />

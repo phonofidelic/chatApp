@@ -29,7 +29,7 @@ class ConversationList extends Component {
 						{this.props.conversations.map(data => data.map(message => (
 							<ConversationItem className="conversation"
 																key={message._id}
-																timestamp={moment(message.updatedAt).from(moment)}
+																timestamp={message.updatedAt}
 																body={message.body}
 																conversationId={message.conversationId}
 																authorId={message.author._id}
