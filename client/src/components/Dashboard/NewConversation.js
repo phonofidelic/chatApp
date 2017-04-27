@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router';
-import * as actions from '../../../actions';
+import * as actions from '../../actions';
 import MessagingForm from './MessagingForm';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import AddNewContactForm from '../AddNewContactForm';
+import AddNewContactForm from './AddNewContactForm';
 
 injectTapEventPlugin();
 
@@ -96,22 +96,15 @@ class NewConversation extends Component {
 	render() {
 		const { handleSubmit } = this.props;
 		return (
-			<div>
-				<div className="back-button-container">
-					<Link to={'/dashboard'}>
-						<button className="secondary-button">back</button>
-					</Link>
-				</div>
-				<div className="new-conversation-container">New conversation
-					<div>{this.renderPartisipantsList()}</div>
-					<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-					{ this.renderSelectContactsField() }
-					{ this.renderMessageField() }
-					<button className="secondary-button" action="submit">Post</button>
-					</form>
-					<AddNewContactForm />
-				</div>
-			</div>					
+			<div className="new-conversation">New conversation
+				<div>{this.renderPartisipantsList()}</div>
+				<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+				{ this.renderSelectContactsField() }
+				{ this.renderMessageField() }
+				<button className="secondary-button" action="submit">Post</button>
+				</form>
+				<AddNewContactForm />
+			</div>				
 		);
 	}
 }

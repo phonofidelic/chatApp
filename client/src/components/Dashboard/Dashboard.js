@@ -7,6 +7,7 @@ import ConversationList from './ConversationList';
 import LogoutButton from '../auth/LogoutButton';
 import AddNewContactForm from './AddNewContactForm';
 import ProfileManagerContainer from './ProfileManagerContainer';
+import NewConversationContainer from './NewConversationContainer';
 import './Dashboard.css';
 
 class Dashboard extends Component {
@@ -18,6 +19,13 @@ class Dashboard extends Component {
 	};
 
 	render() {
+		const stuckBottom = {
+			position: 'fixed',
+			bottom: 40,
+			left: 0,
+			right: 0
+		};
+
 		return (
 			<div className="dashboard-container">
 				<div className="greeting">
@@ -25,9 +33,9 @@ class Dashboard extends Component {
 				</div>
 				<ProfileManagerContainer />
 				<ConversationListContainer />
-				<Link to={'dashboard/conversation/new'}>
-					<div className="primary-button last-primary-button">New conversation</div>
-				</Link>
+				<div style={this.props.showConversationList ? stuckBottom : null}>
+					<NewConversationContainer />
+				</div>
 				<div className="stuck-bottom">
 
 					<button className="secondary-button"
@@ -39,10 +47,11 @@ class Dashboard extends Component {
 	};
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
 	
 	return { 
-		user: state.user.userInfo
+		user: state.user.userInfo,
+		showConversationList: state.user.showConversationList
 	};
 };
 

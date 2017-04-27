@@ -6,9 +6,14 @@ import { VIEW_PROFILE,
 				 GET_CONTACTS,
 				 INVITE_NEW_CONTACT,
 				 TOGGLE_PROFILE_EDITOR,
-				 TOGGLE_CONVERSATION_LIST } from '../actiontypes/user';
+				 TOGGLE_CONVERSATION_LIST,
+				 TOGGLE_NEW_CONVERSATION } from '../actiontypes/user';
 
-const INITIAL_STATE = { showProfileEditor: false, showConversationList: true };
+const INITIAL_STATE = { 
+	showProfileEditor: false, 
+	showConversationList: true, 
+	showNewConversation:false 
+};
 
 export default function(state = INITIAL_STATE, action) {
 	switch (action.type) {
@@ -51,13 +56,25 @@ export default function(state = INITIAL_STATE, action) {
 		case TOGGLE_PROFILE_EDITOR:
 			return {
 				...state,
-				showProfileEditor: !state.showProfileEditor
+				showProfileEditor: !state.showProfileEditor,
+				showConversationList: false,
+				showNewConversation: false
 			}
 
 		case TOGGLE_CONVERSATION_LIST:
 			return {
 				...state,
-				showConversationList: !state.showConversationList
+				showConversationList: !state.showConversationList,
+				showProfileEditor: false,
+				showNewConversation: false
+			}
+
+		case TOGGLE_NEW_CONVERSATION:
+			return {
+				...state,
+				showNewConversation: !state.showNewConversation,
+				showProfileEditor: false,
+				showConversationList: false
 			}
 			
 		default:

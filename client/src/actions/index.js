@@ -17,7 +17,8 @@ import { VIEW_PROFILE,
 				 POST_MESSAGE,
 				 INVITE_NEW_CONTACT,
 				 TOGGLE_PROFILE_EDITOR,
-				 TOGGLE_CONVERSATION_LIST } from '../actiontypes/user';			
+				 TOGGLE_CONVERSATION_LIST,
+				 TOGGLE_NEW_CONVERSATION } from '../actiontypes/user';			
 
 
 // dev urls
@@ -217,6 +218,14 @@ export function toggleConversationList() {
 	return (dispatch) => {
 		dispatch({
 			type: TOGGLE_CONVERSATION_LIST
+		});	
+	}
+}
+
+export function toggleNewConversation() {
+	return (dispatch) => {
+		dispatch({
+			type: TOGGLE_NEW_CONVERSATION
 		});	
 	}
 }

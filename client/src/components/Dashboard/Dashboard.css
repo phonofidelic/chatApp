@@ -29,12 +29,16 @@ button.primary-button,
 }
 
 .last-primary-button {
-	margin-bottom: 50px;
+	position: fixed;
+	bottom: 40px;
+	left: 0;
+	right: 0;
 }
 
-.new-conversation-container {
+.new-conversation {
 	max-width: 350px;
 	margin: 0 auto;
+	background: #fff;
 }
 
 .profile-editor-container {

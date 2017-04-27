@@ -8,8 +8,8 @@ import RegisterWithReference from './components/auth/RegisterWithReference';
 import Login from './components/auth/Login';
 import Dashboard from './components/Dashboard/Dashboard';
 import ConversationList from './components/Dashboard/ConversationList';
-import Conversation from './components/Dashboard/Conversation/Conversation';
-import NewConversation from './components/Dashboard/Conversation/NewConversation';
+import Conversation from './components/Dashboard/Conversation';
+import NewConversation from './components/Dashboard/NewConversation';
 import RequireAuth from './components/auth/RequireAuth';
 import HomePage from './components/HomePage';
 
