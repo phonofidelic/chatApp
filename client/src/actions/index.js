@@ -18,7 +18,8 @@ import { VIEW_PROFILE,
 				 INVITE_NEW_CONTACT,
 				 TOGGLE_PROFILE_EDITOR,
 				 TOGGLE_CONVERSATION_LIST,
-				 TOGGLE_NEW_CONVERSATION } from '../actiontypes/user';			
+				 TOGGLE_NEW_CONVERSATION,
+				 TOGGLE_LOGOUT_BUTTON } from '../actiontypes/user';			
 
 
 // dev urls
@@ -206,6 +207,8 @@ export function inviteNewContact({contactEmail}) {
 	}
 }
 
+// TODO: Combine toggle functions to one reusable function?
+
 export function toggleProfileEditor() {
 	return (dispatch) => {
 		dispatch({
@@ -226,6 +229,14 @@ export function toggleNewConversation() {
 	return (dispatch) => {
 		dispatch({
 			type: TOGGLE_NEW_CONVERSATION
+		});	
+	}
+}
+
+export function toggleLogoutButton() {
+	return (dispatch) => {
+		dispatch({
+			type: TOGGLE_LOGOUT_BUTTON
 		});	
 	}
 }

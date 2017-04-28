@@ -8,6 +8,7 @@ import LogoutButton from '../auth/LogoutButton';
 import AddNewContactForm from './AddNewContactForm';
 import ProfileManagerContainer from './ProfileManagerContainer';
 import NewConversationContainer from './NewConversationContainer';
+import LogoutButtonContainer from './LogoutButtonContainer';
 import './Dashboard.css';
 
 class Dashboard extends Component {
@@ -21,9 +22,10 @@ class Dashboard extends Component {
 	render() {
 		const stuckBottom = {
 			position: 'fixed',
-			bottom: 40,
+			bottom: 0,
 			left: 0,
-			right: 0
+			right: 0,
+			background: '#fff'
 		};
 
 		return (
@@ -35,11 +37,8 @@ class Dashboard extends Component {
 				<ConversationListContainer />
 				<div style={this.props.showConversationList ? stuckBottom : null}>
 					<NewConversationContainer />
-				</div>
-				<div className="stuck-bottom">
-
-					<button className="secondary-button"
-									onClick={this.props.logoutUser.bind(this)}>Logout</button>
+				
+				<LogoutButtonContainer />
 				</div>
 				
 			</div>

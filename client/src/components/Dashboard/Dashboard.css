@@ -47,6 +47,19 @@ button.primary-button,
 	/*background: red;*/
 }
 
+.new-conversation-container {
+  /*margin-bottom: 500px;*/
+}
+
+.add-new-contact-container {
+  margin-bottom: 50px
+}
+
+.logout-alert {
+  width: 300px;
+  margin: 0 auto;
+}
+
 /********* manage profile animations *********/
 .show-editor-appear {
   opacity: 0.01;

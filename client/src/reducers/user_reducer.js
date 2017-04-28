@@ -7,12 +7,14 @@ import { VIEW_PROFILE,
 				 INVITE_NEW_CONTACT,
 				 TOGGLE_PROFILE_EDITOR,
 				 TOGGLE_CONVERSATION_LIST,
-				 TOGGLE_NEW_CONVERSATION } from '../actiontypes/user';
+				 TOGGLE_NEW_CONVERSATION,
+				 TOGGLE_LOGOUT_BUTTON } from '../actiontypes/user';
 
 const INITIAL_STATE = { 
 	showProfileEditor: false, 
 	showConversationList: true, 
-	showNewConversation:false 
+	showNewConversation:false,
+	showLogoutButton: false
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -58,7 +60,8 @@ export default function(state = INITIAL_STATE, action) {
 				...state,
 				showProfileEditor: !state.showProfileEditor,
 				showConversationList: false,
-				showNewConversation: false
+				showNewConversation: false,
+				showLogoutButton: false
 			}
 
 		case TOGGLE_CONVERSATION_LIST:
@@ -66,7 +69,8 @@ export default function(state = INITIAL_STATE, action) {
 				...state,
 				showConversationList: !state.showConversationList,
 				showProfileEditor: false,
-				showNewConversation: false
+				showNewConversation: false,
+				showLogoutButton: false
 			}
 
 		case TOGGLE_NEW_CONVERSATION:
@@ -74,7 +78,17 @@ export default function(state = INITIAL_STATE, action) {
 				...state,
 				showNewConversation: !state.showNewConversation,
 				showProfileEditor: false,
-				showConversationList: false
+				showConversationList: false,
+				showLogoutButton: false
+			}
+
+		case TOGGLE_LOGOUT_BUTTON:
+			return {
+				...state,
+				showNewConversation: false,
+				showProfileEditor: false,
+				showConversationList: false,
+				showLogoutButton: !state.showLogoutButton
 			}
 			
 		default:

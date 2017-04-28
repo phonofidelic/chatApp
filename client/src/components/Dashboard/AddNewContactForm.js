@@ -20,7 +20,7 @@ class AddNewContactForm extends Component {
 		const { handleSubmit } = this.props;
 
 		return (
-			<div>
+			<div className="add-new-contact-container">
 				<h3>Invite a new Contact</h3>
 				<form onSubmit={handleSubmit(this.handleInviteSubmit.bind(this))}>
 					<Field name="contactEmail"

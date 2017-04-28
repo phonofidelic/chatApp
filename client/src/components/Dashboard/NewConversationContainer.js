@@ -24,7 +24,7 @@ class NewConversationContainer extends Component {
 			newConversation = null;
 
 		return(
-			<div>
+			<div className="new-conversation-container">
 				<div className="primary-button"
 						 onClick={() => this.toggleNewConversation()}>New Conversation</div>
 
