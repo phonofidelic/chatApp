@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken'),
 
 function generateToken(user) {
 	return jwt.sign(user, config.secret, {
-		expiresIn: 21600	// TODO: set time for production 
+		expiresIn: 3600
 	});
 };
 
@@ -26,7 +26,7 @@ exports.login = function(req, res, next) {
 	let userInfo = setUserInfo(req.user);
 
 	res.status(200).json({
-		token: 'JWT ' + generateToken(userInfo),	// remove 'JWT'?	
+		token: 'JWT ' + generateToken(userInfo),
 		user: userInfo
 	});
 	console.log('@controllers/authentication.js login:', userInfo);

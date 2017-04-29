@@ -17,6 +17,11 @@ class Dashboard extends Component {
 		super(props);
 
 		this.props.viewProfile();
+
+		// timeout for session
+		setTimeout(() => {
+			this.props.logoutUser()
+		}, 3600 * 1000);
 	};
 
 	render() {

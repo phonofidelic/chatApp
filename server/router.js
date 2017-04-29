@@ -82,10 +82,9 @@ module.exports = function(app) {
 	userRoutes.post('/:userId/invite', requireAuth, UserController.inviteNewContact);
 
 
-	app.use(passport.initialize());	// <- sould remove?
+	// app.use(passport.initialize());	// <- sould remove?
 	app.use('/api', apiRoutes);
 
-	// app.use(express.static(path.join(__dirname, '../../client/build')));
 };
 
 

@@ -43,6 +43,8 @@ const store = createStoreWithMiddleware(
 const token = cookie.load('token');
 if (token) {
 	store.dispatch({ type: AUTH_USER });
+} else {
+	console.log('# not authenticated #');
 }
 
 const history = syncHistoryWithStore(hashHistory, store);
