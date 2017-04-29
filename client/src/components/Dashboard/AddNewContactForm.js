@@ -21,11 +21,11 @@ class AddNewContactForm extends Component {
 
 		return (
 			<div className="add-new-contact-container">
-				<h3>Invite a new Contact</h3>
+				<p>Invite a new Contact</p>
 				<form onSubmit={handleSubmit(this.handleInviteSubmit.bind(this))}>
 					<Field name="contactEmail"
 								 component="input"
-								 type="text"
+								 type="email"
 								 placeholder="Email" />
 					<button className="secondary-button" type="submit">Send invite</button>
 				</form>

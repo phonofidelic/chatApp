@@ -7,10 +7,6 @@ import NewConversation from './NewConversation';
 
 class NewConversationContainer extends Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	toggleNewConversation() {
 		this.props.toggleNewConversation();
 	}

@@ -7,10 +7,6 @@ import LogoutButton from '../auth/LogoutButton';
 
 class LogoutButtonContainer extends Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	toggleLogoutButton() {
 		this.props.toggleLogoutButton();
 	}

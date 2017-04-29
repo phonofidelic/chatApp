@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import { loginUser, checkForExistingUser, registerUser } from '../../actions';
 import './Login.css';
@@ -46,7 +45,7 @@ class Login extends Component {
 						<label></label>
 						<Field name="email" 
 									 component="input" 
-									 type="text" 
+									 type="email" 
 									 placeholder="Email"
 									 onChange={this.props.checkForExistingUser.bind(this)} />
 					</div>

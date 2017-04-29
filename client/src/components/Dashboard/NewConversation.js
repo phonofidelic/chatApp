@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router';
 import * as actions from '../../actions';
-import MessagingForm from './MessagingForm';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -36,7 +34,9 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
 		{...custom} />
 );
 
-
+const inputStyle = {
+	maxWidth: 300
+}
 
 class NewConversation extends Component {
 	constructor(props) {
@@ -45,14 +45,15 @@ class NewConversation extends Component {
 		this.props.viewProfile();	
 	}
 
+
 	renderSelectContactsField() {
-		console.log('## this.props.user:', this.props.user)
 		if (this.props.contacts) {
 			return(
 				<Field name="participantsField"
-								 type="select"
-								 label="Add Participants"
-								 component={ renderSelectField }>
+							 style={inputStyle}
+							 type="select"
+							 label="Add Participants"
+							 component={ renderSelectField }>
 					{this.props.contacts.map(contact => 
 						<MenuItem value={contact._id} primaryText={contact.profile.username} key={contact._id} />
 					)}
@@ -61,20 +62,6 @@ class NewConversation extends Component {
 		} else {
 			return(
 				<div>No contacts found</div>
-			);
-		}
-	};
-
-	renderPartisipantsList() {
-		if(this.props.contacts) {
-			return (
-				<div>
-					<ul>
-						{this.props.contacts.map(contact => {
-							<li>{contact.profile.username}</li>
-						})}
-					</ul>
-				</div>
 			);
 		}
 	};
@@ -96,8 +83,7 @@ class NewConversation extends Component {
 	render() {
 		const { handleSubmit } = this.props;
 		return (
-			<div className="new-conversation">New conversation
-				<div>{this.renderPartisipantsList()}</div>
+			<div className="new-conversation">
 				<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 				{ this.renderSelectContactsField() }
 				{ this.renderMessageField() }

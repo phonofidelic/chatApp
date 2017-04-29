@@ -35,12 +35,6 @@ button.primary-button,
 	right: 0;
 }
 
-.new-conversation {
-	max-width: 350px;
-	margin: 0 auto;
-	background: #fff;
-}
-
 .profile-editor-container {
 	height: 400px;
 	/*display: block;*/
@@ -51,8 +45,16 @@ button.primary-button,
   /*margin-bottom: 500px;*/
 }
 
+.new-conversation {
+  max-width: 350px;
+  margin: 0 auto;
+  background: #fff;
+}
+
 .add-new-contact-container {
-  margin-bottom: 50px
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
 }
 
 .logout-alert {

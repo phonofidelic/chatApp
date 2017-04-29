@@ -1,8 +1,6 @@
 import axios from 'axios';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { reset } from 'redux-form';
 import { browserHistory } from 'react-router';
-import { routerMiddleware, push } from 'react-router-redux'
 import cookie from 'react-cookie';
 import io from 'socket.io-client';
 import { AUTH_USER,

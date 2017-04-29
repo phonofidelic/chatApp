@@ -15,15 +15,6 @@ export default function(ComposedComponent) {
 			}
 		};
 
-		componentDidMount() {
-			console.log('### test');
-			if (!this.props.authenticated) {
-				console.log('### test');
-				this.props.logoutUser();				
-				this.context.router.push('/login');
-			}
-		}
-
 		componentWillUpdate(nextProps) {
 			if (!nextProps.authenticated) {
 				this.props.logoutUser();				

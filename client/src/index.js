@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 
-import { Router, browserHistory, hashHistory } from 'react-router';
+import { Router, hashHistory } from 'react-router';
 // import { BrowserRouter as Router } from 'react-router-dom';
 import { routerMiddleware, syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import routes from './routes';
@@ -13,7 +13,7 @@ import reduxThunk from 'redux-thunk';
 import cookie from 'react-cookie';
 import WebfontLoader from '@dr-kobros/react-webfont-loader';
 
-import rootReducer from './reducers/index';
+// import rootReducer from './reducers/index';
 import { reducer as formReducer } from 'redux-form';
 import authReducer from './reducers/auth_reducer';
 import userReducer from './reducers/user_reducer';

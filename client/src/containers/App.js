@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from '../components/Header/Header';
-import Navigation from '../components/Navigation';
 
 class App extends Component {
   render() {

@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 class ConversationItem extends Component {
-
-	constructor(props) {
-		super(props);
-	};
-
-	handleSelectConversation() {
-		this.props.getConversation(this.props.conversationId);
-		// console.log('this.props', this.props)
-	}
-
 	render() {
 		return (
 			<div className="conversation-item-container">
