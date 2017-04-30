@@ -17,7 +17,8 @@ import { VIEW_PROFILE,
 				 TOGGLE_PROFILE_EDITOR,
 				 TOGGLE_CONVERSATION_LIST,
 				 TOGGLE_NEW_CONVERSATION,
-				 TOGGLE_LOGOUT_BUTTON } from '../actiontypes/user';
+				 TOGGLE_LOGOUT_BUTTON,
+				 SAVE_PROFILE_CHANGES } from '../actiontypes/user';
 // import { VALIDATE_EMAIL,
 // 				 VALIDATE_PASSWORD } from '../actiontypes/validation';
 

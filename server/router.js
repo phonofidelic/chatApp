@@ -81,6 +81,9 @@ module.exports = function(app) {
 	// invite new contact
 	userRoutes.post('/:userId/invite', requireAuth, UserController.inviteNewContact);
 
+	// save new username
+	userRoutes.put('/profile/username', requireAuth, UserController.changeUsername);
+
 
 	// app.use(passport.initialize());	// <- sould remove?
 	app.use('/api', apiRoutes);

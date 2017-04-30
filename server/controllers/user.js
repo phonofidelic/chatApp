@@ -43,6 +43,26 @@ exports.viewProfile = function(req, res, next) {
 // 	}
 // };
 
+exports.changeUsername = function(req, res, next) {
+	console.log('#debug#', req.body)
+	const userId = req.body.userId;
+	const newUsername = req.body.newUsername;
+
+	User.findByIdAndUpdate(
+		userId,
+		{$set: {'profile.username': newUsername}},
+		(err, savedUsername) => {
+			if (err) { 
+				res.send({ error: err });
+				return next(err);
+			}
+			console.log('## savedUsername:', savedUsername)
+			res.status(200).json({ message: 'Username saved!', savedUsername });
+		}
+	);
+
+}
+
 exports.addNewContact = function(req, res, next) {
 	const userId = req.params.userId;
 	const newContact = req.params.contactUserId;

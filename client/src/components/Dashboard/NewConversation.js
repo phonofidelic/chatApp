@@ -87,7 +87,6 @@ class NewConversation extends Component {
 	}
 
 	handleFormSubmit(formProps) {
-		console.log('@handleFormSubmit formProps:', formProps);
 		this.props.startNewConversation(formProps.participantsField, formProps.messageField)
 	}
 
