@@ -5,26 +5,20 @@ var express = require('express');
 var app = express();
 var router = require('./router');
 var path = require('path');
-// var server = require('http').Server(app);
-
 var jsonParser = require('body-parser');
 var logger = require('morgan');
 var config = require('./config/main');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var socketEvents = require('./socketEvents');
-// app.use(passport.initialize());
 
+app.use(passport.initialize());
 app.use(logger('dev'));
 app.use(jsonParser.json());
 
 var staticFiles = express.static(path.join(__dirname, '../../client/build'));
 
 app.use(staticFiles);
-// if (process.env.NODE_ENV === 'production') {
-// 	app.use(staticFiles);
-// }
-
 
 // mongoose.set('debug', true);
 // Connect to mongodb server with mongoose
@@ -43,8 +37,6 @@ db.once('open', function () {
 app.use(jsonParser.urlencoded({ extended: false })); // Parses urlencoded bodies
 app.use(jsonParser.json()); // Send JSON responses
 app.use(logger('dev')); // Log requests to API using morgan
-
-
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
@@ -52,8 +44,6 @@ app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Credentials', 'true');
   next();
 });
-
-// app.use(staticFiles);
 
 router(app);
 

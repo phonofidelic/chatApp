@@ -45,6 +45,21 @@ exports.viewProfile = function (req, res, next) {
 // 	}
 // };
 
+exports.changeUsername = function (req, res, next) {
+	console.log('#debug#', req.body);
+	var userId = req.body.userId;
+	var newUsername = req.body.newUsername;
+
+	User.findByIdAndUpdate(userId, { $set: { 'profile.username': newUsername } }, function (err, savedUsername) {
+		if (err) {
+			res.send({ error: err });
+			return next(err);
+		}
+		console.log('## savedUsername:', savedUsername);
+		res.status(200).json({ message: 'Username saved!', savedUsername: savedUsername });
+	});
+};
+
 exports.addNewContact = function (req, res, next) {
 	var userId = req.params.userId;
 	var newContact = req.params.contactUserId;
