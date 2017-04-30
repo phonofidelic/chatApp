@@ -44,12 +44,14 @@ class AddNewContactForm extends Component {
 			<div className="add-new-contact-container">
 				<p>Invite a new Contact</p>
 				<form onSubmit={handleSubmit(this.handleInviteSubmit.bind(this))}>
-					<Field name="contactEmail"
-								 component={renderEmailField}
-								 type="email"
-								 label="Email"
-								 style={inputStyle}
-								 validate={[validate.required, validate.email]} />
+					<div className="input-field-container">
+						<Field name="contactEmail"
+									 component={renderEmailField}
+									 type="email"
+									 label="Email"
+									 style={inputStyle}
+									 validate={[validate.required, validate.email]} />
+					</div>
 					<button className="secondary-button" type="submit">Send invite</button>
 				</form>
 			</div>

@@ -177,6 +177,29 @@ export function viewProfile() {
 	};
 };
 
+export function saveProfileChanges(newUsername) {
+	const user = cookie.load('user');
+	const body = {
+		userId: user._id, 
+		newUsername: newUsername
+	}
+	return (dispatch) => {
+		axios.put(`${API_URL}/user/profile/username`, body, {
+			headers: {Authorization: cookie.load('token')}
+		}).then(response => {
+			console.log('@saveProfileChanges:', response);
+			dispatch({
+				type: SAVE_PROFILE_CHANGES,
+				payload: response.data
+			});
+		}).catch(err => {
+			console.error('@saveProfileChanges:', err);
+			errorHandler(dispatch, err.response, AUTH_ERROR);
+		})
+	}
+  
+}
+
 export function inviteNewContact({contactEmail}) {
 	const user = cookie.load('user');
 	const body = {

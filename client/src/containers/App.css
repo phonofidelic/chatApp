@@ -75,8 +75,16 @@ input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px #fff inset;
 }
 
+.debug {
+    /*text-align: right;*/
+    /*width: 100%;*/
+    color: #ccc;
+    font-size: 10px;
+}
+
 .input-field-container {
   text-align: center;
+  margin-bottom: 50px;
 }
 
 .header {
@@ -86,6 +94,11 @@ input:-webkit-autofill:focus {
   width: 100%;
   background: #333;
   color: #fff;
+}
+
+.component-container {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .content-container {
