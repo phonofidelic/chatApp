@@ -1,0 +1,2 @@
+export const VALIDATE_EMAIL = 'validate/VALIDATE_EMAIL',
+						 VALIDATE_PASSWORD = 'validate/VALIDATE_PASSWORD';

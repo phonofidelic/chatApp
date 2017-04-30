@@ -14,6 +14,10 @@ const form = reduxForm({
 	form: 'newConversation'
 });
 
+// TODO: move to a service? (also implememnted in Login.js, AddNewConversation.js)
+const validate = {};
+validate.required = value => value ? undefined : 'Required';
+
 const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
 	<SelectField
 		floatingLabelText={label}
@@ -75,6 +79,8 @@ class NewConversation extends Component {
 							 style={inputStyle}
 							 type="textarea"
 							 label="Type your message"
+							 autoComplete="off"
+							 validate={[validate.required]}
 							 component={ renderTextField } />
 			</div>
 		);

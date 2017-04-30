@@ -17,16 +17,11 @@ import { VIEW_PROFILE,
 				 TOGGLE_PROFILE_EDITOR,
 				 TOGGLE_CONVERSATION_LIST,
 				 TOGGLE_NEW_CONVERSATION,
-				 TOGGLE_LOGOUT_BUTTON } from '../actiontypes/user';			
+				 TOGGLE_LOGOUT_BUTTON } from '../actiontypes/user';
+// import { VALIDATE_EMAIL,
+// 				 VALIDATE_PASSWORD } from '../actiontypes/validation';
 
-
-// dev urls
 const API_URL = '/api';
-// const CLIENT_ROOT_URL = 'http://localhost:3000';
-
-// prod urls
-// const API_URL = 'https://phono-chat.herokuapp.com/api';
-// const CLIENT_ROOT_URL = 'https://phono-chat.herokuapp.com';
 
 // Connect to socket.io server
 export const socket = io.connect('/');	
@@ -312,9 +307,8 @@ export function postReply(conversationId, dataToSend) {
 	};
 };
 
-// ################## Navigation #####################
-export function navigateTo(loaction) {
-	console.log('@navigateTo location:', location);
+// ################## Validation #####################
+export function validateEmail() {
 	
 }
 

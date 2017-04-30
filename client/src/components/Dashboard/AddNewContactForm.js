@@ -8,6 +8,13 @@ const form = reduxForm({
 	form: 'inviteNewContact'
 });
 
+// TODO: move to a service? (also implememnted in Login.js, NewConversation.js)
+const validate = {};
+validate.required = value => value ? undefined : 'Required';
+validate.email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+  'Invalid email address' : undefined;
+
 const renderEmailField = ({input, label, meta: { touched, error }, children, ...custom}) => (
 	<TextField
 		floatingLabelText={label}
@@ -41,7 +48,8 @@ class AddNewContactForm extends Component {
 								 component={renderEmailField}
 								 type="email"
 								 label="Email"
-								 style={inputStyle} />
+								 style={inputStyle}
+								 validate={[validate.required, validate.email]} />
 					<button className="secondary-button" type="submit">Send invite</button>
 				</form>
 			</div>

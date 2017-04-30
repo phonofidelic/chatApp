@@ -8,6 +8,16 @@ const form = reduxForm({
 	form: 'login'
 });
 
+// TODO: move to a service? (also implememnted in AddNewConversation.js, NewConversation.js)
+const validate = {};
+validate.required = value => value ? undefined : 'Required';
+validate.email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+  'Invalid email address' : undefined;
+validate.passwordLength = value => value.length > 5 ? undefined : 'Password must be at least 6 characters long';
+// TODO: implement password strength check
+// validate.passwordStrength = value => /^(?=[^\d_].*?\d)\w(\w|[!@#$%]){5,12}$/.test(value) ? undefined : 'Password must contain both letters and numbers';
+
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
 	<TextField
 		floatingLabelText={label}
@@ -50,26 +60,25 @@ class Login extends Component {
 				<form onSubmit={usernameAvailable ? handleSubmit(this.handleRegisterSubmit.bind(this)) : handleSubmit(this.handleLoginSubmit.bind(this))}>
 
 					<div className="input-field-container">			
-						<label></label>
 						<Field name="email" 
 									 component={renderTextField} 
 									 type="email" 
 									 label="Email"
+									 validate={[validate.required, validate.email]}
 									 onChange={this.props.checkForExistingUser.bind(this)} />
 					</div>
 
 					<div className="input-field-container">
-						<label></label>
 						<Field name="password" 
 									 component={renderTextField}
-									 type="password" 
-									 label="Password" />
+									 type="password"
+									 label="Password"
+									 validate={[validate.required, validate.passwordLength]} />
 					</div>
 
 					{
 						usernameAvailable ?
 						<div className="input-field-container">
-							<label></label>
 							<Field name="username" 
 										 component={renderTextField}
 										 type="text" 
