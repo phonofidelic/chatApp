@@ -14,7 +14,7 @@ class Dashboard extends Component {
 
 		this.props.viewProfile();
 
-		// timeout for session
+		// timeout for session  BUG: resets after each page/component refresh
 		setTimeout(() => {
 			this.props.logoutUser()
 		}, 3600 * 1000);

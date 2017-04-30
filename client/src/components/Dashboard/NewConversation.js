@@ -35,7 +35,7 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
 );
 
 const inputStyle = {
-	maxWidth: 300
+	textAlign: 'left'
 }
 
 class NewConversation extends Component {
@@ -49,15 +49,17 @@ class NewConversation extends Component {
 	renderSelectContactsField() {
 		if (this.props.contacts) {
 			return(
-				<Field name="participantsField"
-							 style={inputStyle}
-							 type="select"
-							 label="Add Participants"
-							 component={ renderSelectField }>
-					{this.props.contacts.map(contact => 
-						<MenuItem value={contact._id} primaryText={contact.profile.username} key={contact._id} />
-					)}
-				</Field>
+				<div className="input-field-container">
+					<Field name="participantsField"
+								 style={inputStyle}
+								 type="select"
+								 label="Add Participants"
+								 component={ renderSelectField }>
+						{this.props.contacts.map(contact => 
+							<MenuItem value={contact._id} primaryText={contact.profile.username} key={contact._id} />
+						)}
+					</Field>
+				</div>
 			);
 		} else {
 			return(
@@ -68,10 +70,13 @@ class NewConversation extends Component {
 
 	renderMessageField() {
 		return (
-			<Field name="messageField"
-						 type="textarea"
-						 label="Type your message"
-						 component={ renderTextField } />
+			<div className="input-field-container">
+				<Field name="messageField"
+							 style={inputStyle}
+							 type="textarea"
+							 label="Type your message"
+							 component={ renderTextField } />
+			</div>
 		);
 	}
 
@@ -96,7 +101,6 @@ class NewConversation extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log('@state:', state)
 	return {
 		user: state.user.userInfo,
 		contacts: state.user.contacts

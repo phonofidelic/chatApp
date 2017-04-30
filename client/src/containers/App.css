@@ -44,9 +44,8 @@ button.secondary-button-inline {
   outline: none;
 }
 
-input {
+/*input {
   margin: 10px auto;
-  /*height: 30px;*/
   width: 100%;
   max-width: 300px;
   display: block;
@@ -67,15 +66,17 @@ input:focus {
 input::placeholder:focus {
   color: #ff4d62;
   transition: color .5s ease-in-out;
-}
+}*/
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus {
-  /*border: none;*/
   -webkit-text-fill-color: #555;
   -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-  /*transition: background-color 5000s ease-in-out 0s;*/
+}
+
+.input-field-container {
+  text-align: center;
 }
 
 .header {

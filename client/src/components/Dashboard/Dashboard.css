@@ -57,6 +57,10 @@ button.primary-button,
   text-align: center;
 }
 
+.input-field-container {
+  text-align: center;
+}
+
 .logout-alert {
   width: 300px;
   margin: 0 auto;

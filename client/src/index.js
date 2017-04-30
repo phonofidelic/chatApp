@@ -9,6 +9,7 @@ import { routerMiddleware, syncHistoryWithStore, routerReducer } from 'react-rou
 import routes from './routes';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import reduxThunk from 'redux-thunk';
 import cookie from 'react-cookie';
 import WebfontLoader from '@dr-kobros/react-webfont-loader';
@@ -26,6 +27,10 @@ const config = {
 		families: ['Slabo 27px', 'Roboto:100,300,400']
 	}
 }
+
+const muiTheme = getMuiTheme({
+	// TODO: add custom default style props for mui
+})
 
 const middleware = routerMiddleware(hashHistory);
 
@@ -52,7 +57,7 @@ const history = syncHistoryWithStore(hashHistory, store);
 render(
 	<Provider store={store}>
 		<WebfontLoader config={config}>
-			<MuiThemeProvider>
+			<MuiThemeProvider muiTheme={muiTheme}>
 	  		<Router history={history} routes={routes} />
 	  	</MuiThemeProvider>
 	  </WebfontLoader>

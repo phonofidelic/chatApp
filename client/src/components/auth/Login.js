@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { loginUser, checkForExistingUser, registerUser } from '../../actions';
-import './Login.css';
+import TextField from 'material-ui/TextField';
 
 const form = reduxForm({
 	form: 'login'
 });
+
+const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
+	<TextField
+		floatingLabelText={label}
+		errorText={touched && error}
+		{...input}
+		{...custom} />
+);
 
 class Login extends Component {
 
@@ -41,37 +49,37 @@ class Login extends Component {
 				
 				<form onSubmit={usernameAvailable ? handleSubmit(this.handleRegisterSubmit.bind(this)) : handleSubmit(this.handleLoginSubmit.bind(this))}>
 
-					<div className="input-email">			
+					<div className="input-field-container">			
 						<label></label>
 						<Field name="email" 
-									 component="input" 
+									 component={renderTextField} 
 									 type="email" 
-									 placeholder="Email"
+									 label="Email"
 									 onChange={this.props.checkForExistingUser.bind(this)} />
 					</div>
 
-					<div className="input-password">
+					<div className="input-field-container">
 						<label></label>
 						<Field name="password" 
-									 component="input" 
+									 component={renderTextField}
 									 type="password" 
-									 placeholder="Password" />
+									 label="Password" />
 					</div>
 
 					{
 						usernameAvailable ?
-						<div className="input-username">
+						<div className="input-field-container">
 							<label></label>
 							<Field name="username" 
-										 component="input" 
+										 component={renderTextField}
 										 type="text" 
-										 placeholder="Username" />
+										 label="Username" />
 						</div>
 						: null
 					}
 
 					<div className="greeting">{this.renderAlert()}</div>
-					<div className="auth-button">	
+					<div className="auth-button" style={{marginTop: '80px'}}>	
 						{usernameAvailable ? <button className="secondary-button" type="submit">Register</button> : <button className="secondary-button" type="submit">Login</button>}
 					</div>
 

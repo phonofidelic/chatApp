@@ -2,10 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { inviteNewContact } from '../../actions';
+import TextField from 'material-ui/TextField';
 
 const form = reduxForm({
 	form: 'inviteNewContact'
 });
+
+const renderEmailField = ({input, label, meta: { touched, error }, children, ...custom}) => (
+	<TextField
+		floatingLabelText={label}
+		errorText={touched && error}
+		{...input}
+		onChange={(event, value) => {input.onChange(value)}}
+		{...custom} />
+)
+
+const inputStyle = {
+	textAlign: 'left'
+}
 
 class AddNewContactForm extends Component {
 	// constructor(props) {
@@ -24,9 +38,10 @@ class AddNewContactForm extends Component {
 				<p>Invite a new Contact</p>
 				<form onSubmit={handleSubmit(this.handleInviteSubmit.bind(this))}>
 					<Field name="contactEmail"
-								 component="input"
+								 component={renderEmailField}
 								 type="email"
-								 placeholder="Email" />
+								 label="Email"
+								 style={inputStyle} />
 					<button className="secondary-button" type="submit">Send invite</button>
 				</form>
 			</div>
