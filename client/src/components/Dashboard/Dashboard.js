@@ -50,8 +50,7 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
 	
 	return { 
-		user: state.user.userInfo,
-		showConversationList: state.user.showConversationList
+		user: state.user.userInfo
 	};
 };
 

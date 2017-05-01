@@ -18,7 +18,8 @@ import { VIEW_PROFILE,
 				 TOGGLE_CONVERSATION_LIST,
 				 TOGGLE_NEW_CONVERSATION,
 				 TOGGLE_LOGOUT_BUTTON,
-				 SAVE_PROFILE_CHANGES } from '../actiontypes/user';
+				 SAVE_PROFILE_CHANGES,
+				 CONFIRM_ALLERT } from '../actiontypes/user';
 // import { VALIDATE_EMAIL,
 // 				 VALIDATE_PASSWORD } from '../actiontypes/validation';
 
@@ -197,7 +198,14 @@ export function saveProfileChanges(newUsername) {
 			errorHandler(dispatch, err.response, AUTH_ERROR);
 		})
 	}
-  
+}
+
+export function confirmAllert() {
+	return (dispatch) => {
+		dispatch({
+			type: CONFIRM_ALLERT,
+		});
+	}
 }
 
 export function inviteNewContact({contactEmail}) {
@@ -308,7 +316,7 @@ export function startNewConversation(recipients, message) {
 			headers: { Authorization: cookie.load('token') }
 		}).then(response => {
 			console.log('@startNewConversation response:', response);
-
+			window.location.href = `#/dashboard/conversation/view/${response.data.conversationId}`
 		})
 	}
 };

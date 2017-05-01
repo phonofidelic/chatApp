@@ -7,14 +7,6 @@ import ConversationList from './ConversationList';
 
 class ConversationListContainer extends Component {
 
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			showConversationList: false
-		};
-	}
-
 	toggleConversationList() {
 		this.props.toggleConversationList();
 	}

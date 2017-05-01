@@ -8,7 +8,8 @@ import { VIEW_PROFILE,
 				 TOGGLE_CONVERSATION_LIST,
 				 TOGGLE_NEW_CONVERSATION,
 				 TOGGLE_LOGOUT_BUTTON,
-				 SAVE_PROFILE_CHANGES } from '../actiontypes/user';
+				 SAVE_PROFILE_CHANGES,
+				 CONFIRM_ALLERT } from '../actiontypes/user';
 
 const INITIAL_STATE = { 
 	showProfileEditor: false, 
@@ -53,6 +54,18 @@ export default function(state = INITIAL_STATE, action) {
 			return {
 				...state,
 				inviteStatus: action.payload
+			}
+
+		case SAVE_PROFILE_CHANGES:
+			return {
+				...state,
+				showAllert: true
+			}
+
+		case CONFIRM_ALLERT:
+			return {
+				...state,
+				showAllert:false
 			}
 
 		case TOGGLE_PROFILE_EDITOR:
